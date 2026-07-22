@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BAGK. — Premium Earth-Tone Carry</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            // Palette Earth-Tone Custom: Cream, Sand, Olive, Brown
+            cream: '#FDFBF7',
+            'cream-dark': '#F4EFE6',
+            sand: '#E6DDC8',
+            'sand-dark': '#D8C8B0',
+            olive: '#6B705C',
+            'olive-dark': '#3F4E3A',
+            brown: '#8B5A2B',
+            'brown-dark': '#582F0E',
+            'earth-black': '#231408',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    /* Custom Scrollbar & Utilities */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #FDFBF7; }
+    ::-webkit-scrollbar-thumb { background: #E6DDC8; border-radius: 99px; }
+    ::-webkit-scrollbar-thumb:hover { background: #8B5A2B; }
+    
+    .glass-nav {
+      background: rgba(253, 251, 247, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    
+    .glass-card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+    }
+  </style>
+</head>
+<body class="bg-cream text-earth-black antialiased flex flex-col min-h-screen selection:bg-sand selection:text-brown-dark">
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="bg-brown-dark text-cream px-5 py-3.5 rounded-2xl shadow-2xl flex items-center space-x-3 border border-brown">
+      <div id="toast-icon" class="text-sand"><i data-lucide="check-circle-2" class="w-5 h-5"></i></div>
+      <span id="toast-message" class="text-sm font-semibold">Pesanan ditambahkan!</span>
+    </div>
+  </div>
+
+  <!-- Header / Navbar -->
+  <header class="sticky top-0 z-40 glass-nav border-b border-sand transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-6">
+      
+      <!-- Logo -->
+      <a href="#" class="group flex items-center space-x-1">
+        <span class="text-2xl sm:text-3xl font-black tracking-wider text-brown-dark">BAG<span class="text-olive">K.</span></span>
+      </a>
+
+      <!-- Search Bar Desktop -->
+      <div class="flex-1 max-w-md relative hidden sm:block">
+        <input type="text" id="search-input" oninput="handleSearch()" placeholder="Cari warna Cream, Olive, Sand, Brown..." class="w-full bg-cream-dark/80 border border-sand focus:border-brown focus:bg-white rounded-full py-2.5 pl-11 pr-4 text-sm transition outline-none shadow-inner">
+        <i data-lucide="search" class="w-4 h-4 text-stone-400 absolute left-4 top-3.5"></i>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="hidden md:flex items-center space-x-8 font-semibold text-sm text-stone-700">
+        <a href="#hero" class="hover:text-brown transition">Beranda</a>
+        <a href="#kategori" class="hover:text-brown transition">Kategori</a>
+        <a href="#produk" class="hover:text-brown transition">Koleksi</a>
+      </nav>
+
+      <!-- Action Icons -->
+      <div class="flex items-center space-x-3">
+        <!-- Wishlist -->
+        <button onclick="showWishlistNotice()" class="relative p-2.5 text-stone-700 hover:text-brown hover:bg-cream-dark rounded-full transition">
+          <i data-lucide="heart" class="w-5 h-5"></i>
+          <span id="wishlist-badge" class="absolute top-1 right-1 bg-brown text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold hidden">0</span>
+        </button>
+
+        <!-- Cart -->
+        <button onclick="toggleCart()" class="relative p-2.5 bg-brown-dark hover:bg-brown text-white rounded-full transition shadow-md flex items-center justify-center">
+          <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+          <span id="cart-badge" class="absolute -top-1 -right-1 bg-olive text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold border-2 border-white shadow">0</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Search Mobile -->
+    <div class="px-4 pb-3 sm:hidden">
+      <div class="relative w-full">
+        <input type="text" id="search-input-mobile" oninput="handleSearch(true)" placeholder="Cari koleksi tas..." class="w-full bg-cream-dark border border-sand focus:border-brown rounded-full py-2 pl-10 pr-4 text-sm outline-none">
+        <i data-lucide="search" class="w-4 h-4 text-stone-400 absolute left-3.5 top-2.5"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="relative bg-brown-dark text-cream pt-12 pb-20 md:py-28 overflow-hidden">
+    <!-- Ambient Earth Glows -->
+    <div class="absolute top-0 right-0 w-96 h-96 bg-olive/30 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-brown/30 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid lg:grid-cols-12 gap-12 items-center">
+      
+      <!-- Left Content -->
+      <div class="lg:col-span-7 space-y-6">
+        <div class="inline-flex items-center space-x-2 px-4 py-1.5 bg-sand/20 backdrop-blur-md rounded-full border border-sand/30 text-xs font-bold text-sand">
+          <span class="w-2 h-2 rounded-full bg-sand animate-pulse"></span>
+          <span>Perpaduan Warna Earth-Tone Eksklusif</span>
+        </div>
+        
+        <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-[1.1] text-cream">
+          Harmony of Cream, Olive, Sand & Brown.
+        </h1>
+        
+        <p class="text-sand text-base sm:text-lg max-w-xl font-normal leading-relaxed">
+          Koleksi tas modern berkelas dengan kombinasi warna hangat alami untuk melengkapi tampilan harian yang minimalis dan elegan.
+        </p>
+
+        <div class="pt-4 flex flex-wrap gap-4 items-center">
+          <a href="#produk" class="px-8 py-4 bg-brown hover:bg-olive text-white font-bold rounded-2xl shadow-xl transition transform active:scale-95 text-sm sm:text-base flex items-center space-x-2">
+            <span>Lihat Koleksi Tas</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+          <a href="#kategori" class="px-8 py-4 bg-white/10 hover:bg-white/20 text-cream font-semibold rounded-2xl backdrop-blur-md border border-white/10 transition text-sm sm:text-base">
+            Kategori
+          </a>
+        </div>
+
+        <!-- Color Palette Preview Dots -->
+        <div class="pt-8 border-t border-white/10 flex items-center space-x-4">
+          <span class="text-xs font-bold text-sand uppercase tracking-wider">Palette Warna:</span>
+          <div class="flex items-center space-x-2">
+            <span class="w-6 h-6 rounded-full bg-[#FDFBF7] border border-stone-300 shadow" title="Cream"></span>
+            <span class="w-6 h-6 rounded-full bg-[#E6DDC8] border border-stone-300 shadow" title="Sand"></span>
+            <span class="w-6 h-6 rounded-full bg-[#6B705C] border border-stone-300 shadow" title="Olive"></span>
+            <span class="w-6 h-6 rounded-full bg-[#8B5A2B] border border-stone-300 shadow" title="Brown"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Visual -->
+      <div class="lg:col-span-5 relative">
+        <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10">
+          <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=800&q=80" alt="Earth Tone Bags" class="w-full h-[420px] sm:h-[480px] object-cover hover:scale-105 transition duration-700">
+        </div>
+        <!-- Floating Glass Badge -->
+        <div class="absolute -bottom-6 -left-6 z-20 glass-card p-4 rounded-2xl border border-white/40 shadow-2xl hidden sm:flex items-center space-x-3 text-earth-black">
+          <div class="p-3 bg-olive text-white rounded-xl">
+            <i data-lucide="sparkles" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <p class="text-xs font-bold uppercase tracking-wider text-stone-500">Material Pilihan</p>
+            <p class="text-sm font-black text-brown-dark">Eco-Leather & Durable Canvas</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Kategori Grid -->
+  <section id="kategori" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-xl mx-auto mb-12">
+      <h2 class="text-3xl font-extrabold text-brown-dark">Pilih Kategori Tas</h2>
+      <p class="text-stone-500 text-sm mt-2">Didesain presisi untuk gaya hidup aktif dan profesional.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- Category 1 -->
+      <div onclick="filterCategory('cewek')" class="group relative rounded-3xl overflow-hidden shadow-md cursor-pointer h-80 sm:h-96">
+        <img src="https://images.unsplash.com/photo-1566150476441-535c2e04d439?w=1000&q=80" alt="Koleksi Wanita" class="w-full h-full object-cover group-hover:scale-108 transition duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-brown-dark/90 via-brown-dark/30 to-transparent p-8 flex flex-col justify-end text-white">
+          <span class="text-xs font-bold text-sand tracking-widest uppercase mb-1">Eksklusif Wanita</span>
+          <h3 class="text-3xl font-extrabold">Tote, Sling & Handbag</h3>
+          <p class="text-sand/80 text-sm mt-1 mb-4">Pilihan warna Cream & Sand yang elegan.</p>
+          <span class="inline-flex items-center text-sm font-bold text-sand group-hover:translate-x-2 transition">Jelajahi Koleksi <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i></span>
+        </div>
+      </div>
+
+      <!-- Category 2 -->
+      <div onclick="filterCategory('cowok')" class="group relative rounded-3xl overflow-hidden shadow-md cursor-pointer h-80 sm:h-96">
+        <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1000&q=80" alt="Koleksi Pria" class="w-full h-full object-cover group-hover:scale-108 transition duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-brown-dark/90 via-brown-dark/30 to-transparent p-8 flex flex-col justify-end text-white">
+          <span class="text-xs font-bold text-sand tracking-widest uppercase mb-1">Eksklusif Pria</span>
+          <h3 class="text-3xl font-extrabold">Backpack & Messenger</h3>
+          <p class="text-sand/80 text-sm mt-1 mb-4">Sentuhan tangguh warna Olive & Brown.</p>
+          <span class="inline-flex items-center text-sm font-bold text-sand group-hover:translate-x-2 transition">Jelajahi Koleksi <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Produk Section -->
+  <section id="produk" class="py-20 bg-white border-t border-sand flex-1">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Filter Bar -->
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-6">
+        <div>
+          <h2 class="text-3xl font-extrabold text-brown-dark">Koleksi Warna Warm</h2>
+          <p class="text-stone-500 text-sm mt-1">Pilihan warna hangat khas BAGK.: Cream, Sand, Olive, & Brown.</p>
+        </div>
+        
+        <!-- Filter Pills -->
+        <div class="flex bg-cream-dark p-1.5 rounded-2xl space-x-1 border border-sand">
+          <button onclick="filterCategory('all')" id="btn-all" class="filter-btn px-5 py-2 rounded-xl text-xs font-bold transition shadow-sm bg-brown text-white">Semua</button>
+          <button onclick="filterCategory('cewek')" id="btn-cewek" class="filter-btn px-5 py-2 rounded-xl text-xs font-bold text-stone-600 hover:text-brown-dark transition">Wanita</button>
+          <button onclick="filterCategory('cowok')" id="btn-cowok" class="filter-btn px-5 py-2 rounded-xl text-xs font-bold text-stone-600 hover:text-brown-dark transition">Pria</button>
+        </div>
+      </div>
+
+      <!-- Product Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="product-grid">
+        <!-- Rendered via JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Modal Detail Produk -->
+  <div id="product-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-cream rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl relative max-h-[90vh] overflow-y-auto border border-sand">
+      <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 bg-white/80 backdrop-blur-md p-2.5 rounded-full hover:bg-cream-dark transition text-stone-700 shadow">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div class="grid md:grid-cols-2 gap-6 p-6 sm:p-8" id="modal-content">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Drawer -->
+  <div id="cart-drawer" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden transition-opacity">
+    <div class="absolute right-0 top-0 bottom-0 max-w-md w-full bg-cream shadow-2xl flex flex-col justify-between">
+      
+      <!-- Drawer Header -->
+      <div class="p-6 border-b border-sand flex justify-between items-center bg-cream-dark">
+        <div class="flex items-center space-x-3">
+          <div class="p-2 bg-brown text-white rounded-xl"><i data-lucide="shopping-bag" class="w-5 h-5"></i></div>
+          <h3 class="font-extrabold text-lg text-brown-dark">Keranjang Belanja</h3>
+        </div>
+        <button onclick="toggleCart()" class="p-2 text-stone-400 hover:text-stone-700 rounded-full">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Cart Items -->
+      <div class="p-6 flex-1 overflow-y-auto space-y-4" id="cart-items">
+        <!-- Rendered via JS -->
+      </div>
+
+      <!-- Drawer Footer -->
+      <div class="p-6 border-t border-sand bg-cream-dark space-y-4">
+        <div class="flex justify-between items-baseline font-bold text-lg text-brown-dark">
+          <span>Total Tagihan:</span>
+          <span id="cart-total" class="text-2xl font-black text-brown">Rp 0</span>
+        </div>
+        <button onclick="checkoutWhatsApp()" class="w-full py-4 bg-olive hover:bg-olive-dark text-white font-bold rounded-2xl flex items-center justify-center space-x-2 transition shadow-lg shadow-olive/20">
+          <i data-lucide="message-circle" class="w-5 h-5"></i>
+          <span>Checkout via WhatsApp</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-brown-dark text-sand pt-16 pb-8 border-t border-brown">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10">
+      <div class="space-y-4">
+        <span class="text-3xl font-black tracking-wider text-cream">BAG<span class="text-olive">K.</span></span>
+        <p class="text-sm text-sand/80 leading-relaxed">Spesialis tas modern dengan kombinasi warna alami Cream, Olive, Sand, dan Brown untuk gaya autentikmu.</p>
+      </div>
+
+      <div>
+        <h4 class="text-cream font-bold text-sm uppercase tracking-wider mb-4">Navigasi</h4>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="#hero" class="hover:text-cream transition">Beranda</a></li>
+          <li><a href="#kategori" class="hover:text-cream transition">Kategori Tas</a></li>
+          <li><a href="#produk" class="hover:text-cream transition">Koleksi Produk</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-cream font-bold text-sm uppercase tracking-wider mb-4">Bantuan</h4>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="#" class="hover:text-cream transition">Panduan Perawatan</a></li>
+          <li><a href="#" class="hover:text-cream transition">Garansi Material</a></li>
+          <li><a href="#" class="hover:text-cream transition">Ketentuan Pengiriman</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-cream font-bold text-sm uppercase tracking-wider mb-4">Hubungi Kami</h4>
+        <p class="text-sm text-sand/80 mb-2">WhatsApp: +62 812 3456 789</p>
+        <p class="text-sm text-sand/80 mb-2">Email: hello@bagk.com</p>
+        <p class="text-sm text-sand/80">Store: Jakarta & Bandung</p>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 pt-8 border-t border-white/10 text-center text-xs text-sand/60 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p>&copy; 2026 BAGK. Official Store. All rights reserved.</p>
+      <div class="flex space-x-6">
+        <a href="#" class="hover:text-cream">Privacy Policy</a>
+        <a href="#" class="hover:text-cream">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script Application Logic -->
+  <script>
+    // Master Products dengan Pilihan Warna: Cream, Sand, Olive, Brown
+    const products = [
+      { 
+        id: 1, 
+        name: "Aura Leather Tote", 
+        category: "cewek", 
+        price: 349000, 
+        desc: "Tote bag muat laptop 14 inch dari bahan kulit sintetis premium dengan tekstur halus.", 
+        img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&q=80", 
+        colors: [
+          { name: "Cream", hex: "#FDFBF7" },
+          { name: "Sand", hex: "#E6DDC8" },
+          { name: "Olive", hex: "#6B705C" },
+          { name: "Brown", hex: "#8B5A2B" }
+        ]
+      },
+      { 
+        id: 2, 
+        name: "Urban Explorer Canvas", 
+        category: "cowok", 
+        price: 429000, 
+        desc: "Ransel kanvas tebal tahan cipratan air dengan kompartemen laptop terlindungi.", 
+        img: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80", 
+        colors: [
+          { name: "Olive", hex: "#6B705C" },
+          { name: "Brown", hex: "#8B5A2B" },
+          { name: "Sand", hex: "#E6DDC8" }
+        ]
+      },
+      { 
+        id: 3, 
+        name: "Luna Crossbody Sling", 
+        category: "cewek", 
+        price: 219000, 
+        desc: "Tas selempang berdesain minimalis dengan penutup magnetik & tali serbaguna.", 
+        img: "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600&q=80", 
+        colors: [
+          { name: "Sand", hex: "#E6DDC8" },
+          { name: "Cream", hex: "#FDFBF7" },
+          { name: "Brown", hex: "#8B5A2B" }
+        ]
+      },
+      { 
+        id: 4, 
+        name: "Nomad Messenger Bag", 
+        category: "cowok", 
+        price: 389000, 
+        desc: "Tas messenger bergaya vintage modern untuk kemudahan mobilitas kerja harian.", 
+        img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=80", 
+        colors: [
+          { name: "Brown", hex: "#8B5A2B" },
+          { name: "Olive", hex: "#6B705C" }
+        ]
+      },
+      { 
+        id: 5, 
+        name: "Chic Mini Pouch", 
+        category: "cewek", 
+        price: 189000, 
+        desc: "Mini bag santai cocok untuk membawa HP, dompet, dan kosmetik ringan.", 
+        img: "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600&q=80", 
+        colors: [
+          { name: "Cream", hex: "#FDFBF7" },
+          { name: "Olive", hex: "#6B705C" },
+          { name: "Sand", hex: "#E6DDC8" }
+        ]
+      },
+      { 
+        id: 6, 
+        name: "Voyager Weekender Duffel", 
+        category: "cowok", 
+        price: 499000, 
+        desc: "Tas kapasitas besar untuk gym maupun perjalanan singkat di akhir pekan.", 
+        img: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80", 
+        colors: [
+          { name: "Olive", hex: "#6B705C" },
+          { name: "Brown", hex: "#8B5A2B" },
+          { name: "Sand", hex: "#E6DDC8" }
+        ]
+      }
+    ];
+
+    let cart = [];
+    let wishlist = [];
+    let selectedColorsMap = {}; 
+    let currentCategory = 'all';
+    let activeModalProduct = null;
+    let activeModalSelectedColor = '';
+
+    function formatRupiah(amount) {
+      return 'Rp ' + amount.toLocaleString('id-ID');
+    }
+
+    function showToast(message, isError = false) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-message');
+      const toastIcon = document.getElementById('toast-icon');
+
+      toastMsg.innerText = message;
+      toastIcon.className = isError ? 'text-rose-400' : 'text-sand';
+      toastIcon.innerHTML = isError ? `<i data-lucide="alert-circle" class="w-5 h-5"></i>` : `<i data-lucide="check-circle-2" class="w-5 h-5"></i>`;
+
+      if(window.lucide) lucide.createIcons();
+
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 2500);
+    }
+
+    function toggleWishlist(productId) {
+      const idx = wishlist.indexOf(productId);
+      if(idx > -1) {
+        wishlist.splice(idx, 1);
+        showToast("Dihapus dari Favorit", true);
+      } else {
+        wishlist.push(productId);
+        showToast("Ditambahkan ke Favorit!");
+      }
+      updateWishlistUI();
+      renderProducts(getFilteredProducts());
+    }
+
+    function updateWishlistUI() {
+      const badge = document.getElementById('wishlist-badge');
+      if (wishlist.length > 0) {
+        badge.innerText = wishlist.length;
+        badge.classList.remove('hidden');
+      } else {
+        badge.classList.add('hidden');
+      }
+    }
+
+    function showWishlistNotice() {
+      if(wishlist.length === 0) {
+        showToast("Belum ada tas favorit.", true);
+      } else {
+        showToast(`${wishlist.length} tas tersimpan di favorit.`);
+      }
+    }
+
+    function selectCardColor(productId, colorName) {
+      selectedColorsMap[productId] = colorName;
+      renderProducts(getFilteredProducts());
+    }
+
+    function getFilteredProducts() {
+      const queryDesktop = document.getElementById('search-input')?.value.toLowerCase() || '';
+      const queryMobile = document.getElementById('search-input-mobile')?.value.toLowerCase() || '';
+      const query = queryDesktop || queryMobile;
+
+      return products.filter(p => {
+        const matchesCategory = currentCategory === 'all' || p.category === currentCategory;
+        const matchesSearch = p.name.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query);
+        return matchesCategory && matchesSearch;
+      });
+    }
+
+    function renderProducts(items) {
+      const grid = document.getElementById('product-grid');
+      if (items.length === 0) {
+        grid.innerHTML = `<div class="col-span-full text-center py-16 text-stone-400 font-medium">Tas yang dicari tidak ditemukan.</div>`;
+        return;
+      }
+
+      grid.innerHTML = items.map(p => {
+        const isWishlisted = wishlist.includes(p.id);
+        const selectedColor = selectedColorsMap[p.id] || p.colors[0].name;
+
+        return `
+          <div class="group bg-cream rounded-3xl overflow-hidden border border-sand shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative">
+            
+            <!-- Wishlist Button -->
+            <button onclick="toggleWishlist(${p.id})" class="absolute top-4 right-4 z-20 p-2.5 rounded-full glass-card hover:scale-110 transition shadow ${isWishlisted ? 'text-brown' : 'text-stone-400 hover:text-brown'}">
+              <i data-lucide="heart" class="w-4 h-4 ${isWishlisted ? 'fill-brown' : ''}"></i>
+            </button>
+
+            <!-- Product Image -->
+            <div class="relative h-72 bg-cream-dark overflow-hidden cursor-pointer" onclick="openProductModal(${p.id})">
+              <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-md text-brown-dark text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider border border-sand">
+                ${p.category === 'cewek' ? 'Wanita' : 'Pria'}
+              </span>
+            </div>
+
+            <!-- Product Details -->
+            <div class="p-6 flex-1 flex flex-col justify-between">
+              <div>
+                <!-- Color Swatches -->
+                <div class="flex items-center space-x-2 mb-3">
+                  <span class="text-[11px] font-bold text-stone-400 uppercase tracking-wider">Warna:</span>
+                  <div class="flex space-x-1.5">
+                    ${p.colors.map(c => `
+                      <button onclick="selectCardColor(${p.id}, '${c.name}')" title="${c.name}" class="w-4 h-4 rounded-full border border-stone-300 transition-all ${selectedColor === c.name ? 'ring-2 ring-brown scale-110' : 'hover:scale-105'}" style="background-color: ${c.hex}"></button>
+                    `).join('')}
+                  </div>
+                  <span class="text-xs font-bold text-brown ml-1">(${selectedColor})</span>
+                </div>
+
+                <h3 class="font-bold text-lg text-brown-dark hover:text-brown transition cursor-pointer" onclick="openProductModal(${p.id})">${p.name}</h3>
+                <p class="text-brown font-black text-lg mt-1">${formatRupiah(p.price)}</p>
+              </div>
+
+              <div class="mt-5 grid grid-cols-2 gap-2">
+                <button onclick="openProductModal(${p.id})" class="py-2.5 px-3 bg-cream-dark hover:bg-sand text-brown-dark font-bold rounded-xl text-xs transition flex items-center justify-center space-x-1 border border-sand">
+                  <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                  <span>Detail</span>
+                </button>
+                <button onclick="addToCartDirect(${p.id})" class="py-2.5 px-3 bg-brown hover:bg-brown-dark text-white font-bold rounded-xl text-xs transition shadow-md flex items-center justify-center space-x-1">
+                  <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                  <span>+ Keranjang</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        `;
+      }).join('');
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function filterCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('bg-brown', 'text-white', 'shadow-sm');
+        btn.classList.add('text-stone-600');
+      });
+
+      const activeBtn = document.getElementById(`btn-${cat}`);
+      if (activeBtn) {
+        activeBtn.classList.remove('text-stone-600');
+        activeBtn.classList.add('bg-brown', 'text-white', 'shadow-sm');
+      }
+
+      renderProducts(getFilteredProducts());
+    }
+
+    function handleSearch(isMobile = false) {
+      renderProducts(getFilteredProducts());
+    }
+
+    function openProductModal(id) {
+      activeModalProduct = products.find(p => p.id === id);
+      activeModalSelectedColor = selectedColorsMap[id] || activeModalProduct.colors[0].name;
+
+      const modalContent = document.getElementById('modal-content');
+      modalContent.innerHTML = `
+        <div class="h-64 md:h-full rounded-2xl overflow-hidden bg-cream-dark">
+          <img src="${activeModalProduct.img}" alt="${activeModalProduct.name}" class="w-full h-full object-cover">
+        </div>
+        <div class="flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-black uppercase tracking-widest text-olive">${activeModalProduct.category === 'cewek' ? 'Tas Wanita' : 'Tas Pria'}</span>
+            <h2 class="text-2xl font-bold text-brown-dark mt-1">${activeModalProduct.name}</h2>
+            <p class="text-2xl font-black text-brown mt-1">${formatRupiah(activeModalProduct.price)}</p>
+            <p class="text-sm text-stone-600 mt-3 leading-relaxed">${activeModalProduct.desc}</p>
+            
+            <div class="mt-6">
+              <label class="text-xs font-extrabold text-stone-700 block mb-2 uppercase tracking-wider">Pilih Varian Warna Warm:</label>
+              <div class="flex flex-wrap gap-2">
+                ${activeModalProduct.colors.map(c => `
+                  <button onclick="setModalColor('${c.name}')" id="modal-color-${c.name}" class="modal-color-btn text-xs px-4 py-2 rounded-xl border-2 font-bold transition flex items-center space-x-2 ${activeModalSelectedColor === c.name ? 'border-brown bg-sand/40 text-brown-dark' : 'border-sand text-stone-600'}">
+                    <span class="w-3.5 h-3.5 rounded-full border border-stone-300" style="background-color: ${c.hex}"></span>
+                    <span>${c.name}</span>
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+
+          <button onclick="addToCartFromModal()" class="mt-8 w-full py-4 bg-brown hover:bg-brown-dark text-white font-bold rounded-2xl flex items-center justify-center space-x-2 transition shadow-xl shadow-brown/20">
+            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+            <span>Masukkan ke Keranjang</span>
+          </button>
+        </div>
+      `;
+      document.getElementById('product-modal').classList.remove('hidden');
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function setModalColor(colorName) {
+      activeModalSelectedColor = colorName;
+      document.querySelectorAll('.modal-color-btn').forEach(b => {
+        b.classList.remove('border-brown', 'bg-sand/40', 'text-brown-dark');
+        b.classList.add('border-sand', 'text-stone-600');
+      });
+      const target = document.getElementById(`modal-color-${colorName}`);
+      if(target) {
+        target.classList.remove('border-sand', 'text-stone-600');
+        target.classList.add('border-brown', 'bg-sand/40', 'text-brown-dark');
+      }
+    }
+
+    function closeProductModal() {
+      document.getElementById('product-modal').classList.add('hidden');
+    }
+
+    function addToCartDirect(productId) {
+      const p = products.find(item => item.id === productId);
+      const chosenColor = selectedColorsMap[productId] || p.colors[0].name;
+      addItemToCart(p, chosenColor);
+    }
+
+    function addToCartFromModal() {
+      addItemToCart(activeModalProduct, activeModalSelectedColor);
+      closeProductModal();
+    }
+
+    function addItemToCart(product, color) {
+      const existingIndex = cart.findIndex(item => item.id === product.id && item.color === color);
+      if (existingIndex > -1) {
+        cart[existingIndex].qty += 1;
+      } else {
+        cart.push({
+          ...product,
+          color: color,
+          qty: 1
+        });
+      }
+      updateCart();
+      showToast(`${product.name} (${color}) ditambahkan!`);
+    }
+
+    function updateCart() {
+      const cartContainer = document.getElementById('cart-items');
+      const totalBadge = document.getElementById('cart-badge');
+      const totalAmount = document.getElementById('cart-total');
+
+      const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+      const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+      totalBadge.innerText = totalItems;
+      totalAmount.innerText = formatRupiah(totalPrice);
+
+      if (cart.length === 0) {
+        cartContainer.innerHTML = `<div class="text-center text-stone-400 py-16 text-sm font-medium">Keranjang belanja masih kosong.</div>`;
+        return;
+      }
+
+      cartContainer.innerHTML = cart.map((item, index) => `
+        <div class="flex items-center space-x-4 border-b border-sand pb-4">
+          <img src="${item.img}" class="w-16 h-16 rounded-2xl object-cover bg-cream-dark">
+          <div class="flex-1">
+            <h4 class="font-bold text-sm text-brown-dark">${item.name}</h4>
+            <p class="text-xs text-stone-500">Warna: <span class="font-bold text-brown">${item.color}</span></p>
+            <p class="text-xs font-black text-brown mt-1">${formatRupiah(item.price)}</p>
+          </div>
+          <div class="flex items-center space-x-2 bg-cream-dark p-1 rounded-xl border border-sand">
+            <button onclick="changeQty(${index}, -1)" class="w-6 h-6 rounded-lg bg-white hover:bg-sand text-stone-700 text-xs font-bold shadow-sm">-</button>
+            <span class="text-xs font-bold px-1">${item.qty}</span>
+            <button onclick="changeQty(${index}, 1)" class="w-6 h-6 rounded-lg bg-white hover:bg-sand text-stone-700 text-xs font-bold shadow-sm">+</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function changeQty(index, change) {
+      cart[index].qty += change;
+      if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+      }
+      updateCart();
+    }
+
+    function toggleCart() {
+      document.getElementById('cart-drawer').classList.toggle('hidden');
+    }
+
+    function checkoutWhatsApp() {
+      if (cart.length === 0) {
+        showToast('Keranjang kamu masih kosong!', true);
+        return;
+      }
+      const phone = "628123456789"; 
+      let message = "*PESANAN KOLEKSI BAGK. EARTH-TONE*\n\n";
+      let total = 0;
+
+      cart.forEach((item, i) => {
+        const subtotal = item.price * item.qty;
+        total += subtotal;
+        message += `${i + 1}. *${item.name}*\n   - Warna: ${item.color}\n   - Jumlah: ${item.qty}x (${formatRupiah(item.price)})\n   - Subtotal: ${formatRupiah(subtotal)}\n\n`;
+      });
+
+      message += `*TOTAL PEMBAYARAN:* ${formatRupiah(total)}\n\nMohon konfirmasi ketersediaan stok & nomor rekening pembayaran. Terima kasih!`;
+      window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderProducts(products);
+      updateCart();
+    });
+  </script>
+</body>
+</html>

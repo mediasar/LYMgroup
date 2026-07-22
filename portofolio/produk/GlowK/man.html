@@ -1,0 +1,295 @@
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Men - GlowK</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #fff6f9;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: #fff;
+      padding: 20px 40px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      color: #000000;
+    }
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #444;
+      font-weight: 500;
+    }
+    nav a:hover {
+      color: #d81b60;
+    }
+    .hero {
+      background: linear-gradient(to right, #ffe4ec, #fff0f5);
+      padding: 80px 40px;
+      text-align: center;
+    }
+    .hero h2 {
+      font-size: 36px;
+      color: #d81b60;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: 18px;
+      max-width: 600px;
+      margin: auto;
+      color: #555;
+    }
+    .cta {
+      margin-top: 30px;
+      
+    }
+    .cta a {
+      background: #d81b60;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    .cta a:hover {
+      background: #b7154e;
+    }
+    .products {
+      padding: 60px 40px;
+      background: #fff;
+    }
+    .products h3 {
+      text-align: center;
+      font-size: 28px;
+      color: #d81b60;
+      margin-bottom: 40px;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    .product-card {
+      background: #fff0f7;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+    .product-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+    .product-card h4 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #d81b60;
+    }
+    .product-card p {
+      font-size: 14px;
+      color: #555;
+    }
+    .about, .contact, .newsletter {
+      padding: 60px 40px;
+      background: #fff6f9;
+    }
+    .about h3, .contact h3, .newsletter h3 {
+      text-align: center;
+      font-size: 26px;
+      color: #d81b60;
+      margin-bottom: 30px;
+    }
+    .about p, .contact p {
+      max-width: 700px;
+      margin: auto;
+      font-size: 16px;
+      color: #555;
+      text-align: center;
+    }
+    .contact form, .newsletter form {
+      max-width: 500px;
+      margin: 30px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    input, textarea {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+    button {
+      padding: 12px;
+      border: none;
+      background: #d81b60;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #b7154e;
+    }
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      background: #000000;
+      color: #9b9a9a;
+      font-size: 14px;
+    }
+  </style>
+
+</head>
+<body>
+  <header>
+  <h1>☰</h1>
+    Member Exclusive | Receive Rouge Dior Mini 100 & Dior Hair Clip with min spend of Rp 2,000,000
+    <nav>
+    <a href="login men.html">LOGIN</a>
+    </nav>
+  </header>
+
+   <section>
+    <footer>
+    <nav>
+      <h1>GlowK</h1>
+      <a href="skincare men.html">SKINCARE</a>
+      <a href="parfum men.html">PARFUM</a>
+      <a href="index.html">WANITA</a>
+    </nav>
+    </section>
+    </footer>
+    </section>
+
+<head>
+  <meta charset="UTF-8">
+  <title>GlowK Infinite Carousel</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #fff6f9;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 40px;
+      color: #d81b60;
+    }
+
+    .carousel-container {
+      overflow: hidden;
+      width: 100%;
+      background: #fff;
+      padding: 20px 0;
+    }
+
+    .carousel-track {
+      display: flex;
+      animation: scroll 30s linear infinite;
+    }
+
+    .carousel-track img {
+      height: 200px;
+      width: 300px;
+      margin: 0 10px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    @keyframes scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .carousel-inner {
+      display: flex;
+      width: fit-content;
+    }
+
+    .video-wrapper {
+      width: 100%;
+      height: 500px;
+      overflow: hidden;
+      position: relative;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .video-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+  </style>
+  <body>
+  <div class="video-wrapper">
+    <video autoplay muted loop playsinline>
+      <source src="mvdior2.mp4" type="video/mp4">
+    </video>
+  </div>
+</body>
+</head>
+<body>
+  <div class="carousel-container">
+    <div class="carousel-track">
+      <img src="ds.jpg" alt="Produk 1">
+      <img src="sev.jpg" alt="Produk 2">
+      <img src="dsparfum1.jpg" alt="Produk 3">
+      <img src="enwojpg" alt="Produk 4">
+      <img src="enwo2.jpg" alt="Produk 5">
+      <!-- duplikat untuk efek looping -->
+      <img src="ds.jpg" alt="Produk 6">
+      <img src="sev.jpg" alt="Produk 7">
+      <img src="dsparfum1.jpg" alt="Produk 8">
+      <img src="enwojpg" alt="Produk 9">
+      <img src="enwo2.jpg" alt="Produk 10">
+    </div>
+ 
+ <section>
+  <footer>
+  <div style="text-align:left;">
+  <h3>Tentang GlowK</h3>
+  <p>GlowK adalah brand kosmetik lokal yang percaya bahwa
+  <p>kecantikan sejati datang dari bahan-bahan alami.</p>
+  <p>Kami berkomitmen untuk menghadirkan produk berkualitas
+  <p>tinggi yang aman,lembut di kulit, dan ramah lingkungan.</p>
+  </footer>
+ </section>
+
+  <footer>
+      <div style="text-align:center;">
+    &copy; 2025 GlowK. Dirancang dengan cinta untuk kecantikan alami. 2025 GlowK. dirancang untuk kecantikan alami.
+  </footer>
+  
+</body>
+</html>

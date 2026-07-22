@@ -1,0 +1,379 @@
+<sty>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - GlowK</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #fff6f9;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: #fff;
+      padding: 20px 40px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      color: #000000;
+    }
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #444;
+      font-weight: 500;
+    }
+    nav a:hover {
+      color: #d81b60;
+    }
+    .hero {
+      background: linear-gradient(to right, #ffe4ec, #fff0f5);
+      padding: 80px 40px;
+      text-align: center;
+    }
+    .hero h2 {
+      font-size: 36px;
+      color: #d81b60;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: 18px;
+      max-width: 600px;
+      margin: auto;
+      color: #555;
+    }
+    .cta {
+      margin-top: 30px;
+      
+    }
+    .cta a {
+      background: #d81b60;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    .cta a:hover {
+      background: #b7154e;
+    }
+    .products {
+      padding: 60px 40px;
+      background: #fff;
+    }
+    .products h3 {
+      text-align: center;
+      font-size: 28px;
+      color: #9b9a9a;
+      margin-bottom: 40px;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    .product-card {
+      background: #fff0f7;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+    .product-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+    .product-card h4 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #d81b60;
+    }
+    .product-card p {
+      font-size: 14px;
+      color: #555;
+    }
+    .about, .contact, .newsletter {
+      padding: 60px 40px;
+      background: #fff6f9;
+    }
+    .about h3, .contact h3, .newsletter h3 {
+      text-align: center;
+      font-size: 26px;
+      color: #d81b60;
+      margin-bottom: 30px;
+    }
+    .about p, .contact p {
+      max-width: 700px;
+      margin: auto;
+      font-size: 16px;
+      color: #555;
+      text-align: center;
+    }
+    .contact form, .newsletter form {
+      max-width: 500px;
+      margin: 30px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    input, textarea {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+    button {
+      padding: 12px;
+      border: none;
+      background: #d81b60;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #b7154e;
+    }
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      background: #000000;
+      color: #9b9a9a;
+      font-size: 14px;
+    }
+  </style>
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parfume Women - GlowK</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #fff6f9;
+    }
+
+    header {
+      background: #fff;
+      padding: 16px 40px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #d81b60;
+    }
+
+    nav {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #444;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #d81b60;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 24px;
+      background: none;
+      border: none;
+      color: #d81b60;
+      cursor: pointer;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        background: #fff0f7;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 200px;
+        padding: 20px;
+        border-radius: 0 0 10px 10px;
+      }
+
+      nav.show {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+  </style>
+
+  <style>
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #3b82f6;
+      border-radius: 4px;
+    }
+    body {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert("Produk ditambahkan ke keranjang!");
+    }
+    function loadCart() {
+      const list = document.getElementById("cartList");
+      const total = document.getElementById("cartTotal");
+      list.innerHTML = "";
+      let sum = 0;
+      cart.forEach((item, i) => {
+        sum += item.price;
+        list.innerHTML += `<div class='flex justify-between border-b py-2'><span>${item.name}</span><span>Rp${item.price.toLocaleString()}</span></div>`;
+      });
+      total.textContent = `Rp${sum.toLocaleString()}`;
+    }
+  </script>
+</head>
+
+  </style>
+</head>
+<style>
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #000000;
+      border-radius: 4px;
+    }
+    body {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert("Produk ditambahkan ke keranjang!");
+    }
+    function loadCart() {
+      const list = document.getElementById("cartList");
+      const total = document.getElementById("cartTotal");
+      list.innerHTML = "";
+      let sum = 0;
+      cart.forEach((item, i) => {
+        sum += item.price;
+        list.innerHTML += `<div class='flex justify-between border-b py-2'><span>${item.name}</span><span>Rp${item.price.toLocaleString()}</span></div>`;
+      });
+      total.textContent = `Rp${sum.toLocaleString()}`;
+    }
+  </script>
+</head>
+
+<head>
+<body>
+<header>
+    <p class="fas fa-bars"></p>
+</button>
+
+<section>
+  <div style="text-align: center;">
+    <h1>GlowK</h1>
+</section>
+
+  <nav>
+    <a href="index.html"><i class="fas fa-home"></i></a>
+  </nav>
+</header>
+</body>
+</head>
+  <!-- Login -->
+  <section id="login" class="max-w-md mx-auto px-4 py-10">
+    <h2 class="text-2xl font-bold text-center mb-6 text-pink-700">Login</h2>
+    <form class="bg-white p-6 rounded shadow-md space-y-4">
+      <div>
+        <label class="block text-gray-700">Email</label>
+        <input type="email" placeholder="email@domain.com" required class="border w-full px-4 py-2 rounded">
+      </div>
+      <div>
+        <label class="block text-gray-700">Kata Sandi</label>
+        <input type="password" required class="border w-full px-4 py-2 rounded">
+      </div>
+      <button type="submit" class="bg-pink-600 text-white px-6 py-2 rounded hover:bg-blue-700 w-full">Masuk</button>
+    </form>
+  </section>
+ 
+ <section>
+  <footer>
+  <div style="text-align:left;">
+  <h3>Tentang GlowK</h3>
+  <p>GlowK adalah brand kosmetik lokal yang percaya bahwa
+  <p>kecantikan sejati datang dari bahan-bahan alami.</p>
+  <p>Kami berkomitmen untuk menghadirkan produk berkualitas
+  <p>tinggi yang aman,lembut di kulit, dan ramah lingkungan.</p>
+  </footer>
+ </section>
+
+  <footer>
+      <div style="text-align:center;">
+    &copy; 2025 GlowK. Dirancang dengan cinta untuk kecantikan alami. 2025 GlowK. dirancang untuk kecantikan alami.
+  </footer>
+  
+</html>

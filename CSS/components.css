@@ -1,0 +1,205 @@
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    font-family:var(--font);
+
+    background:var(--background);
+
+    color:var(--primary);
+
+    overflow-x:hidden;
+
+}
+
+img{
+
+    width:100%;
+
+    display:block;
+
+}
+
+a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+ul{
+
+    list-style:none;
+
+}
+
+.container{
+
+    width:min(92%,var(--container));
+
+    margin:auto;
+
+}
+
+.section{
+
+    padding:120px 0;
+
+}
+
+.section-header{
+
+    text-align:center;
+
+    margin-bottom:80px;
+
+}
+
+.section-tag{
+
+    display:inline-block;
+
+    color:var(--accent);
+
+    font-weight:700;
+
+    letter-spacing:2px;
+
+    margin-bottom:15px;
+
+    text-transform:uppercase;
+
+}
+
+.section-header h2{
+
+    font-size:var(--h2);
+
+    margin-bottom:20px;
+
+}
+
+.section-header p{
+
+    max-width:700px;
+
+    margin:auto;
+
+    color:var(--secondary);
+
+    line-height:1.8;
+
+}
+
+.btn-primary{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:18px 42px;
+
+    background:var(--primary);
+
+    color:white;
+
+    border-radius:100px;
+
+    transition:var(--transition);
+
+}
+
+.btn-primary:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.btn-outline{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:18px 42px;
+
+    border:1px solid var(--primary);
+
+    border-radius:100px;
+
+    transition:var(--transition);
+
+}
+
+.btn-outline:hover{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+.btn-small{
+
+    display:inline-flex;
+
+    padding:12px 24px;
+
+    border-radius:50px;
+
+    background:black;
+
+    color:white;
+
+}
+
+.btn-small-outline{
+
+    display:inline-flex;
+
+    padding:12px 24px;
+
+    border:1px solid black;
+
+    border-radius:50px;
+
+}
+
+.info-card{
+
+    background:white;
+
+    border-radius:var(--radius);
+
+    box-shadow:var(--shadow);
+
+    padding:30px;
+
+    transition:var(--transition);
+
+}
+
+.info-card:hover{
+
+    transform:translateY(-10px);
+
+}

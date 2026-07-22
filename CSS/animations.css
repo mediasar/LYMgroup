@@ -1,0 +1,382 @@
+/* ==========================================
+   FADE UP
+========================================== */
+
+.hidden{
+
+    opacity:0;
+
+    transform:translateY(60px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+
+}
+
+.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+/* ==========================================
+   FADE LEFT
+========================================== */
+
+.fade-left{
+
+    opacity:0;
+
+    transform:translateX(-80px);
+
+    transition:all .8s ease;
+
+}
+
+.fade-left.show{
+
+    opacity:1;
+
+    transform:translateX(0);
+
+}
+
+/* ==========================================
+   FADE RIGHT
+========================================== */
+
+.fade-right{
+
+    opacity:0;
+
+    transform:translateX(80px);
+
+    transition:all .8s ease;
+
+}
+
+.fade-right.show{
+
+    opacity:1;
+
+    transform:translateX(0);
+
+}
+
+/* ==========================================
+   ZOOM
+========================================== */
+
+.zoom{
+
+    opacity:0;
+
+    transform:scale(.8);
+
+    transition:all .8s ease;
+
+}
+
+.zoom.show{
+
+    opacity:1;
+
+    transform:scale(1);
+
+}
+
+/* ==========================================
+   FLOAT
+========================================== */
+
+@keyframes floating{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-15px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+.float{
+
+    animation:floating 5s ease-in-out infinite;
+
+}
+
+/* ==========================================
+   SPIN
+========================================== */
+
+@keyframes spin{
+
+    from{
+
+        transform:rotate(0);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+.spin{
+
+    animation:spin 10s linear infinite;
+
+}
+
+/* ==========================================
+   PULSE
+========================================== */
+
+@keyframes pulse{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.08);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+.pulse{
+
+    animation:pulse 2s infinite;
+
+}
+
+/* ==========================================
+   BUTTON HOVER
+========================================== */
+
+.btn-primary{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.btn-primary::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+    width:120%;
+
+    height:100%;
+
+    background:rgba(255,255,255,.2);
+
+    transform:skewX(-25deg);
+
+    transition:.7s;
+
+}
+
+.btn-primary:hover::before{
+
+    left:120%;
+
+}
+
+/* ==========================================
+   CARD HOVER
+========================================== */
+
+.project-card,
+
+.service-card,
+
+.info-card,
+
+.stat-card,
+
+.testimonial-card{
+
+    transition:
+        transform .4s ease,
+        box-shadow .4s ease;
+
+}
+
+.project-card:hover,
+
+.service-card:hover,
+
+.info-card:hover,
+
+.stat-card:hover,
+
+.testimonial-card:hover{
+
+    transform:translateY(-12px);
+
+}
+
+/* ==========================================
+   IMAGE ZOOM
+========================================== */
+
+.project-image{
+
+    overflow:hidden;
+
+}
+
+.project-image img{
+
+    transition:transform .6s ease;
+
+}
+
+.project-card:hover img{
+
+    transform:scale(1.08);
+
+}
+
+/* ==========================================
+   ICON ROTATE
+========================================== */
+
+.service-card i{
+
+    transition:.4s;
+
+}
+
+.service-card:hover i{
+
+    transform:rotate(12deg) scale(1.15);
+
+}
+
+/* ==========================================
+   BACK TO TOP
+========================================== */
+
+#backToTop{
+
+    transition:.4s;
+
+}
+
+#backToTop:hover{
+
+    transform:translateY(-8px);
+
+}
+
+/* ==========================================
+   CURSOR SCALE
+========================================== */
+
+.cursor.active{
+
+    transform:translate(-50%,-50%) scale(2);
+
+}
+
+/* ==========================================
+   LOADER
+========================================== */
+
+@keyframes loader{
+
+    0%{
+
+        transform:rotate(0);
+
+    }
+
+    100%{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+.loader-circle{
+
+    animation:loader 1s linear infinite;
+
+}
+
+/* ==========================================
+   TEXT GRADIENT
+========================================== */
+
+.gradient-text{
+
+    background:linear-gradient(
+        90deg,
+        #C8A46B,
+        #F4D9A5,
+        #C8A46B
+    );
+
+    background-size:300%;
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+    animation:gradientMove 6s linear infinite;
+
+}
+
+@keyframes gradientMove{
+
+    0%{
+
+        background-position:0%;
+
+    }
+
+    100%{
+
+        background-position:300%;
+
+    }
+
+}

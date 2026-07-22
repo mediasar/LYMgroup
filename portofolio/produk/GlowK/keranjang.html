@@ -1,0 +1,49 @@
+<html>
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GlowK</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #3b82f6;
+      border-radius: 4px;
+    }
+    body {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert("Produk ditambahkan ke keranjang!");
+    }
+    function loadCart() {
+      const list = document.getElementById("cartList");
+      const total = document.getElementById("cartTotal");
+      list.innerHTML = "";
+      let sum = 0;
+      cart.forEach((item, i) => {
+        sum += item.price;
+        list.innerHTML += `<div class='flex justify-between border-b py-2'><span>${item.name}</span><span>Rp${item.price.toLocaleString()}</span></div>`;
+      });
+      total.textContent = `Rp${sum.toLocaleString()}`;
+    }
+  </script>
+</head>
+   <!-- Keranjang -->
+  <section id="keranjang" class="max-w-3xl mx-auto px-4 py-10">
+    <h2 class="text-2xl font-bold mb-4 text-black-700">Your shopping cart</h2>
+    <div id="cartList" class="mb-4 border rounded p-4 bg-white"></div>
+    <div class="text-lg font-semibold mb-2">Estimated Total <span id="cartTotal">Rp 0,00</span></div>
+    <button class="bg-green-600 text-white px-6 py-2 rounded hover:bg-pink-700">Checkout</button>
+  </section></html>
