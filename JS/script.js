@@ -4,27 +4,29 @@ window.addEventListener("load", () => {
 
     const loader = document.getElementById("loader");
 
-    loader.style.opacity = "0";
-
-    loader.style.visibility = "hidden";
-
-    loader.style.transition = ".6s";
+    if (loader) {
+        loader.style.opacity = "0";
+        loader.style.visibility = "hidden";
+        loader.style.transition = ".6s";
+    }
 
 });
 
 /* ==========================================MOBILE MENU========================================== */
 
 const menuBtn = document.querySelector(".menu-btn");
-
 const navLinks = document.querySelector(".nav-links");
 
-menuBtn.addEventListener("click", () => {
+if (menuBtn && navLinks) {
 
-    navLinks.classList.toggle("active");
+    menuBtn.addEventListener("click", () => {
 
-    menuBtn.classList.toggle("active");
+        navLinks.classList.toggle("active");
+        menuBtn.classList.toggle("active");
 
-});
+    });
+
+}
 
 /* ==========================================CLOSE MENU========================================== */
 
@@ -44,19 +46,19 @@ document.querySelectorAll(".nav-links a").forEach(link => {
 
 const header = document.querySelector("header");
 
-window.addEventListener("scroll", () => {
+if (header) {
 
-    if(window.scrollY > 80){
+    window.addEventListener("scroll", () => {
 
-        header.classList.add("sticky");
+        if (window.scrollY > 80) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
 
-    }else{
+    });
 
-        header.classList.remove("sticky");
-
-    }
-
-});
+}
 
 /* ==========================================SCROLL PROGRESS========================================== */
 
@@ -71,6 +73,7 @@ window.addEventListener("scroll",()=>{
     const progressHeight =
         (window.pageYOffset / totalHeight) * 100;
 
+if (progress) {
     progress.style.width = progressHeight + "%";
 
 });
@@ -273,9 +276,10 @@ const cursor=document.querySelector(".cursor");
 
 window.addEventListener("mousemove",(e)=>{
 
-cursor.style.left=e.clientX+"px";
+if (cursor) {
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
 
-cursor.style.top=e.clientY+"px";
 
 });
 
@@ -336,3 +340,26 @@ console.log(
 "color:#C8A46B;font-size:20px;font-weight:bold;"
 
 );
+
+if (backTop) {
+
+    window.addEventListener("scroll",()=>{
+
+        if(window.scrollY > 500){
+            backTop.classList.add("show");
+        }else{
+            backTop.classList.remove("show");
+        }
+
+    });
+
+    backTop.onclick=()=>{
+
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
+
+    };
+
+}

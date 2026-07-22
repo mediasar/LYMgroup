@@ -13,8 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const x = (window.innerWidth / 2 - e.clientX) / 45;
             const y = (window.innerHeight / 2 - e.clientY) / 45;
 
-            heroImage.style.transform =
-                `translate(${x}px, ${y}px)`;
+if (heroImage) {
+    heroImage.style.transform =
+    `translate(${x}px,${y}px)`;
 
         });
 
