@@ -28,7 +28,7 @@
 
       <!-- Search Bar -->
       <div class="flex-1 max-w-md relative hidden sm:block">
-        <input type="text" id="search-input" oninput="handleSearch()" placeholder="Cari baju, dress, jaket..." class="w-full bg-gray-100 border border-transparent focus:border-indigo-500 focus:bg-white rounded-full py-2 pl-10 pr-4 text-sm outline-none transition">
+        <input type="text" id="search-input" oninput="handleSearch()" placeholder="Cari jas, blazer, jam, sepatu..." class="w-full bg-gray-100 border border-transparent focus:border-indigo-500 focus:bg-white rounded-full py-2 pl-10 pr-4 text-sm outline-none transition">
         <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute left-3.5 top-3"></i>
       </div>
 
@@ -50,7 +50,7 @@
     <!-- Search Bar Mobile -->
     <div class="px-4 pb-3 sm:hidden">
       <div class="relative w-full">
-        <input type="text" id="search-input-mobile" oninput="handleSearch(true)" placeholder="Cari pakaian..." class="w-full bg-gray-100 border border-transparent focus:border-indigo-500 focus:bg-white rounded-full py-2 pl-10 pr-4 text-sm outline-none">
+        <input type="text" id="search-input-mobile" oninput="handleSearch(true)" placeholder="Cari produk..." class="w-full bg-gray-100 border border-transparent focus:border-indigo-500 focus:bg-white rounded-full py-2 pl-10 pr-4 text-sm outline-none">
         <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute left-3.5 top-3"></i>
       </div>
     </div>
@@ -61,16 +61,16 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid md:grid-cols-2 gap-12 items-center">
       <div>
         <span class="inline-block px-3.5 py-1 bg-indigo-600/30 text-indigo-400 rounded-full text-xs font-semibold tracking-wider mb-4">NEW COLLECTION 2026</span>
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">Tampil Percaya Diri dengan Style Terkini.</h1>
-        <p class="text-gray-300 text-base md:text-lg mb-8">Eksplorasi pakaian pria dan wanita berdesain modern, minimalis, dan berkualitas tinggi hanya di FashionK.</p>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">Tampil Elegan & Classy Setiap Saat.</h1>
+        <p class="text-gray-300 text-base md:text-lg mb-8">Temukan koleksi eksklusif Suits, Blazers, Jam Tangan, Sepatu Kulit, Sabuk, dan Kaos Premium Pria & Wanita.</p>
         <div class="flex space-x-4">
           <a href="#produk" class="px-7 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-lg transition text-sm sm:text-base">Belanja Sekarang</a>
           <a href="#kategori" class="px-7 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg backdrop-blur-sm transition text-sm sm:text-base">Kategori</a>
         </div>
       </div>
       <div class="grid grid-cols-2 gap-4">
-        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80" alt="Women Fashion" class="rounded-2xl shadow-2xl object-cover h-72 sm:h-80 w-full">
-        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&q=80" alt="Men Fashion" class="rounded-2xl shadow-2xl object-cover h-72 sm:h-80 w-full mt-8">
+        <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=600&q=80" alt="Women Tailored Suit" class="rounded-2xl shadow-2xl object-cover h-72 sm:h-80 w-full">
+        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&q=80" alt="Men Classic Suit" class="rounded-2xl shadow-2xl object-cover h-72 sm:h-80 w-full mt-8">
       </div>
     </div>
   </section>
@@ -80,39 +80,55 @@
     <h2 class="text-3xl font-bold text-center mb-10">Pilih Kategori</h2>
     <div class="grid md:grid-cols-2 gap-8">
       <div class="relative rounded-2xl overflow-hidden group shadow-md h-80 sm:h-96">
-        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1000&q=80" alt="Wanita" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+        <img src="https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?auto=format&fit=crop&w=1000&q=80" alt="Wanita" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8 text-white">
           <h3 class="text-2xl sm:text-3xl font-bold mb-2">Koleksi Wanita</h3>
-          <p class="text-gray-300 text-sm mb-4">Dress, Outer, Tops, & Accessories</p>
-          <a href="#produk" onclick="filterCategory('wanita')" class="inline-flex items-center text-indigo-400 font-semibold group-hover:translate-x-2 transition">Jelajahi Wanita <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i></a>
+          <p class="text-gray-300 text-sm mb-4">Blazer, Suits, Jam Tangan, Heel/Loafer, Sabuk, & T-Shirt Premium</p>
+          <a href="#produk" onclick="filterGender('wanita')" class="inline-flex items-center text-indigo-400 font-semibold group-hover:translate-x-2 transition">Jelajahi Wanita <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i></a>
         </div>
       </div>
       <div class="relative rounded-2xl overflow-hidden group shadow-md h-80 sm:h-96">
-        <img src="https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?auto=format&fit=crop&w=1000&q=80" alt="Pria" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+        <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=1000&q=80" alt="Pria" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8 text-white">
           <h3 class="text-2xl sm:text-3xl font-bold mb-2">Koleksi Pria</h3>
-          <p class="text-gray-300 text-sm mb-4">Kemeja, Jaket, Celana, & Streetwear</p>
-          <a href="#produk" onclick="filterCategory('pria')" class="inline-flex items-center text-indigo-400 font-semibold group-hover:translate-x-2 transition">Jelajahi Pria <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i></a>
+          <p class="text-gray-300 text-sm mb-4">Gentlemen Suit, Blazer, Luxury Watch, Oxford Shoes, Leather Belt, & Tee</p>
+          <a href="#produk" onclick="filterGender('pria')" class="inline-flex items-center text-indigo-400 font-semibold group-hover:translate-x-2 transition">Jelajahi Pria <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i></a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Section Produk Terbaru -->
+  <!-- Section Produk Terbaru & Filter Multi-level -->
   <section id="produk" class="py-16 bg-white border-t border-gray-100 flex-1">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+      
+      <!-- Header Filter -->
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-6 border-b border-gray-100 gap-4">
         <div>
-          <h2 class="text-3xl font-bold">Koleksi Pilihan</h2>
+          <h2 class="text-3xl font-bold text-gray-900">Koleksi Pilihan</h2>
           <p class="text-gray-500 text-sm mt-1">Pakaian berkualitas tinggi untuk style harianmu.</p>
         </div>
+        
+        <!-- Filter Baris 1: Gender -->
         <div class="flex space-x-2">
-          <button onclick="filterCategory('all')" id="btn-all" class="filter-btn px-4 py-2 rounded-full font-medium text-sm transition bg-indigo-600 text-white">Semua</button>
-          <button onclick="filterCategory('wanita')" id="btn-wanita" class="filter-btn px-4 py-2 rounded-full font-medium text-sm transition bg-gray-100 text-gray-600 hover:bg-gray-200">Wanita</button>
-          <button onclick="filterCategory('pria')" id="btn-pria" class="filter-btn px-4 py-2 rounded-full font-medium text-sm transition bg-gray-100 text-gray-600 hover:bg-gray-200">Pria</button>
+          <button onclick="filterGender('all')" id="btn-gender-all" class="gender-btn px-5 py-2.5 rounded-full font-semibold text-sm transition bg-indigo-600 text-white shadow-sm">Semua</button>
+          <button onclick="filterGender('wanita')" id="btn-gender-wanita" class="gender-btn px-5 py-2.5 rounded-full font-medium text-sm transition bg-gray-100 text-gray-600 hover:bg-gray-200">Wanita</button>
+          <button onclick="filterGender('pria')" id="btn-gender-pria" class="gender-btn px-5 py-2.5 rounded-full font-medium text-sm transition bg-gray-100 text-gray-600 hover:bg-gray-200">Pria</button>
         </div>
       </div>
 
+      <!-- Filter Baris 2: Sub-Kategori / Jenis Produk -->
+      <div class="flex items-center space-x-3 pt-6 pb-10 overflow-x-auto hide-scrollbar">
+        <button onclick="filterType('all')" id="btn-type-all" class="type-btn whitespace-nowrap px-5 py-2.5 rounded-full font-semibold text-xs sm:text-sm transition bg-slate-900 text-white shadow-sm">Semua Kategori</button>
+        <button onclick="filterType('blazer')" id="btn-type-blazer" class="type-btn whitespace-nowrap px-5 py-2.5 rounded-full font-medium text-xs sm:text-sm transition bg-white border border-gray-200 text-gray-600 hover:border-gray-400">Blazer</button>
+        <button onclick="filterType('suit')" id="btn-type-suit" class="type-btn whitespace-nowrap px-5 py-2.5 rounded-full font-medium text-xs sm:text-sm transition bg-white border border-gray-200 text-gray-600 hover:border-gray-400">Suit / Setelan</button>
+        <button onclick="filterType('watch')" id="btn-type-watch" class="type-btn whitespace-nowrap px-5 py-2.5 rounded-full font-medium text-xs sm:text-sm transition bg-white border border-gray-200 text-gray-600 hover:border-gray-400">Jam Tangan</button>
+        <button onclick="filterType('shoes')" id="btn-type-shoes" class="type-btn whitespace-nowrap px-5 py-2.5 rounded-full font-medium text-xs sm:text-sm transition bg-white border border-gray-200 text-gray-600 hover:border-gray-400">Sepatu</button>
+        <button onclick="filterType('belt')" id="btn-type-belt" class="type-btn whitespace-nowrap px-5 py-2.5 rounded-full font-medium text-xs sm:text-sm transition bg-white border border-gray-200 text-gray-600 hover:border-gray-400">Ikat Pinggang</button>
+        <button onclick="filterType('tshirt')" id="btn-type-tshirt" class="type-btn whitespace-nowrap px-5 py-2.5 rounded-full font-medium text-xs sm:text-sm transition bg-white border border-gray-200 text-gray-600 hover:border-gray-400">T-Shirt</button>
+      </div>
+
+      <!-- Grid Produk -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="product-grid">
         <!-- Produk di-render via JS -->
       </div>
@@ -199,15 +215,238 @@
 
   <!-- Script Logic Application -->
   <script>
+    // Database Produk (Ditambahkan colorImages untuk pemetaan gambar per warna)
     const products = [
-      { id: 1, name: 'Oversized Linen Shirt', category: 'pria', price: 299000, img: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=500&q=80', colors: ['White', 'Beige', 'Black'], sizes: ['M', 'L', 'XL'] },
-      { id: 2, name: 'Floral Summer Blazer', category: 'wanita', price: 389000, img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80', colors: ['Pink', 'Cream'], sizes: ['S', 'M', 'L'] },
-      { id: 3, name: 'Minimalist Denim Jacket', category: 'pria', price: 450000, img: 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=500&q=80', colors: ['Blue Denim', 'Black'], sizes: ['M', 'L', 'XL'] },
-      { id: 4, name: 'Casual Pleated Dress', category: 'wanita', price: 349000, img: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=500&q=80', colors: ['Navy', 'Olive', 'Maroon'], sizes: ['S', 'M', 'L'] },
+      // ==================== PRIA (10 ITEMS) ====================
+      { 
+        id: 1, 
+        name: 'Executive Suit', 
+        category: 'pria', 
+        type: 'suit',
+        price: 2500000, 
+        img: 'executivesuitblack.png', 
+        colors: ['Black', 'Grey', 'Navy', 'Charcoal', 'Cream','Red'], 
+        colorImages: {
+          'Black': 'executivesuitblack.png',
+          'Grey': 'executivesuitgrey.png',
+          'Navy': 'executivesuitnavy.png',
+          'Charcoal': 'executivesuitcharcoal.png',
+          'Cream': 'executivesuitcream.png',
+          'Red': 'executivesuitred.png',
+        },
+        sizes: ['48 (M)', '50 (L)', '52 (XL)'] 
+      },
+      { 
+        id: 2, 
+        name: 'Smart Casual Linen Blazer', 
+        category: 'pria', 
+        type: 'blazer',
+        price: 890000, 
+        img: 'https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?auto=format&fit=crop&w=600&q=80', 
+        colors: ['Beige', 'Light Blue', 'Olive'], 
+        sizes: ['M', 'L', 'XL'] 
+      },
+      { 
+        id: 3, 
+        name: 'Daniel Wellington', 
+        category: 'pria', 
+        type: 'watch',
+        price: 5301750, 
+        img: 'danielwellington.png', 
+        colors: ['='], 
+        sizes: ['42mm', '44mm'] 
+      },
+      { 
+        id: 4, 
+        name: 'Hamilton', 
+        category: 'pria', 
+        type: 'watch',
+        price: 18000000, 
+        img: 'hamilton.png',
+        colors: ['='], 
+        sizes: ['40mm'] 
+      },
+      { 
+        id: 5, 
+        name: 'Leather Oxford Dress Shoes', 
+        category: 'pria', 
+        type: 'shoes',
+        price: 1150000, 
+        img: 'https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?auto=format&fit=crop&w=600&q=80', 
+        colors: ['Dark Brown', 'Black Tan'], 
+        sizes: ['40', '41', '42', '43'] 
+      },
+      { 
+        id: 6, 
+        name: 'Suede Penny Loafers', 
+        category: 'pria', 
+        type: 'shoes',
+        price: 799000, 
+        img: 'https://images.unsplash.com/photo-1533867617858-e7b97e060509?auto=format&fit=crop&w=600&q=80', 
+        colors: ['Navy Suede', 'Taupe Suede'], 
+        sizes: ['40', '41', '42', '43'] 
+      },
+      { 
+        id: 7, 
+        name: 'Reversible Italian Leather Belt', 
+        category: 'pria', 
+        type: 'belt',
+        price: 420000, 
+        img: 'https://images.unsplash.com/photo-1624222247344-550fb60583dc?auto=format&fit=crop&w=600&q=80', 
+        colors: ['Black/Brown Dual', 'Cognac Gold'], 
+        sizes: ['105cm', '115cm', '125cm'] 
+      },
+      { 
+        id: 8, 
+        name: 'Casual Braided Canvas Belt', 
+        category: 'pria', 
+        type: 'belt',
+        price: 250000, 
+        img: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80', 
+        colors: ['Navy Striped', 'Khaki Green'], 
+        sizes: ['All Size'] 
+      },
+      { 
+        id: 9, 
+        name: 'Heavyweight Heavy Cotton Tee', 
+        category: 'pria', 
+        type: 'tshirt',
+        price: 179000, 
+        img: 'kaoshitam.png', 
+        colors: ['Black', 'White', 'Green', 'Navy', 'Pink', 'Brown'], 
+        colorImages: {
+          'Black': 'kaosblack.png',
+          'White': 'kaoswhite.png',
+          'Green': 'kaosgreen.png',
+          'Navy': 'kaosnavy.png',
+          'Pink': 'kaospink.png',
+          'Brown': 'kaosbrown.png',
+        },
+        sizes: ['M', 'L', 'XL'] 
+      },
+      { 
+        id: 10, 
+        name: 'Polo Shirt', 
+        category: 'pria', 
+        type: 'tshirt',
+        price: 799000, 
+        img: 'polocoklat.png', 
+        colors: ['Black', 'White', 'Green', 'Brown'], 
+        colorImages: {
+          'Black': 'poloblack.png',
+          'White': 'polowhite.png',
+          'Green': 'pologreen.png',
+          'Brown': 'polobrown.png',
+        },
+        sizes: ['M', 'L', 'XL'] 
+      },
+
+      // ==================== WANITA (10 ITEMS) ====================
+      { 
+        id: 11, 
+        name: 'Chic Tailored Pantsuit Set', 
+        category: 'wanita', 
+        type: 'suit',
+        price: 1450000, 
+        img: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=600&q=80', 
+        colors: ['Cream Pink', 'Pastel Mint', 'Off White'], 
+        sizes: ['S', 'M', 'L'] 
+      },
+      { 
+        id: 12, 
+        name: 'Oversized Double-Breasted Blazer', 
+        category: 'wanita', 
+        type: 'blazer',
+        price: 780000, 
+        img: 'https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?auto=format&fit=crop&w=600&q=80', 
+        colors: ['Beige Plaid', 'Charcoal Grey'], 
+        sizes: ['S', 'M', 'L'] 
+      },
+      { 
+        id: 13, 
+        name: 'Rose Gold Mesh Watch', 
+        category: 'wanita', 
+        type: 'watch',
+        price: 1650000, 
+        img: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80', 
+        colors: ['Rose Gold', 'Silver Pearl'], 
+        sizes: ['32mm', '36mm'] 
+      },
+      { 
+        id: 14, 
+        name: 'Elegant Pearl Accent Leather Watch', 
+        category: 'wanita', 
+        type: 'watch',
+        price: 1290000, 
+        img: 'https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=600&q=80', 
+        colors: ['Emerald Green', 'Nude Leather'], 
+        sizes: ['30mm'] 
+      },
+      { 
+        id: 15, 
+        name: 'Classic Pointed Stiletto Heels', 
+        category: 'wanita', 
+        type: 'shoes',
+        price: 850000, 
+        img: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=80', 
+        colors: ['Classic Red', 'Nude Beige', 'Black Patent'], 
+        sizes: ['36', '37', '38', '39'] 
+      },
+      { 
+        id: 16, 
+        name: 'Chic Leather Bit Loafers', 
+        category: 'wanita', 
+        type: 'shoes',
+        price: 720000, 
+        img: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=600&q=80', 
+        colors: ['White Gold', 'Tan Brown'], 
+        sizes: ['36', '37', '38', '39'] 
+      },
+      { 
+        id: 17, 
+        name: 'Slim Monogram Waist Belt', 
+        category: 'wanita', 
+        type: 'belt',
+        price: 350000, 
+        img: 'https://images.unsplash.com/photo-1603487742131-4160ec999306?auto=format&fit=crop&w=600&q=80', 
+        colors: ['Black Gold Buckle', 'Camel Brown'], 
+        sizes: ['85cm', '95cm'] 
+      },
+      { 
+        id: 18, 
+        name: 'Cinch Leather Dress Belt', 
+        category: 'wanita', 
+        type: 'belt',
+        price: 290000, 
+        img: 'https://images.unsplash.com/photo-1624222247344-550fb60583dc?auto=format&fit=crop&w=600&q=80', 
+        colors: ['Taupe Silver', 'Burgundy'], 
+        sizes: ['Free Size'] 
+      },
+      { 
+        id: 19, 
+        name: 'Premium Mercerized Cotton Tee', 
+        category: 'wanita', 
+        type: 'tshirt',
+        price: 210000, 
+        img: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80', 
+        colors: ['Soft Pink', 'Off White', 'Lavender'], 
+        sizes: ['S', 'M', 'L'] 
+      },
+      { 
+        id: 20, 
+        name: 'Boxy Cropped Everyday T-Shirt', 
+        category: 'wanita', 
+        type: 'tshirt',
+        price: 185000, 
+        img: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80', 
+        colors: ['Butter Yellow', 'Black', 'Sky Blue'], 
+        sizes: ['S', 'M', 'L'] 
+      }
     ];
 
     let cart = [];
-    let currentCategory = 'all';
+    let currentGender = 'all';
+    let currentType = 'all';
     let selectedSize = '';
     let selectedColor = '';
     let activeModalProduct = null;
@@ -219,7 +458,7 @@
     function renderProducts(items) {
       const grid = document.getElementById('product-grid');
       if (items.length === 0) {
-        grid.innerHTML = `<p class="col-span-full text-center text-gray-500 py-12">Produk tidak ditemukan.</p>`;
+        grid.innerHTML = `<p class="col-span-full text-center text-gray-500 py-16">Tidak ada produk yang sesuai dengan filter ini.</p>`;
         return;
       }
 
@@ -244,27 +483,53 @@
       lucide.createIcons();
     }
 
-    function filterCategory(cat) {
-      currentCategory = cat;
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.remove('bg-indigo-600', 'text-white');
-        btn.classList.add('bg-gray-100', 'text-gray-600');
+    function applyFilters() {
+      const query = (document.getElementById('search-input').value || document.getElementById('search-input-mobile').value).toLowerCase();
+      
+      const filtered = products.filter(p => {
+        const matchGender = (currentGender === 'all' || p.category === currentGender);
+        const matchType = (currentType === 'all' || p.type === currentType);
+        const matchSearch = p.name.toLowerCase().includes(query);
+        return matchGender && matchType && matchSearch;
       });
 
-      const activeBtn = document.getElementById(`btn-${cat}`);
-      if (activeBtn) {
-        activeBtn.classList.remove('bg-gray-100', 'text-gray-600');
-        activeBtn.classList.add('bg-indigo-600', 'text-white');
-      }
-
-      const filtered = cat === 'all' ? products : products.filter(p => p.category === cat);
       renderProducts(filtered);
     }
 
+    function filterGender(gender) {
+      currentGender = gender;
+      document.querySelectorAll('.gender-btn').forEach(btn => {
+        btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-sm');
+        btn.classList.add('bg-gray-100', 'text-gray-600');
+      });
+
+      const activeBtn = document.getElementById(`btn-gender-${gender}`);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-gray-100', 'text-gray-600');
+        activeBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-sm');
+      }
+
+      applyFilters();
+    }
+
+    function filterType(type) {
+      currentType = type;
+      document.querySelectorAll('.type-btn').forEach(btn => {
+        btn.classList.remove('bg-slate-900', 'text-white');
+        btn.classList.add('bg-white', 'border', 'border-gray-200', 'text-gray-600');
+      });
+
+      const activeBtn = document.getElementById(`btn-type-${type}`);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-white', 'border', 'border-gray-200', 'text-gray-600');
+        activeBtn.classList.add('bg-slate-900', 'text-white');
+      }
+
+      applyFilters();
+    }
+
     function handleSearch(isMobile = false) {
-      const query = document.getElementById(isMobile ? 'search-input-mobile' : 'search-input').value.toLowerCase();
-      const filtered = products.filter(p => p.name.toLowerCase().includes(query) && (currentCategory === 'all' || p.category === currentCategory));
-      renderProducts(filtered);
+      applyFilters();
     }
 
     function openProductModal(id) {
@@ -272,10 +537,15 @@
       selectedSize = activeModalProduct.sizes[0];
       selectedColor = activeModalProduct.colors[0];
 
+      // Tentukan gambar awal (gunakan colorImages jika ada)
+      const initialImg = (activeModalProduct.colorImages && activeModalProduct.colorImages[selectedColor]) 
+        ? activeModalProduct.colorImages[selectedColor] 
+        : activeModalProduct.img;
+
       const modalContent = document.getElementById('modal-content');
       modalContent.innerHTML = `
         <div class="h-80 md:h-full rounded-xl overflow-hidden bg-gray-100">
-          <img src="${activeModalProduct.img}" alt="${activeModalProduct.name}" class="w-full h-full object-cover">
+          <img id="modal-product-img" src="${initialImg}" alt="${activeModalProduct.name}" class="w-full h-full object-cover">
         </div>
         <div class="flex flex-col justify-between">
           <div>
@@ -286,19 +556,19 @@
             <!-- Warna -->
             <div class="mt-4">
               <label class="text-sm font-semibold text-gray-700 block mb-2">Pilih Warna:</label>
-              <div class="flex space-x-2">
+              <div class="flex flex-wrap gap-2">
                 ${activeModalProduct.colors.map((c, i) => `
-                  <button onclick="selectColor('${c}')" id="color-${c}" class="color-btn text-xs px-3 py-1.5 rounded-lg border ${i===0 ? 'border-indigo-600 bg-indigo-50 text-indigo-600 font-bold' : 'border-gray-200 text-gray-600'}">${c}</button>
+                  <button onclick="selectColor('${c}')" id="color-${c.replace(/[^a-zA-Z0-9]/g, '-')}" class="color-btn text-xs px-3 py-1.5 rounded-lg border ${i===0 ? 'border-indigo-600 bg-indigo-50 text-indigo-600 font-bold' : 'border-gray-200 text-gray-600'}">${c}</button>
                 `).join('')}
               </div>
             </div>
 
             <!-- Ukuran -->
             <div class="mt-4">
-              <label class="text-sm font-semibold text-gray-700 block mb-2">Pilih Ukuran:</label>
-              <div class="flex space-x-2">
+              <label class="text-sm font-semibold text-gray-700 block mb-2">Pilih Ukuran / Spesifikasi:</label>
+              <div class="flex flex-wrap gap-2">
                 ${activeModalProduct.sizes.map((s, i) => `
-                  <button onclick="selectSize('${s}')" id="size-${s}" class="size-btn w-10 h-10 rounded-lg border flex items-center justify-center font-semibold text-sm ${i===0 ? 'border-indigo-600 bg-indigo-600 text-white' : 'border-gray-200 text-gray-700 hover:border-gray-400'}">${s}</button>
+                  <button onclick="selectSize('${s}')" id="size-${s.replace(/[^a-zA-Z0-9]/g, '-')}" class="size-btn px-3 py-1.5 rounded-lg border text-xs font-semibold ${i===0 ? 'border-indigo-600 bg-indigo-600 text-white' : 'border-gray-200 text-gray-700 hover:border-gray-400'}">${s}</button>
                 `).join('')}
               </div>
             </div>
@@ -320,7 +590,7 @@
         b.classList.remove('border-indigo-600', 'bg-indigo-600', 'text-white');
         b.classList.add('border-gray-200', 'text-gray-700');
       });
-      const el = document.getElementById(`size-${size}`);
+      const el = document.getElementById(`size-${size.replace(/[^a-zA-Z0-9]/g, '-')}`);
       if(el) {
         el.classList.remove('border-gray-200', 'text-gray-700');
         el.classList.add('border-indigo-600', 'bg-indigo-600', 'text-white');
@@ -329,14 +599,22 @@
 
     function selectColor(color) {
       selectedColor = color;
+      
+      // Highlighting tombol warna
       document.querySelectorAll('.color-btn').forEach(b => {
         b.classList.remove('border-indigo-600', 'bg-indigo-50', 'text-indigo-600', 'font-bold');
         b.classList.add('border-gray-200', 'text-gray-600');
       });
-      const el = document.getElementById(`color-${color}`);
+      const el = document.getElementById(`color-${color.replace(/[^a-zA-Z0-9]/g, '-')}`);
       if(el) {
         el.classList.remove('border-gray-200', 'text-gray-600');
         el.classList.add('border-indigo-600', 'bg-indigo-50', 'text-indigo-600', 'font-bold');
+      }
+
+      // 🟢 FITUR GANTI GAMBAR DI SINI:
+      const modalImg = document.getElementById('modal-product-img');
+      if (modalImg && activeModalProduct && activeModalProduct.colorImages && activeModalProduct.colorImages[color]) {
+        modalImg.src = activeModalProduct.colorImages[color];
       }
     }
 
@@ -345,12 +623,18 @@
     }
 
     function addToCartFromModal() {
+      // Dapatkan gambar variasi warna saat dimasukkan ke keranjang
+      const itemImg = (activeModalProduct.colorImages && activeModalProduct.colorImages[selectedColor]) 
+        ? activeModalProduct.colorImages[selectedColor] 
+        : activeModalProduct.img;
+
       const existingIndex = cart.findIndex(item => item.id === activeModalProduct.id && item.size === selectedSize && item.color === selectedColor);
       if (existingIndex > -1) {
         cart[existingIndex].qty += 1;
       } else {
         cart.push({
           ...activeModalProduct,
+          img: itemImg, // Menyimpan gambar variasi yang dipilih ke keranjang
           size: selectedSize,
           color: selectedColor,
           qty: 1
@@ -416,7 +700,7 @@
         alert('Keranjang kamu masih kosong!');
         return;
       }
-      const phone = "6282123962717"; // Ganti dengan nomor Admin
+      const phone = "6282123962717"; // Nomor Admin
       let message = "*PESANAN BARU - FASHIONK*\n\n";
       let total = 0;
 
@@ -431,7 +715,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      renderProducts(products);
+      applyFilters();
       updateCart();
     });
   </script>
