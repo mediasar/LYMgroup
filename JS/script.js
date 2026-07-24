@@ -257,6 +257,8 @@ const heroImage=document.querySelector(".hero-image");
 
 window.addEventListener("mousemove",(e)=>{
 
+if(heroImage){
+
 const x=(window.innerWidth/2-e.pageX)/40;
 
 const y=(window.innerHeight/2-e.pageY)/40;
@@ -264,6 +266,8 @@ const y=(window.innerHeight/2-e.pageY)/40;
 heroImage.style.transform=
 
 `translate(${x}px,${y}px)`;
+
+}
 
 });
 
