@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KTravel — Global Corporate Management & Executive Leisure</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            corporate: {
+              black: '#070A11',
+              dark: '#0B111E',
+              navy: '#152035',
+              slate: '#334155',
+              gold: '#C5A059',
+              goldHover: '#B08C45',
+              emerald: '#10B981'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .glass-nav {
+      background: rgba(11, 17, 30, 0.94);
+      backdrop-filter: blur(16px);
+    }
+    .hero-gradient {
+      background: radial-gradient(circle at top right, rgba(197, 160, 89, 0.15), transparent 40%),
+                  linear-gradient(180deg, rgba(7, 10, 17, 0.85) 0%, rgba(7, 10, 17, 0.98) 100%);
+    }
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-corporate-gold selection:text-corporate-black flex flex-col min-h-screen">
+
+  <!-- ==================== 1. TOP UTILITY BAR ==================== -->
+  <div class="bg-corporate-black text-slate-300 text-[11px] py-2 border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-6">
+        <span class="flex items-center gap-1.5 font-medium">
+          <i data-lucide="phone" class="w-3.5 h-3.5 text-corporate-gold"></i>
+          +62 821-2396-2717 (Admin)
+        </span>
+        <span class="hidden md:flex items-center gap-1.5 font-medium">
+          <i data-lucide="mail" class="w-3.5 h-3.5 text-corporate-gold"></i>
+          KTravel@gmail.com
+        </span>
+      </div>
+      
+      <div class="flex items-center gap-6">
+        <!-- Currency Switcher -->
+        <div class="flex items-center gap-1">
+          <span class="text-slate-400 font-medium">Mata Uang:</span>
+          <select id="currency-select" onchange="changeCurrency()" class="bg-slate-900 text-white font-bold text-[10px] px-2 py-0.5 rounded border border-slate-700 outline-none cursor-pointer">
+            <option value="IDR">IDR (Rp)</option>
+            <option value="USD">USD ($)</option>
+            <option value="SGD">SGD (S$)</option>
+          </select>
+        </div>
+
+        <span class="hidden sm:flex items-center gap-1.5 text-emerald-400 font-semibold">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> PKP Registered & ISO 9001:2015
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 2. HEADER & NAVIGATION ==================== -->
+  <header class="sticky top-0 z-40 glass-nav border-b border-slate-800 shadow-xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-corporate-gold to-amber-200 text-corporate-black font-black text-xl flex items-center justify-center shadow-lg shadow-amber-500/10">
+          KT
+        </div>
+        <div class="flex flex-col">
+          <span class="text-xl font-extrabold tracking-tight text-white leading-none">
+            K<span class="text-corporate-gold">TRAVEL</span>
+          </span>
+          <span class="text-[8px] uppercase tracking-widest text-slate-400 mt-1 font-semibold">Corporate & MICE Management</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center space-x-8 text-xs uppercase tracking-wider font-semibold text-slate-300">
+        <a href="#layanan" class="hover:text-corporate-gold transition">Standar Layanan</a>
+        <a href="#katalog" class="hover:text-corporate-gold transition">Destinasi Eksekutif</a>
+        <a href="#kalkulator" class="hover:text-corporate-gold transition">Simulasi MICE</a>
+        <a href="#rfp" class="hover:text-corporate-gold transition">Proposal B2B</a>
+        <a href="#faq" class="hover:text-corporate-gold transition">FAQ</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="hidden lg:flex items-center space-x-3">
+        <a href="#rfp" class="px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-800/80 hover:bg-slate-700 text-white font-bold text-xs transition">
+          Minta RFP Resmi
+        </a>
+        <a href="#katalog" class="px-5 py-2.5 rounded-xl bg-corporate-gold hover:bg-corporate-goldHover text-corporate-black font-extrabold text-xs shadow-md transition">
+          Eksplor Katalog
+        </a>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-slate-300 hover:text-white">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-corporate-dark border-b border-slate-800 px-6 py-4 space-y-3 font-semibold text-xs text-slate-300">
+      <a href="#layanan" onclick="toggleMobileMenu()" class="block py-2">Standar Layanan</a>
+      <a href="#katalog" onclick="toggleMobileMenu()" class="block py-2">Destinasi Eksekutif</a>
+      <a href="#kalkulator" onclick="toggleMobileMenu()" class="block py-2">Simulasi MICE</a>
+      <a href="#rfp" onclick="toggleMobileMenu()" class="block py-2 text-corporate-gold font-bold">Proposal B2B (RFP)</a>
+    </div>
+  </header>
+
+  <!-- ==================== 3. HERO SECTION ==================== -->
+  <section class="relative bg-corporate-black text-white py-24 lg:py-36 overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-20">
+      <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1920&q=80" class="w-full h-full object-cover">
+    </div>
+    <div class="absolute inset-0 hero-gradient z-0"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="max-w-3xl">
+        
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-slate-800/90 border border-slate-700 rounded-full text-corporate-gold text-xs font-semibold uppercase tracking-widest mb-6 backdrop-blur-sm">
+          <i data-lucide="award" class="w-4 h-4"></i> Enterprise Travel Management & Executive Retreats
+        </div>
+
+        <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-tight mb-6">
+          Manajemen Perjalanan Dinas & MICE Berstandar Global.
+        </h1>
+
+        <p class="text-slate-300 text-base sm:text-lg mb-10 font-normal leading-relaxed">
+          KTravel mengelola *Corporate Outing*, *VIP Flight Charter*, dan perjalanan dinas eksekutif dengan akuntabilitas perpajakan lengkap, garansi SLA, serta dukungan tim *crisis management* 24/7.
+        </p>
+
+        <!-- Search & Filter Bar -->
+        <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-2xl text-slate-800 border border-slate-200">
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+            <div>
+              <label class="block text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-1">Destinasi</label>
+              <select id="hero-dest" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 outline-none focus:border-corporate-dark">
+                <option value="all">Semua Destinasi</option>
+                <option value="Bali">Bali (Private Resort)</option>
+                <option value="Labuan Bajo">Labuan Bajo (Luxury Phinisi)</option>
+                <option value="Lombok">Lombok & Gili</option>
+                <option value="Jepang">Jepang (Executive Route)</option>
+                <option value="Yogyakarta">Yogyakarta Heritage</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-1">Kategori Event</label>
+              <select id="hero-cat" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 outline-none focus:border-corporate-dark">
+                <option value="all">Semua Kategori</option>
+                <option value="Pantai">Bahari & Cruise</option>
+                <option value="Gunung">Nature Exploration</option>
+                <option value="Budaya">Culture & Heritage</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-1">Anggaran / Pax</label>
+              <select id="hero-budget" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 outline-none focus:border-corporate-dark">
+                <option value="all">Semua Anggaran</option>
+                <option value="3000000">&lt; Rp 3.000.000</option>
+                <option value="6000000">&lt; Rp 6.000.000</option>
+                <option value="20000000">&lt; Rp 20.000.000</option>
+              </select>
+            </div>
+
+            <div class="flex items-end">
+              <button onclick="execHeroSearch()" class="w-full py-2.5 bg-corporate-dark hover:bg-corporate-navy text-white font-bold rounded-xl text-xs transition shadow-md flex items-center justify-center gap-2">
+                <i data-lucide="search" class="w-4 h-4 text-corporate-gold"></i> Cari Jadwal
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 4. CERTIFICATIONS & ENTERPRISE TRUST ==================== -->
+  <section class="bg-corporate-dark py-6 border-y border-slate-800 text-slate-400 text-xs font-bold tracking-widest uppercase">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div class="flex items-center justify-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-corporate-gold"></i> GARUDA INDONESIA PARTNER</div>
+        <div class="flex items-center justify-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-corporate-gold"></i> MARRIOTT BONVOY NETWORK</div>
+        <div class="flex items-center justify-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-corporate-gold"></i> ASITA REGISTERED</div>
+        <div class="flex items-center justify-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-corporate-gold"></i> IATA CERTIFIED AGENT</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 5. STANDAR LAYANAN UNGGULAN ==================== -->
+  <section id="layanan" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-slate-500 font-extrabold uppercase tracking-widest text-xs">Standar Operasional Berlisensi</span>
+        <h2 class="text-3xl font-extrabold text-corporate-dark mt-2 tracking-tight">Pilar Layanan Korporat KTravel</h2>
+        <p class="text-slate-500 text-xs mt-2">Menjamin kepatuhan regulasi, transparansi laporan keuangan, serta keandalan eksekusi acara.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <div class="p-8 rounded-3xl bg-slate-50 border border-slate-200/80 card-hover shadow-sm">
+          <div class="w-12 h-12 bg-corporate-dark text-corporate-gold rounded-2xl flex items-center justify-center mb-6 shadow-md">
+            <i data-lucide="file-spreadsheet" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-base text-corporate-dark mb-2">Transparansi Pajak & LPJ Resmi</h3>
+          <p class="text-slate-500 text-xs leading-relaxed">Penerbitan Faktur Pajak PPN (PKP) dan Laporan Pertanggungjawaban (LPJ) terstruktur untuk memudahkan proses audit tim *Finance* perusahaan Anda.</p>
+        </div>
+
+        <div class="p-8 rounded-3xl bg-slate-50 border border-slate-200/80 card-hover shadow-sm">
+          <div class="w-12 h-12 bg-corporate-dark text-corporate-gold rounded-2xl flex items-center justify-center mb-6 shadow-md">
+            <i data-lucide="user-check" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-base text-corporate-dark mb-2">Dedicated Key Account Manager</h3>
+          <p class="text-slate-500 text-xs leading-relaxed">Satu profesional *Account Executive* didedikasikan penuh untuk menangani modifikasi *itinerary*, kendala teknis, dan koordinasi lapangan 24/7.</p>
+        </div>
+
+        <div class="p-8 rounded-3xl bg-slate-50 border border-slate-200/80 card-hover shadow-sm">
+          <div class="w-12 h-12 bg-corporate-dark text-corporate-gold rounded-2xl flex items-center justify-center mb-6 shadow-md">
+            <i data-lucide="shield-check" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-base text-corporate-dark mb-2">Garansi SLA & Asuransi Komprehensif</h3>
+          <p class="text-slate-500 text-xs leading-relaxed">Setiap peserta terlindungi oleh asuransi perjalanan eksekutif, serta jaminan standar penerbangan dan kendaraan operasional terakreditasi.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== 6. KATALOG DESTINASI EKSEKUTIF ==================== -->
+  <section id="katalog" class="py-24 bg-slate-100 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-4">
+        <div>
+          <span class="text-slate-500 font-extrabold uppercase tracking-widest text-xs">Pilihan Terakreditasi</span>
+          <h2 class="text-3xl font-extrabold text-corporate-dark mt-1">Katalog Paket Wisata & MICE</h2>
+        </div>
+
+        <div class="flex items-center gap-3 w-full md:w-auto">
+          <label class="text-xs font-bold text-slate-500">Urutkan:</label>
+          <select id="sort-select" onchange="applyFilters()" class="bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 outline-none focus:border-corporate-dark">
+            <option value="default">Rekomendasi Utama</option>
+            <option value="price-low">Harga: Termurah</option>
+            <option value="price-high">Harga: Tertinggi</option>
+            <option value="rating">Rating Klien</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Categories & Search -->
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
+        <div class="flex flex-wrap gap-2 w-full md:w-auto" id="category-buttons">
+          <button onclick="filterCategory('all')" class="cat-btn active px-4 py-2 rounded-xl text-xs font-bold bg-corporate-dark text-white shadow-sm">Semua Paket</button>
+          <button onclick="filterCategory('Pantai')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50">Bahari & Cruise</button>
+          <button onclick="filterCategory('Gunung')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50">Nature Exploration</button>
+          <button onclick="filterCategory('Budaya')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50">Culture & Heritage</button>
+        </div>
+
+        <div class="relative w-full md:w-72">
+          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3"></i>
+          <input type="text" id="package-search-input" onkeyup="applyFilters()" placeholder="Cari destinasi..." class="w-full bg-white border border-slate-200 rounded-xl pl-10 pr-4 py-2 text-xs outline-none focus:border-corporate-dark font-medium">
+        </div>
+      </div>
+
+      <!-- Grid Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="packages-grid">
+        <!-- JS Dynamic Rendering -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== 7. SIMULASI KALKULATOR ANGGARAN ==================== -->
+  <section id="kalkulator" class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-corporate-dark rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden border border-slate-800">
+        <div class="relative z-10">
+          <div class="text-center mb-8">
+            <span class="text-corporate-gold font-extrabold uppercase tracking-widest text-xs">Simulasi Cepat</span>
+            <h2 class="text-2xl font-extrabold mt-1">Kalkulator Estimasi Anggaran MICE / Gathering</h2>
+            <p class="text-xs text-slate-400 mt-1">Hitung estimasi budget kegiatan perusahaan Anda secara instan.</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+            <div>
+              <label class="block text-[11px] font-bold text-slate-300 mb-1">Jumlah Peserta (Pax)</label>
+              <input type="number" id="calc-pax" value="25" min="5" oninput="calculateEstimate()" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-xs font-bold text-white outline-none">
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold text-slate-300 mb-1">Tipe Akomodasi</label>
+              <select id="calc-hotel" onchange="calculateEstimate()" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-xs font-bold text-white outline-none">
+                <option value="2500000">Hotel Bintang 4 (Executive Standard)</option>
+                <option value="4500000">Hotel Bintang 5 (Presidential Level)</option>
+                <option value="7500000">Private Villa & Phinisi Charter</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold text-slate-300 mb-1">Durasi Kegiatan</label>
+              <select id="calc-days" onchange="calculateEstimate()" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-xs font-bold text-white outline-none">
+                <option value="1">3 Hari 2 Malam</option>
+                <option value="1.4">4 Hari 3 Malam</option>
+                <option value="1.8">5 Hari 4 Malam</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="bg-slate-800/90 p-5 rounded-2xl border border-slate-700 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+              <p class="text-xs text-slate-400">Proyeksi Estimasi Total Biaya:</p>
+              <p id="calc-total" class="text-2xl font-black text-corporate-gold mt-0.5">Rp 62.500.000</p>
+            </div>
+            <a href="#rfp" class="px-5 py-3 bg-corporate-gold hover:bg-corporate-goldHover text-corporate-black font-extrabold text-xs rounded-xl transition shadow-md whitespace-nowrap">
+              Minta Penawaran Formal
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 8. B2B RFP FORM & CORPORATE DESK ==================== -->
+  <section id="rfp" class="py-24 bg-corporate-dark text-white relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        
+        <div>
+          <span class="text-corporate-gold font-extrabold uppercase tracking-widest text-xs">Portal Korporasi & MICE</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold mt-2 mb-4 leading-tight">Pengajuan Proposal Resmi (RFP)</h2>
+          <p class="text-slate-300 text-xs leading-relaxed mb-6">
+            Tim *Corporate Account Executive* KTravel siap menyusun proposal penawaran komprehensif yang disesuaikan dengan standar anggaran, kepatuhan audit internal, dan agenda khusus instansi Anda.
+          </p>
+
+          <div class="space-y-3 text-xs text-slate-300 mb-8">
+            <div class="flex items-center gap-2">
+              <i data-lucide="check-circle" class="w-4 h-4 text-corporate-gold shrink-0"></i>
+              <span>Dukungan Opsi Pembayaran Flexible Terms of Payment (TOP 30 Hari)</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="check-circle" class="w-4 h-4 text-corporate-gold shrink-0"></i>
+              <span>Fasilitas Branding Acara lengkap (Gala Dinner, Backdrop, Custom Apparel)</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="check-circle" class="w-4 h-4 text-corporate-gold shrink-0"></i>
+              <span>Dokumentasi Video & Photo Broadcast Grade (Include 4K Drone)</span>
+            </div>
+          </div>
+
+          <div class="p-4 bg-slate-800/80 rounded-2xl border border-slate-700 flex items-center justify-between">
+            <div>
+              <p class="text-[10px] uppercase font-bold text-slate-400">Head of Corporate Sales</p>
+              <p class="text-xs font-bold text-white mt-0.5">+62 821-2396-2717 (Bang Jos)</p>
+            </div>
+            <a href="https://wa.me/6282123962717?text=Halo%20Tim%20B2B%20KTravel,%20saya%20ingin%20mengajukan%20permohonan%20proposal%20kegiatan%20perusahaan." target="_blank" class="px-4 py-2 bg-corporate-gold text-corporate-black font-bold text-xs rounded-xl hover:bg-corporate-goldHover transition">
+              Diskusi Langsung
+            </a>
+          </div>
+        </div>
+
+        <!-- RFP Form -->
+        <div class="bg-white text-slate-900 p-8 rounded-3xl shadow-2xl">
+          <h3 class="font-extrabold text-lg text-corporate-dark mb-1">Formulir Pengajuan Proposal</h3>
+          <p class="text-xs text-slate-500 mb-6">Proposal resmi beserta Rincian Biaya Riil akan dikirimkan dalam kurun waktu 1x24 jam kerja.</p>
+
+          <form onsubmit="handleRFPSubmit(event)" class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Nama Perusahaan / Instansi</label>
+              <input type="text" required placeholder="PT Example Indonesia" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs outline-none focus:border-corporate-dark font-medium">
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Nama PIC</label>
+                <input type="text" required placeholder="Nama Lengkap" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs outline-none focus:border-corporate-dark font-medium">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">No. WhatsApp PIC</label>
+                <input type="tel" required placeholder="0812xxxx" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs outline-none focus:border-corporate-dark font-medium">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Estimasi Peserta</label>
+                <input type="number" min="10" required placeholder="misal: 40" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs outline-none focus:border-corporate-dark font-medium">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Jenis Kegiatan</label>
+                <select class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs outline-none focus:border-corporate-dark font-medium text-slate-700">
+                  <option>Corporate Gathering</option>
+                  <option>Leadership Retreat</option>
+                  <option>Exhibition / MICE</option>
+                  <option>VIP Executive Tour</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="submit" class="w-full py-3.5 bg-corporate-dark hover:bg-corporate-navy text-white font-bold text-xs rounded-xl shadow-lg transition">
+              Kirim Permintaan Proposal Formal
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 9. FAQ ACCORDION ==================== -->
+  <section id="faq" class="py-24 bg-slate-100">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-12">
+        <span class="text-slate-500 font-extrabold uppercase tracking-widest text-xs">Pusat Informasi</span>
+        <h2 class="text-3xl font-extrabold text-corporate-dark mt-1">Pertanyaan Umum (FAQ)</h2>
+      </div>
+
+      <div class="space-y-4">
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+          <button onclick="toggleFaq(this)" class="w-full text-left p-5 font-bold text-corporate-dark text-xs sm:text-sm flex justify-between items-center">
+            <span>Apakah KTravel dapat menerbitkan Faktur Pajak PPN & PPh resmi?</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 transition-transform"></i>
+          </button>
+          <div class="px-5 pb-5 text-xs text-slate-600 hidden leading-relaxed border-t border-slate-100 pt-3">
+            Ya, PT KTravel Manajemen Indonesia adalah Pengusaha Kena Pajak (PKP) terdaftar. Seluruh transaksi B2B akan disertai Faktur Pajak PPN dan pemotongan PPh Pasal 23 sesuai regulasi yang berlaku.
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+          <button onclick="toggleFaq(this)" class="w-full text-left p-5 font-bold text-corporate-dark text-xs sm:text-sm flex justify-between items-center">
+            <span>Bagaimana prosedur penanganan kendala cuaca atau pembatalan jadwal terbang?</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 transition-transform"></i>
+          </button>
+          <div class="px-5 pb-5 text-xs text-slate-600 hidden leading-relaxed border-t border-slate-100 pt-3">
+            Tim *Risk Management* KTravel siap melakukan penyesuaian (*rerouting*) penerbangan, memindahkan jadwal akomodasi, atau menyediakan alternatif perjalanan tanpa mengurangi standar pelayanan yang disepakati.
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+          <button onclick="toggleFaq(this)" class="w-full text-left p-5 font-bold text-corporate-dark text-xs sm:text-sm flex justify-between items-center">
+            <span>Apakah itinerary dapat disesuaikan secara khusus (Tailor-made)?</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 transition-transform"></i>
+          </button>
+          <div class="px-5 pb-5 text-xs text-slate-600 hidden leading-relaxed border-t border-slate-100 pt-3">
+            Tentu. Seluruh paket tur dapat dikustomisasi secara fleksibel berdasarkan durasi acara, kebutuhan menu makanan (Halal/Vegan), agenda *meeting* internal, hingga permintaan fasilitas VIP Tambahan.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== 10. FOOTER ==================== -->
+  <footer class="bg-corporate-black text-slate-400 py-16 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10">
+      
+      <div class="space-y-4">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-corporate-gold text-corporate-black font-black flex items-center justify-center text-sm">KT</div>
+          <span class="text-xl font-extrabold text-white">K<span class="text-corporate-gold">TRAVEL</span></span>
+        </div>
+        <p class="text-xs leading-relaxed text-slate-400">
+          PT KTravel Manajemen Indonesia — Penyedia terintegrasi manajemen perjalanan dinas, insentif perusahaan, dan reservasi paket tur mewah berlisensi resmi.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Navigasi Utama</h4>
+        <ul class="space-y-2 text-xs">
+          <li><a href="#layanan" class="hover:text-corporate-gold transition">Standar Layanan</a></li>
+          <li><a href="#katalog" class="hover:text-corporate-gold transition">Destinasi Eksekutif</a></li>
+          <li><a href="#kalkulator" class="hover:text-corporate-gold transition">Simulasi MICE</a></li>
+          <li><a href="#rfp" class="hover:text-corporate-gold transition">Proposal B2B</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Layanan Spesialis</h4>
+        <ul class="space-y-2 text-xs">
+          <li><a href="#rfp" class="hover:text-corporate-gold transition">Corporate Gathering Tour</a></li>
+          <li><a href="#katalog" class="hover:text-corporate-gold transition">Private Luxury Phinisi</a></li>
+          <li><a href="#katalog" class="hover:text-corporate-gold transition">International Executive Tour</a></li>
+          <li><a href="#rfp" class="hover:text-corporate-gold transition">VIP Fleet & Fast-Track</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Kantor Operasional</h4>
+        <p class="text-xs text-slate-300 font-semibold">KTravel Executive Tower, Lt. 18</p>
+        <p class="text-xs text-slate-400 mb-3">Jl. Jend. Sudirman Kav. 52-53, Jakarta Selatan</p>
+        <p class="text-xs text-slate-300">Hotline: +62 821-2396-2717</p>
+      </div>
+
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-6 border-t border-slate-800 text-center text-xs text-slate-500">
+      &copy; 2026 PT KTravel Manajemen Indonesia. Hak Cipta Dilindungi Undang-Undang.
+    </div>
+  </footer>
+
+  <!-- ==================== 11. ADVANCED BOOKING & QUOTATION MODAL ==================== -->
+  <div id="booking-modal" class="fixed inset-0 z-50 bg-corporate-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-xl w-full overflow-hidden shadow-2xl relative max-h-[90vh] flex flex-col">
+      
+      <div class="p-4 border-b flex justify-between items-center bg-slate-50">
+        <h3 class="font-extrabold text-xs uppercase tracking-wider text-corporate-dark">Rincian Reservasi & Estimasi Penawaran</h3>
+        <button onclick="closeModal()" class="p-1 text-slate-400 hover:text-slate-900 rounded-full">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="p-6 overflow-y-auto space-y-4" id="modal-body">
+        <!-- JS Render Content -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== JAVASCRIPT LOGIC ENGINE ==================== -->
+  <script>
+    const currencyRates = {
+      IDR: { symbol: 'Rp ', rate: 1 },
+      USD: { symbol: '$ ', rate: 0.000062 },
+      SGD: { symbol: 'S$ ', rate: 0.000084 }
+    };
+
+    let currentCurrency = 'IDR';
+
+    const packages = [
+      {
+        id: 1,
+        title: 'Exotic Bali Tropical Escape',
+        destination: 'Bali',
+        category: 'Pantai',
+        duration: '3 Hari 2 Malam',
+        priceIDR: 2450000,
+        rating: 4.9,
+        img: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=600&q=80',
+        facilities: ['Hotel Bintang 4 Beachfront', 'Private Executive MPV', 'All Entry Ticket Pass', '6x Dining Luxury Resto']
+      },
+      {
+        id: 2,
+        title: 'Komodo Luxury Sailing Phinisi',
+        destination: 'Labuan Bajo',
+        category: 'Pantai',
+        duration: '4 Hari 3 Malam',
+        priceIDR: 4800000,
+        rating: 5.0,
+        img: 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=600&q=80',
+        facilities: ['Phinisi AC Cabin Private', 'Full Snorkeling Equipment', 'Full Board Gourmet Meals', 'Professional Drone Video']
+      },
+      {
+        id: 3,
+        title: 'Yogyakarta Cultural Heritage',
+        destination: 'Yogyakarta',
+        category: 'Budaya',
+        duration: '3 Hari 2 Malam',
+        priceIDR: 1850000,
+        rating: 4.8,
+        img: 'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=600&q=80',
+        facilities: ['Hotel Bintang 4 Pusat Kota', 'Private Merapi Jeep Sunrise', 'Borobudur VIP Access Pass', 'Authentic Culinary Tour']
+      },
+      {
+        id: 4,
+        title: 'Gili Trawangan Ocean Villa',
+        destination: 'Lombok',
+        category: 'Pantai',
+        duration: '3 Hari 2 Malam',
+        priceIDR: 2750000,
+        rating: 4.9,
+        img: 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=600&q=80',
+        facilities: ['Private Express Speedboat', 'Beachfront Resort Villa', 'Glass-Bottom Snorkeling Boat', 'Bicycle Charter Included']
+      },
+      {
+        id: 5,
+        title: 'Tokyo & Mt. Fuji Golden Route',
+        destination: 'Jepang',
+        category: 'Gunung',
+        duration: '6 Hari 5 Malam',
+        priceIDR: 16500000,
+        rating: 5.0,
+        img: 'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&w=600&q=80',
+        facilities: ['Tiket Pesawat PP All-in', 'JR Pass Green Class Transport', 'Hotel Bintang 4 Pusat Kota', 'Indonesian Speaking Guide']
+      },
+      {
+        id: 6,
+        title: 'Mount Bromo Sunrise Adventure',
+        destination: 'Jawa Timur',
+        category: 'Gunung',
+        duration: '2 Hari 1 Malam',
+        priceIDR: 1250000,
+        rating: 4.7,
+        img: 'https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=600&q=80',
+        facilities: ['Private 4x4 Jeep Bromo', 'Boutique Hotel Accommodation', 'National Park Ticket Pass', 'Breakfast & Hot Beverages']
+      }
+    ];
+
+    let currentCategoryFilter = 'all';
+    let selectedPackage = null;
+
+    function formatCurrency(amountIDR) {
+      const curr = currencyRates[currentCurrency];
+      const converted = amountIDR * curr.rate;
+
+      if (currentCurrency === 'IDR') {
+        return curr.symbol + Math.round(converted).toLocaleString('id-ID');
+      } else {
+        return curr.symbol + converted.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
+    }
+
+    function changeCurrency() {
+      currentCurrency = document.getElementById('currency-select').value;
+      applyFilters();
+      calculateEstimate();
+    }
+
+    function renderPackages(data) {
+      const container = document.getElementById('packages-grid');
+      
+      if (data.length === 0) {
+        container.innerHTML = `<p class="col-span-full text-center text-slate-500 py-16 text-xs font-semibold">Tidak ada paket perjalanan yang sesuai dengan kriteria pencarian Anda.</p>`;
+        return;
+      }
+
+      container.innerHTML = data.map(pkg => `
+        <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 flex flex-col justify-between border border-slate-200">
+          <div>
+            <div class="relative overflow-hidden h-52">
+              <img src="${pkg.img}" alt="${pkg.title}" class="w-full h-full object-cover">
+              <span class="absolute top-4 right-4 bg-corporate-dark/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-white uppercase tracking-wider">
+                ${pkg.duration}
+              </span>
+              <span class="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-full text-[11px] font-bold text-amber-500 flex items-center gap-1 shadow-sm">
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i> ${pkg.rating}
+              </span>
+            </div>
+
+            <div class="p-6">
+              <div class="flex items-center gap-1.5 text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-corporate-gold"></i>
+                <span>${pkg.destination}</span>
+              </div>
+              <h3 class="font-bold text-base text-corporate-dark mb-4 leading-snug">${pkg.title}</h3>
+              
+              <div class="space-y-2 mb-6">
+                ${pkg.facilities.map(f => `<div class="flex items-start gap-2 text-xs text-slate-600"><i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5"></i> <span>${f}</span></div>`).join('')}
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6 pt-0 border-t border-slate-100 mt-auto flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Mulai Dari</span>
+              <p class="text-base font-black text-corporate-dark">${formatCurrency(pkg.priceIDR)}</p>
+            </div>
+            <button onclick="openBookingModal(${pkg.id})" class="px-4 py-2.5 bg-corporate-dark hover:bg-corporate-navy text-white font-bold text-xs rounded-xl shadow-md transition flex items-center gap-1.5">
+              Rincian & Booking <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-corporate-gold"></i>
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    function filterCategory(cat) {
+      currentCategoryFilter = cat;
+      document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.classList.remove('bg-corporate-dark', 'text-white', 'shadow-sm');
+        btn.classList.add('bg-white', 'text-slate-600');
+      });
+
+      event.target.classList.remove('bg-white', 'text-slate-600');
+      event.target.classList.add('bg-corporate-dark', 'text-white', 'shadow-sm');
+
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const searchTxt = document.getElementById('package-search-input').value.toLowerCase();
+      const sortVal = document.getElementById('sort-select').value;
+
+      let result = packages.filter(pkg => {
+        const matchCat = (currentCategoryFilter === 'all' || pkg.category === currentCategoryFilter);
+        const matchTxt = pkg.title.toLowerCase().includes(searchTxt) || pkg.destination.toLowerCase().includes(searchTxt);
+        return matchCat && matchTxt;
+      });
+
+      if (sortVal === 'price-low') {
+        result.sort((a, b) => a.priceIDR - b.priceIDR);
+      } else if (sortVal === 'price-high') {
+        result.sort((a, b) => b.priceIDR - a.priceIDR);
+      } else if (sortVal === 'rating') {
+        result.sort((a, b) => b.rating - a.rating);
+      }
+
+      renderPackages(result);
+    }
+
+    function execHeroSearch() {
+      const dest = document.getElementById('hero-dest').value;
+      const cat = document.getElementById('hero-cat').value;
+      const budget = document.getElementById('hero-budget').value;
+
+      let filtered = packages.filter(p => {
+        const matchDest = (dest === 'all' || p.destination === dest);
+        const matchCat = (cat === 'all' || p.category === cat);
+        const matchBudget = (budget === 'all' || p.priceIDR <= parseInt(budget));
+        return matchDest && matchCat && matchBudget;
+      });
+
+      renderPackages(filtered);
+      document.getElementById('katalog').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function calculateEstimate() {
+      const pax = parseInt(document.getElementById('calc-pax').value) || 0;
+      const baseHotel = parseInt(document.getElementById('calc-hotel').value) || 0;
+      const durationMult = parseFloat(document.getElementById('calc-days').value) || 1;
+
+      const totalIDR = pax * baseHotel * durationMult;
+      document.getElementById('calc-total').innerText = formatCurrency(totalIDR);
+    }
+
+    function openBookingModal(id) {
+      selectedPackage = packages.find(p => p.id === id);
+      const modalBody = document.getElementById('modal-body');
+
+      modalBody.innerHTML = `
+        <div class="rounded-2xl overflow-hidden h-36 mb-3">
+          <img src="${selectedPackage.img}" class="w-full h-full object-cover">
+        </div>
+        <div>
+          <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">${selectedPackage.destination} &bull; ${selectedPackage.duration}</span>
+          <h2 class="text-base font-extrabold text-corporate-dark mt-0.5">${selectedPackage.title}</h2>
+          <p class="text-base font-black text-corporate-dark mt-1">${formatCurrency(selectedPackage.priceIDR)} <span class="text-xs text-slate-400 font-normal">/ pax</span></p>
+        </div>
+
+        <form onsubmit="submitBooking(event)" class="space-y-3 pt-2">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Tipe Tingkat Layanan</label>
+            <select id="tier-select" onchange="calcModalTotal()" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs font-bold text-slate-700 outline-none">
+              <option value="1">Executive Deluxe (Standar Bintang 4)</option>
+              <option value="1.3">Presidential VIP (+30% Hotel Bintang 5 & Luxury Transport)</option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Jumlah Peserta</label>
+              <input type="number" id="cust-pax" min="1" value="1" onchange="calcModalTotal()" onkeyup="calcModalTotal()" required class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs outline-none font-bold text-slate-700">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Rencana Tanggal</label>
+              <input type="date" id="cust-date" required class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs outline-none font-bold text-slate-700">
+            </div>
+          </div>
+
+          <!-- Add Ons -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Layanan Tambahan (Add-Ons)</label>
+            <div class="space-y-1.5 text-xs text-slate-600">
+              <label class="flex items-center gap-2">
+                <input type="checkbox" id="addon-fasttrack" onchange="calcModalTotal()" class="rounded text-corporate-dark">
+                <span>VIP Airport Fast-Track (+Rp 350.000/pax)</span>
+              </label>
+              <label class="flex items-center gap-2">
+                <input type="checkbox" id="addon-drone" onchange="calcModalTotal()" class="rounded text-corporate-dark">
+                <span>Dokumentasi Drone 4K (+Rp 1.500.000/group)</span>
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Nama Pemesan / PIC Perusahaan</label>
+            <input type="text" id="cust-name" required placeholder="Nama Lengkap" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs outline-none font-medium text-slate-700">
+          </div>
+
+          <div class="bg-slate-100 p-4 rounded-2xl flex justify-between items-center border border-slate-200">
+            <span class="font-bold text-xs text-corporate-dark">Estimasi Total Biaya:</span>
+            <span id="modal-price-display" class="font-black text-base text-corporate-dark">${formatCurrency(selectedPackage.priceIDR)}</span>
+          </div>
+
+          <button type="submit" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition flex items-center justify-center gap-2 text-xs mt-2">
+            <i data-lucide="message-square" class="w-4 h-4"></i> Konfirmasi via WhatsApp Official
+          </button>
+        </form>
+      `;
+
+      document.getElementById('booking-modal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function calcModalTotal() {
+      const pax = parseInt(document.getElementById('cust-pax').value) || 1;
+      const tierMult = parseFloat(document.getElementById('tier-select').value) || 1;
+      
+      let addonTotal = 0;
+      if (document.getElementById('addon-fasttrack')?.checked) addonTotal += (350000 * pax);
+      if (document.getElementById('addon-drone')?.checked) addonTotal += 1500000;
+
+      const subtotal = (selectedPackage.priceIDR * pax * tierMult) + addonTotal;
+      document.getElementById('modal-price-display').innerText = formatCurrency(subtotal);
+    }
+
+    function closeModal() {
+      document.getElementById('booking-modal').classList.add('hidden');
+    }
+
+    function submitBooking(e) {
+      e.preventDefault();
+      const name = document.getElementById('cust-name').value;
+      const pax = document.getElementById('cust-pax').value;
+      const date = document.getElementById('cust-date').value;
+      const tierText = document.getElementById('tier-select').options[document.getElementById('tier-select').selectedIndex].text;
+
+      const fastTrack = document.getElementById('addon-fasttrack')?.checked ? 'Ya' : 'Tidak';
+      const drone = document.getElementById('addon-drone')?.checked ? 'Ya' : 'Tidak';
+
+      const phone = "6282123962717";
+      const tierMult = parseFloat(document.getElementById('tier-select').value) || 1;
+
+      let addonTotal = 0;
+      if (document.getElementById('addon-fasttrack')?.checked) addonTotal += (350000 * pax);
+      if (document.getElementById('addon-drone')?.checked) addonTotal += 1500000;
+
+      const total = (selectedPackage.priceIDR * pax * tierMult) + addonTotal;
+
+      const message = `*RESERVASI KTRAVEL — EXECUTIVE DESK*\n\n` +
+        `*Destinasi:* ${selectedPackage.title}\n` +
+        `*Tipe Layanan:* ${tierText}\n` +
+        `*Nama Pemesan:* ${name}\n` +
+        `*Jumlah Peserta:* ${pax} Pax\n` +
+        `*Tanggal Keberangkatan:* ${date}\n` +
+        `*Add-Ons:* Airport Fast-Track (${fastTrack}), Drone 4K (${drone})\n` +
+        `*Estimasi Total:* ${formatCurrency(total)}\n\n` +
+        `Mohon dibantu konfirmasi jadwal & penerbitan dokumen invoice resmi KTravel. Terima kasih.`;
+
+      window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+      closeModal();
+    }
+
+    function handleRFPSubmit(e) {
+      e.preventDefault();
+      alert("Permintaan proposal B2B Anda telah berhasil terikirim. Corporate Account Executive KTravel akan menghubungi Anda melalui WhatsApp / Email dalam 1x24 jam kerja.");
+      e.target.reset();
+    }
+
+    function toggleFaq(btn) {
+      const content = btn.nextElementSibling;
+      const icon = btn.querySelector('[data-lucide="chevron-down"]');
+      content.classList.toggle('hidden');
+      icon.classList.toggle('rotate-180');
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderPackages(packages);
+      calculateEstimate();
+    });
+  </script>
+</body>
+</html>
