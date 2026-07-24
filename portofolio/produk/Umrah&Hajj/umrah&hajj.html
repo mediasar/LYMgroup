@@ -421,20 +421,21 @@
     </div>
   </div>
 
-  <!-- FIREBASE SDK & INTEGRASI REAL-TIME -->
+<!-- FIREBASE SDK & INTEGRASI REAL-TIME -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 
   <script>
-    // Konfigurasi khusus proyek Firebase Al-Fitrah kamu
+    // Konfigurasi asli proyek Firebase Al-Fitrah Travel
     const firebaseConfig = {
-      apiKey: "AMBZZsy_GANTIKAN_DENGAN_API_KEY_KAMU", // Dapatkan dari Firebase Console
+      apiKey: "AIzaSyA39osA-PANWqgUsyLTixMZFv0IJ07HOFQ",
       authDomain: "alfitrahtravel-d6dba.firebaseapp.com",
       databaseURL: "https://alfitrahtravel-d6dba-default-rtdb.asia-southeast1.firebasedatabase.app",
       projectId: "alfitrahtravel-d6dba",
-      storageBucket: "alfitrahtravel-d6dba.appspot.com",
-      messagingSenderId: "1234567890", // Dapatkan dari Firebase Console
-      appId: "1:1234567890:web:abcdef123456" // Dapatkan dari Firebase Console
+      storageBucket: "alfitrahtravel-d6dba.firebasestorage.app",
+      messagingSenderId: "700313920316",
+      appId: "1:700313920316:web:811723b0c9f7aea46bf439",
+      measurementId: "G-8R8Y9TECSH"
     };
 
     // Inisialisasi Firebase
@@ -449,11 +450,11 @@
 
     let initialLoad = true;
 
-    // MENDENGARKAN PENDAFTARAN BARU SECARA REAL-TIME
+    // MENDENGARKAN PENDAFTARAN BARU SECARA REAL-TIME (Untuk Pop-Up Social Proof)
     const query = database.ref('pendaftaran_terbaru').limitToLast(1);
     
     query.on('child_added', (snapshot) => {
-      // Saring data awal saat reload
+      // Saring data awal saat halaman pertama kali dimuat
       if (initialLoad) {
         initialLoad = false;
         return;
@@ -461,9 +462,9 @@
 
       const data = snapshot.val();
       if (data) {
-        // Render ke pop-up
-        nameElem.innerText = `${data.nama_panggilan} (${data.kota})`;
-        actionElem.innerHTML = `Baru saja mendaftar <span class="font-semibold text-brand-primary">${data.paket}</span>`;
+        // Tampilkan data ke pop-up
+        nameElem.innerText = `${data.nama_panggilan || 'Jemaah'} (${data.kota || 'Indonesia'})`;
+        actionElem.innerHTML = `Baru saja mendaftar <span class="font-semibold text-brand-primary">${data.paket || 'Paket Umrah'}</span>`;
         timeElem.innerText = "Baru saja";
 
         // Tampilkan pop-up
@@ -476,7 +477,7 @@
       }
     });
 
-    // FUNGSI MENGIRIM FORM OLEH PENDAFTAR ASLI
+    // FUNGSI MENGIRIM FORM PENDAFTARAN
     function kirimPendaftaranRealtime(event) {
       event.preventDefault();
       
@@ -489,13 +490,13 @@
       btnSubmit.disabled = true;
       btnSubmit.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Memproses...`;
 
-      // Menyamarkan nama belakang untuk privasi publik
+      // Menyamarkan nama belakang demi privasi publik
       const namaArray = nama.split(' ');
       const namaRingkas = namaArray.length > 1 
         ? `${namaArray[0]} ${namaArray[1].charAt(0)}.` 
         : namaArray[0];
 
-      // Kirim data asli ke node database kamu
+      // Kirim data ke Realtime Database
       database.ref('pendaftaran_terbaru').push({
         nama_panggilan: namaRingkas,
         kota: kota,
@@ -506,8 +507,8 @@
         alert(`Terima kasih Bpk/Ibu ${nama}, pendaftaran Anda berhasil terkirim! Konsultan kami akan menghubungi WhatsApp Anda.`);
         document.getElementById('form-pendaftaran').reset();
       }).catch((err) => {
-        alert('Gagal mengirim data. Pastikan Realtime Database Rules di Firebase sudah diatur ke .write: true');
-        console.error(err);
+        alert('Gagal mengirim pendaftaran. Silakan periksa koneksi internet Anda dan coba lagi.');
+        console.error('Firebase DB Error:', err);
       }).finally(() => {
         btnSubmit.disabled = false;
         btnSubmit.innerHTML = `<i class="fa-solid fa-paper-plane mr-2"></i> Kirimkan E-Brosur Lengkap`;
