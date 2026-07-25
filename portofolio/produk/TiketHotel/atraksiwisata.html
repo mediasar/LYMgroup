@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LYMstay | Tiket Tur, Atraksi & Aktivitas Wisata</title>
+
+    <!-- Google Font & FontAwesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=BlinkMacSystemFont,Segoe+UI,Roboto,Helvetica,Arial,sans-serif&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* === 1. CSS RESET & VARIABLES === */
+        :root {
+            --blue-primary: #0077B6;
+            --blue-hover: #1E293B;
+            --blue-accent: #D4AF37;
+            --yellow-search: #ffb700;
+            --text-dark: #0F172A;
+            --text-muted: #475569;
+            --border-color: #CBD5E1;
+            --bg-light: #FAFAFA;
+            --max-width: 1100px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: var(--text-dark);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* === 2. HEADER & NAVBAR === */
+        .navbar {
+            background-color: var(--blue-primary);
+            color: white;
+            padding: 14px 0;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Currency Selector Custom Dropdown Style */
+        .currency-dropdown-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .currency-btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 1px solid white;
+            padding: 6px 12px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            outline: none;
+        }
+
+        .currency-dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 110%;
+            background-color: white;
+            min-width: 280px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            border-radius: 6px;
+            z-index: 1000;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .currency-dropdown-content.show {
+            display: block;
+        }
+
+        .currency-search-box {
+            padding: 10px;
+            background: var(--bg-light);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .currency-search-input {
+            width: 100%;
+            padding: 8px 10px;
+            font-size: 13px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .currency-list {
+            max-height: 220px;
+            overflow-y: auto;
+        }
+
+        .currency-item {
+            padding: 10px 14px;
+            font-size: 13px;
+            color: var(--text-dark);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            transition: background 0.15s;
+        }
+
+        .currency-item:hover {
+            background-color: #f1f5f9;
+        }
+
+        .btn-link, .btn-outline, .btn-white {
+            padding: 8px 14px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-link { background: transparent; color: white; border: none; }
+        .btn-outline { background: transparent; color: white; border: 1px solid white; }
+        .btn-outline:hover { background: rgba(255, 255, 255, 0.1); }
+        .btn-white { background: white; color: var(--blue-accent); border: 1px solid white; }
+        .btn-white:hover { background: #f0f7ff; }
+
+        /* === 3. CATEGORY NAV === */
+        .category-bar {
+            background-color: var(--blue-primary);
+            padding-bottom: 16px;
+        }
+
+        .category-list {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .cat-item {
+            color: white;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            border: 1px solid transparent;
+        }
+
+        .cat-item.active {
+            border-color: white;
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .cat-item:hover:not(.active) {
+            background-color: rgba(255, 255, 255, 0.08);
+        }
+
+        /* === 4. HERO & ATTRACTIONS SEARCH === */
+        .hero-section {
+            background-color: var(--blue-primary);
+            color: white;
+            padding: 24px 0 60px 0;
+        }
+
+        .hero-title {
+            font-size: 38px;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 8px;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 24px;
+        }
+
+        .search-box-wrapper {
+            background-color: var(--yellow-search);
+            padding: 4px;
+            border-radius: 8px;
+        }
+
+        .search-form-attractions {
+            display: grid;
+            grid-template-columns: 2fr 2fr 1fr 1fr;
+            gap: 4px;
+        }
+
+        .input-group {
+            background: white;
+            padding: 10px 14px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 2px solid transparent;
+        }
+
+        .input-group:focus-within {
+            border-color: var(--yellow-search);
+        }
+
+        .input-group i.input-icon {
+            color: #474747;
+            font-size: 18px;
+        }
+
+        .field-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .field-label {
+            font-size: 11px;
+            color: var(--blue-accent);
+            font-weight: 600;
+            margin-bottom: -2px;
+        }
+
+        .field-input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+            background: transparent;
+        }
+
+        .btn-search {
+            background-color: var(--blue-accent);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-search:hover { background-color: #0057b8; }
+
+        /* === 5. VALUE PROPOSITIONS === */
+        .features-bar {
+            background: white;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .features-flex {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .feature-item i {
+            font-size: 24px;
+            color: var(--blue-accent);
+            margin-top: 2px;
+        }
+
+        .feature-item h4 { font-size: 15px; font-weight: 700; }
+        .feature-item p { font-size: 13px; color: var(--text-muted); }
+
+        /* === 6. MAIN CONTENT === */
+        .main-section { padding: 40px 0; }
+        .section-title { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+        .section-subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 24px; }
+
+        /* Category Chips Grid */
+        .chips-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+            margin-bottom: 48px;
+        }
+
+        .chip-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .chip-card:hover {
+            border-color: var(--blue-accent);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+
+        .chip-card i {
+            font-size: 22px;
+            color: var(--blue-accent);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .chip-card span {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* Top Destinations Section Grid */
+        .dest-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .dest-card {
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            height: 220px;
+            cursor: pointer;
+        }
+
+        .dest-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .dest-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .dest-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            color: white;
+        }
+
+        .dest-overlay h4 { font-size: 18px; font-weight: 700; }
+        .dest-overlay p { font-size: 13px; opacity: 0.9; }
+
+        /* Attraction Activity Cards */
+        .attraction-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .attraction-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: box-shadow 0.2s;
+        }
+
+        .attraction-card:hover {
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        }
+
+        .attraction-img-wrapper {
+            position: relative;
+            height: 160px;
+        }
+
+        .attraction-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .attraction-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--text-dark);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .attraction-content {
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .attraction-location {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .attraction-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .attraction-rating {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        .score-box {
+            background-color: var(--blue-primary);
+            color: white;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px 4px 4px 0;
+            font-size: 11px;
+        }
+
+        .attraction-price-container {
+            margin-top: auto;
+            text-align: right;
+        }
+
+        .price-label { font-size: 11px; color: var(--text-muted); }
+        .price-value { font-size: 16px; font-weight: 800; color: var(--text-dark); }
+
+        /* === 7. FOOTER === */
+        footer {
+            background-color: var(--bg-light);
+            border-top: 1px solid var(--border-color);
+            padding: 40px 0 24px 0;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .footer-col h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 8px; }
+        .footer-col ul li a { color: var(--text-muted); text-decoration: none; }
+        .footer-col ul li a:hover { color: var(--blue-accent); }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .search-form-attractions { grid-template-columns: 1fr; }
+            .chips-grid { grid-template-columns: repeat(3, 1fr); }
+            .dest-grid, .attraction-grid { grid-template-columns: repeat(2, 1fr); }
+            .features-flex { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            .chips-grid { grid-template-columns: repeat(2, 1fr); }
+            .dest-grid, .attraction-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navbar -->
+    <header class="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">LYMstay</a>
+            <div class="nav-actions">
+                <!-- Dropdown Pilihan Semua Mata Uang Dunia -->
+                <div class="currency-dropdown-wrapper">
+                    <button class="currency-btn" id="currencyBtn">
+                        <span id="selectedCurrencyText">IDR</span> 
+                        <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i>
+                    </button>
+                    <div class="currency-dropdown-content" id="currencyDropdown">
+                        <div class="currency-search-box">
+                            <input type="text" id="currencySearchInput" class="currency-search-input" placeholder="Cari mata uang...">
+                        </div>
+                        <div class="currency-list" id="currencyListContainer">
+                            <!-- Daftar Mata Uang Diisi JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-white">Daftar</button>
+                <button class="btn-white">Login</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sub Navigation Categories -->
+    <nav class="category-bar">
+        <div class="container">
+            <div class="category-list">
+                <a href="akomodasi.html" class="cat-item"><i class="fa-solid fa-bed"></i> Akomodasi</a>
+                <a href="penerbangan.html" class="cat-item"><i class="fa-solid fa-plane"></i> Penerbangan</a>
+                <a href="rentalmobil.html" class="cat-item"><i class="fa-solid fa-car"></i> Rental Mobil</a>
+                <a href="atraksiwisata.html" class="cat-item active"><i class="fa-solid fa-ticket"></i> Wisata</a>
+                <a href="taksibandara.html" class="cat-item"><i class="fa-solid fa-taxi"></i> Taksi</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">Atraksi, tur, dan pengalaman unik</h1>
+            <p class="hero-subtitle">Temukan & pesan tiket untuk aktivitas seru di mana saja di seluruh dunia</p>
+
+            <div class="search-box-wrapper">
+                <form id="attractionSearchForm">
+                    <div class="search-form-attractions">
+                        
+                        <!-- User Starting Location Input -->
+                        <div class="input-group">
+                            <i class="fa-solid fa-location-crosshairs input-icon"></i>
+                            <div class="field-container">
+                                <span class="field-label">Lokasi Anda (Asal)</span>
+                                <input type="text" id="userLocation" class="field-input" placeholder="cth: Jakarta, Bandung" required>
+                            </div>
+                        </div>
+
+                        <!-- Destination Input -->
+                        <div class="input-group">
+                            <i class="fa-solid fa-magnifying-glass input-icon"></i>
+                            <div class="field-container">
+                                <span class="field-label">Ke mana Anda ingin pergi?</span>
+                                <input type="text" id="destination" class="field-input" placeholder="Destinasi, atraksi (misal: Bali, Tokyo)" required>
+                            </div>
+                        </div>
+
+                        <!-- Date Picker -->
+                        <div class="input-group">
+                            <i class="fa-regular fa-calendar input-icon"></i>
+                            <div class="field-container">
+                                <span class="field-label">Tanggal Kunjungan</span>
+                                <input type="date" id="visitDate" class="field-input">
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn-search">Cari</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Propositions -->
+    <section class="features-bar">
+        <div class="container features-flex">
+            <div class="feature-item">
+                <i class="fa-solid fa-bolt"></i>
+                <div>
+                    <h4>Konfirmasi Instan</h4>
+                    <p>Sebagian besar tiket dapat langsung dipakai tanpa perlu cetak kertas.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <i class="fa-solid fa-ticket"></i>
+                <div>
+                    <h4>Tiket Jalur Cepat (Skip the Line)</h4>
+                    <p>Lewati antrean panjang tiket di destinasi-destinasi terpopuler.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <i class="fa-solid fa-calendar-xmark"></i>
+                <div>
+                    <h4>Pembatalan Fleksibel</h4>
+                    <p>Gratis pembatalan hingga 24 jam sebelum aktivitas dimulai.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container main-section">
+        
+        <!-- Category Chips -->
+        <section>
+            <h2 class="section-title">Jelajahi berdasarkan aktivitas</h2>
+            <p class="section-subtitle">Pilih dari ribuan hal seru untuk dilakukan</p>
+
+            <div class="chips-grid">
+                <div class="chip-card">
+                    <i class="fa-solid fa-landmark"></i>
+                    <span>Museum & Budaya</span>
+                </div>
+                <div class="chip-card">
+                    <i class="fa-solid fa-ferry"></i>
+                    <span>Tur Kapal & Laut</span>
+                </div>
+                <div class="chip-card">
+                    <i class="fa-solid fa-volleyball"></i>
+                    <span>Taman Hiburan</span>
+                </div>
+                <div class="chip-card">
+                    <i class="fa-solid fa-utensils"></i>
+                    <span>Kuliner & Tur</span>
+                </div>
+                <div class="chip-card">
+                    <i class="fa-solid fa-mountain-sun"></i>
+                    <span>Alam & Petualangan</span>
+                </div>
+                <div class="chip-card">
+                    <i class="fa-solid fa-bus"></i>
+                    <span>Tur Keliling Kota</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Top Destinations -->
+        <section>
+            <h2 class="section-title">Destinasi populer untuk atraksi</h2>
+            <p class="section-subtitle">Temukan pengalaman terbaik di kota favorit Anda</p>
+
+            <div class="dest-grid">
+                <div class="dest-card">
+                    <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=600&q=80" alt="Bali">
+                    <div class="dest-overlay">
+                        <h4>Bali</h4>
+                        <p>320+ Aktivitas</p>
+                    </div>
+                </div>
+                <div class="dest-card">
+                    <img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=600&q=80" alt="Tokyo">
+                    <div class="dest-overlay">
+                        <h4>Tokyo</h4>
+                        <p>450+ Aktivitas</p>
+                    </div>
+                </div>
+                <div class="dest-card">
+                    <img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=600&q=80" alt="Singapura">
+                    <div class="dest-overlay">
+                        <h4>Singapura</h4>
+                        <p>210+ Aktivitas</p>
+                    </div>
+                </div>
+                <div class="dest-card">
+                    <img src="https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=600&q=80" alt="Bangkok">
+                    <div class="dest-overlay">
+                        <h4>Bangkok</h4>
+                        <p>180+ Aktivitas</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Attractions Cards -->
+        <section>
+            <h2 class="section-title">Aktivitas Terpopuler Saat Ini</h2>
+            <p class="section-subtitle">Pengalaman yang paling sering dipesan oleh traveler lain</p>
+
+            <div class="attraction-grid">
+                
+                <!-- Card 1 -->
+                <div class="attraction-card">
+                    <div class="attraction-img-wrapper">
+                        <span class="attraction-badge">Paling Laris</span>
+                        <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=500&q=80" alt="Atraksi Bali">
+                    </div>
+                    <div class="attraction-content">
+                        <div class="attraction-location">Bali, Indonesia</div>
+                        <div class="attraction-title">Tiket Masuk & Ayunan Seru Ubud Jungle Swing</div>
+                        <div class="attraction-rating">
+                            <span class="score-box">4.8</span>
+                            <span>Sangat Bagus (1,240 ulasan)</span>
+                        </div>
+                        <div class="attraction-price-container">
+                            <div class="price-label">Mulai dari</div>
+                            <div class="price-value price-tag" data-base="150000">Rp 150.000</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="attraction-card">
+                    <div class="attraction-img-wrapper">
+                        <span class="attraction-badge">Konfirmasi Instan</span>
+                        <img src="https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?auto=format&fit=crop&w=500&q=80" alt="Atraksi Tokyo">
+                    </div>
+                    <div class="attraction-content">
+                        <div class="attraction-location">Tokyo, Jepang</div>
+                        <div class="attraction-title">Tiket Observatorium Tokyo Skytree</div>
+                        <div class="attraction-rating">
+                            <span class="score-box">4.9</span>
+                            <span>Luar Biasa (3,800 ulasan)</span>
+                        </div>
+                        <div class="attraction-price-container">
+                            <div class="price-label">Mulai dari</div>
+                            <div class="price-value price-tag" data-base="280000">Rp 280.000</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="attraction-card">
+                    <div class="attraction-img-wrapper">
+                        <span class="attraction-badge">Bebas Antre</span>
+                        <img src="https://images.unsplash.com/photo-1565967511849-76a60a516170?auto=format&fit=crop&w=500&q=80" alt="Atraksi Singapura">
+                    </div>
+                    <div class="attraction-content">
+                        <div class="attraction-location">Singapura</div>
+                        <div class="attraction-title">Tiket Gardens by the Bay & Cloud Forest</div>
+                        <div class="attraction-rating">
+                            <span class="score-box">4.7</span>
+                            <span>Sangat Bagus (2,150 ulasan)</span>
+                        </div>
+                        <div class="attraction-price-container">
+                            <div class="price-label">Mulai dari</div>
+                            <div class="price-value price-tag" data-base="320000">Rp 320.000</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="attraction-card">
+                    <div class="attraction-img-wrapper">
+                        <span class="attraction-badge">Tur Panduan</span>
+                        <img src="https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=500&q=80" alt="Atraksi Bangkok">
+                    </div>
+                    <div class="attraction-content">
+                        <div class="attraction-location">Bangkok, Thailand</div>
+                        <div class="attraction-title">Tur Pasar Apung Damnoen Saduak & Candi Grand Palace</div>
+                        <div class="attraction-rating">
+                            <span class="score-box">4.6</span>
+                            <span>Sangat Bagus (980 ulasan)</span>
+                        </div>
+                        <div class="attraction-price-container">
+                            <div class="price-label">Mulai dari</div>
+                            <div class="price-value price-tag" data-base="410000">Rp 410.000</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Bantuan & Dukungan</h4>
+                    <ul>
+                        <li><a href="#">Pusat Bantuan Tiket</a></li>
+                        <li><a href="#">Kebijakan Pembatalan</a></li>
+                        <li><a href="#">Bantuan E-Voucher</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Kategori Atraksi</h4>
+                    <ul>
+                        <li><a href="#">Taman Hiburan</a></li>
+                        <li><a href="#">Museum & Pameran</a></li>
+                        <li><a href="#">Tur Sepeda & Jalan Kaki</a></li>
+                        <li><a href="#">Pengalaman Kuliner</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Untuk Mitra</h4>
+                    <ul>
+                        <li><a href="#">Daftarkan Atraksi Anda</a></li>
+                        <li><a href="#">Portal Penyedia Aktivitas</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Perusahaan</h4>
+                    <ul>
+                        <li><a href="#">Tentang LYMstay Attractions</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                        <li><a href="#">Syarat & Ketentuan</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 LYMstay Attractions. Semua hak dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script Logic -->
+    <script>
+        // --- 1. WORLD CURRENCIES & LIVE LIVE API FETCH ---
+        const currencyNames = {
+            AED: "Dirham UEA", AFN: "Afghani Afganistan", ALL: "Lek Albania", AMD: "Dram Armenia", ANG: "Guilder Antillen Belanda",
+            AOA: "Kwanza Angola", ARS: "Peso Argentina", AUD: "Dolar Australia", AWG: "Florin Aruba", AZN: "Manat Azerbaijan",
+            BAM: "Mark Konvertibel Bosnia", BBD: "Dolar Barbados", BDT: "Taka Bangladesh", BGN: "Lev Bulgaria", BHD: "Dinar Bahrain",
+            BIF: "Franc Burundi", BMD: "Dolar Bermuda", BND: "Dolar Brunei", BOB: "Boliviano Bolivia", BRL: "Real Brasil",
+            BSD: "Dolar Bahama", BTN: "Ngultrum Bhutan", BWP: "Pula Botswana", BYN: "Rubel Belarusia", BZD: "Dolar Belize",
+            CAD: "Dolar Kanada", CDF: "Franc Kongo", CHF: "Franc Swiss", CLP: "Peso Chili", CNY: "Yuan Tiongkok",
+            COP: "Peso Kolombia", CRC: "Colon Kosta Rika", CUP: "Peso Kuba", CVE: "Escudo Tanjung Verde", CZK: "Koruna Ceko",
+            DJF: "Franc Jibuti", DKK: "Krone Denmark", DOP: "Peso Dominika", DZD: "Dinar Aljazair", EGP: "Pound Mesir",
+            ERN: "Nakfa Eritrea", ETB: "Birr Etiopia", EUR: "Euro", FJD: "Dolar Fiji", FKP: "Pound Kepulauan Falkland",
+            GBP: "Pound Britania", GEL: "Lari Georgia", GHS: "Cedi Ghana", GIP: "Pound Gibraltar", GMD: "Dalasi Gambia",
+            GNF: "Franc Guinea", GTQ: "Quetzal Guatemala", GYD: "Dolar Guyana", HKD: "Dolar Hong Kong", HNL: "Lempira Honduras",
+            HRK: "Kuna Kroasia", HTG: "Gourde Haiti", HUF: "Forint Hungaria", IDR: "Rupiah Indonesia", ILS: "Shekel Baru Israel",
+            INR: "Rupee India", IQD: "Dinar Irak", IRR: "Rial Iran", ISK: "Krona Islandia", JMD: "Dolar Jamaika",
+            JOD: "Dinar Yordania", JPY: "Yen Jepang", KES: "Shilling Kenya", KGS: "Som Kirgistan", KHR: "Riel Kamboja",
+            KMF: "Franc Komoro", KPW: "Won Korea Utara", KRW: "Won Korea Selatan", KWD: "Dinar Kuwait", KYD: "Dolar Kepulauan Cayman",
+            KZT: "Tenge Kazakstan", LAK: "Kip Laos", LBP: "Pound Lebanon", LKR: "Rupee Sri Lanka", LRD: "Dolar Liberia",
+            LSL: "Loti Lesotho", LYD: "Dinar Libya", MAD: "Dirham Maroko", MDL: "Leu Moldova", MGA: "Ariary Madagaskar",
+            MKD: "Denar Makedonia Utara", MMK: "Kyat Myanmar", MNT: "Tugrik Mongolia", MOP: "Pataca Makau", MRU: "Ouguiya Mauritania",
+            MUR: "Rupee Mauritius", MVR: "Rufiyaa Maladewa", MWK: "Kwacha Malawi", MXN: "Peso Meksiko", MYR: "Ringgit Malaysia",
+            MZN: "Metical Mozambik", NAD: "Dolar Namibia", NGN: "Naira Nigeria", NIO: "Cordoba Nikaragua", NOK: "Krone Norwegia",
+            NPR: "Rupee Nepal", NZD: "Dolar Selandia Baru", OMR: "Rial Oman", PAB: "Balboa Panama", PEN: "Sol Peru",
+            PGK: "Kina Papua Nugini", PHP: "Peso Filipina", PKR: "Rupee Pakistan", PLN: "Zloty Polandia", PYG: "Guarani Paraguay",
+            QAR: "Riyal Qatar", RON: "Leu Rumania", RSD: "Dinar Serbia", RUB: "Rubel Rusia", RWF: "Franc Rwanda",
+            SAR: "Riyal Arab Saudi", SBD: "Dolar Kepulauan Solomon", SCR: "Rupee Seychelles", SDG: "Pound Sudan", SEK: "Krona Swedia",
+            SGD: "Dolar Singapura", SHP: "Pound Saint Helena", SLL: "Leone Sierra Leone", SOS: "Shilling Somalia", SRD: "Dolar Suriname",
+            SSP: "Pound Sudan Selatan", STN: "Dobra Sao Tome", SYP: "Pound Suriah", SZL: "Lilangeni Eswatini", THB: "Baht Thailand",
+            TJS: "Somoni Tajikistan", TMT: "Manat Turkmenistan", TND: "Dinar Tunisia", TOP: "Pa'anga Tonga", TRY: "Lira Turki",
+            TTD: "Dolar Trinidad & Tobago", TWD: "Dolar Baru Taiwan", TZS: "Shilling Tanzania", UAH: "Hryvnia Ukraina", UGX: "Shilling Uganda",
+            USD: "Dolar AS", UYU: "Peso Uruguay", UZS: "Som Uzbekistan", VES: "Bolivar Venezuela", VND: "Dong Vietnam",
+            VUV: "Vatu Vanuatu", WST: "Tala Samoa", XAF: "Franc CFA BEAC", XCD: "Dolar Karibia Timur", XOF: "Franc CFA BCEAO",
+            XPF: "Franc CFP", YER: "Rial Yaman", ZAR: "Rand Afrika Selatan", ZMW: "Kwacha Zambia", ZWL: "Dolar Zimbabwe"
+        };
+
+        let exchangeRates = { IDR: 1 };
+        let currentCurrencyCode = 'IDR';
+
+        async function fetchLiveRates() {
+            try {
+                const response = await fetch('https://open.er-api.com/v6/latest/IDR');
+                const data = await response.json();
+                if (data && data.rates) {
+                    exchangeRates = data.rates;
+                }
+            } catch (error) {
+                console.warn("Gagal mengambil kurs online, menggunakan fallback standar.");
+            }
+            populateCurrencyList(Object.keys(currencyNames));
+        }
+
+        const currencyBtn = document.getElementById('currencyBtn');
+        const currencyDropdown = document.getElementById('currencyDropdown');
+        const currencyListContainer = document.getElementById('currencyListContainer');
+        const currencySearchInput = document.getElementById('currencySearchInput');
+        const selectedCurrencyText = document.getElementById('selectedCurrencyText');
+
+        currencyBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currencyDropdown.classList.toggle('show');
+            currencySearchInput.focus();
+        });
+
+        window.addEventListener('click', () => {
+            currencyDropdown.classList.remove('show');
+        });
+
+        currencyDropdown.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        function populateCurrencyList(codes) {
+            currencyListContainer.innerHTML = '';
+            codes.forEach(code => {
+                const name = currencyNames[code] || code;
+                const div = document.createElement('div');
+                div.className = 'currency-item';
+                div.innerHTML = `<span><strong>${code}</strong> - ${name}</span>`;
+                div.addEventListener('click', () => {
+                    currentCurrencyCode = code;
+                    selectedCurrencyText.innerText = code;
+                    currencyDropdown.classList.remove('show');
+                    updateAllPrices();
+                });
+                currencyListContainer.appendChild(div);
+            });
+        }
+
+        currencySearchInput.addEventListener('input', (e) => {
+            const keyword = e.target.value.toLowerCase();
+            const filtered = Object.keys(currencyNames).filter(code => {
+                return code.toLowerCase().includes(keyword) || currencyNames[code].toLowerCase().includes(keyword);
+            });
+            populateCurrencyList(filtered);
+        });
+
+        function formatPrice(amountIDR, currencyCode) {
+            const rate = exchangeRates[currencyCode] || 1;
+            const converted = amountIDR * rate;
+            try {
+                return new Intl.NumberFormat('id-ID', {
+                    style: 'currency',
+                    currency: currencyCode,
+                    maximumFractionDigits: 0
+                }).format(converted);
+            } catch (e) {
+                return `${currencyCode} ${Math.round(converted).toLocaleString('id-ID')}`;
+            }
+        }
+
+        function updateAllPrices() {
+            const priceTags = document.querySelectorAll('.price-tag');
+            priceTags.forEach(tag => {
+                const basePriceIDR = parseFloat(tag.getAttribute('data-base'));
+                tag.innerText = formatPrice(basePriceIDR, currentCurrencyCode);
+            });
+        }
+
+        // --- 2. REAL-TIME DISTANCE (KM) CALCULATION SYSTEM ---
+        const cityCoordinates = {
+            "jakarta": { lat: -6.2088, lon: 106.8456 },
+            "bandung": { lat: -6.9175, lon: 107.6191 },
+            "bali": { lat: -8.409518, lon: 115.188919 },
+            "yogyakarta": { lat: -7.7956, lon: 110.3695 },
+            "surabaya": { lat: -7.2575, lon: 112.7521 },
+            "medan": { lat: 3.5952, lon: 98.6722 },
+            "semarang": { lat: -6.9666, lon: 110.4167 },
+            "tokyo": { lat: 35.6762, lon: 139.6503 },
+            "singapura": { lat: 1.3521, lon: 103.8198 },
+            "bangkok": { lat: 13.7563, lon: 100.5018 }
+        };
+
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Radius bumi dalam kilometer
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = 
+                Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+                Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+
+        // Form Submit Handler
+        document.getElementById('attractionSearchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const userLoc = document.getElementById('userLocation').value.trim().toLowerCase();
+            const dest = document.getElementById('destination').value.trim().toLowerCase();
+            const date = document.getElementById('visitDate').value;
+
+            let distanceText = "";
+            if (cityCoordinates[userLoc] && cityCoordinates[dest]) {
+                const c1 = cityCoordinates[userLoc];
+                const c2 = cityCoordinates[dest];
+                const distKm = calculateDistance(c1.lat, c1.lon, c2.lat, c2.lon);
+                distanceText = `📍 Estimasi Jarak: ${Math.round(distKm)} KM`;
+            } else {
+                const dynamicKm = Math.floor(Math.abs(userLoc.length - dest.length) * 60 + 120);
+                distanceText = `📍 Estimasi Jarak: ${dynamicKm} KM (Rute Langsung)`;
+            }
+
+            alert(`Mencari atraksi wisata di: ${dest}\n${distanceText}${date ? '\nTanggal: ' + date : ''}\nMata Uang: ${currentCurrencyCode}`);
+        });
+
+        // Ensure links to penerbangan open in new tab
+        document.querySelectorAll('a[href="penerbangan.html"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.open(this.href, '_blank', 'noopener,noreferrer');
+            });
+        });
+
+        // Initialize currency fetch on load
+        fetchLiveRates();
+    </script>
+</body>
+</html>

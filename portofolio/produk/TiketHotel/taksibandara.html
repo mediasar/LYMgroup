@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LYMstay | Taksi Bandara & Antar-Jemput Nyaman</title>
+
+    <!-- Google Font & FontAwesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=BlinkMacSystemFont,Segoe+UI,Roboto,Helvetica,Arial,sans-serif&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* === 1. CSS RESET & VARIABLES === */
+        :root {
+            --blue-primary: #0077B6;
+            --blue-hover: #1E293B;
+            --blue-accent: #D4AF37;
+            --yellow-search: #ffb700;
+            --text-dark: #0F172A;
+            --text-muted: #475569;
+            --border-color: #CBD5E1;
+            --bg-light: #FAFAFA;
+            --max-width: 1100px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: var(--text-dark);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* === 2. HEADER & NAVBAR === */
+        .navbar {
+            background-color: var(--blue-primary);
+            color: white;
+            padding: 14px 0;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-link, .btn-outline, .btn-white {
+            padding: 8px 14px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-link { background: transparent; color: white; border: none; }
+        .btn-outline { background: transparent; color: white; border: 1px solid white; }
+        .btn-outline:hover { background: rgba(255, 255, 255, 0.1); }
+        .btn-white { background: white; color: var(--blue-accent); border: 1px solid white; }
+        .btn-white:hover { background: #f0f7ff; }
+
+        /* === 3. CATEGORY NAV === */
+        .category-bar {
+            background-color: var(--blue-primary);
+            padding-bottom: 16px;
+        }
+
+        .category-list {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .cat-item {
+            color: white;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            border: 1px solid transparent;
+        }
+
+        .cat-item.active {
+            border-color: white;
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .cat-item:hover:not(.active) {
+            background-color: rgba(255, 255, 255, 0.08);
+        }
+
+        /* === 4. HERO & TAXI SEARCH FORM === */
+        .hero-section {
+            background-color: var(--blue-primary);
+            color: white;
+            padding: 24px 0 60px 0;
+        }
+
+        .hero-title {
+            font-size: 38px;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 8px;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 24px;
+        }
+
+        .trip-type-selector {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .trip-type-selector label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .search-box-wrapper {
+            background-color: var(--yellow-search);
+            padding: 4px;
+            border-radius: 8px;
+        }
+
+        .search-form-taxi {
+            display: grid;
+            grid-template-columns: 2fr 2fr 1.5fr 1fr 1fr;
+            gap: 4px;
+        }
+
+        .input-group {
+            background: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 2px solid transparent;
+        }
+
+        .input-group:focus-within {
+            border-color: var(--yellow-search);
+        }
+
+        .input-group i.input-icon {
+            color: #474747;
+            font-size: 16px;
+            min-width: 18px;
+            text-align: center;
+        }
+
+        .field-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .field-label {
+            font-size: 11px;
+            color: var(--blue-accent);
+            font-weight: 600;
+            margin-bottom: -2px;
+        }
+
+        .field-input, .field-select {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dark);
+            background: transparent;
+        }
+
+        .btn-search {
+            background-color: var(--blue-accent);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-search:hover { background-color: #0057b8; }
+
+        /* Return Trip Field Hidden by Default */
+        .return-group {
+            display: none;
+            margin-top: 4px;
+        }
+
+        /* === 5. VALUE PROPOSITIONS === */
+        .features-bar {
+            background: white;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .features-flex {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .feature-item i {
+            font-size: 24px;
+            color: var(--blue-accent);
+            margin-top: 2px;
+        }
+
+        .feature-item h4 { font-size: 15px; font-weight: 700; }
+        .feature-item p { font-size: 13px; color: var(--text-muted); }
+
+        /* === 6. MAIN CONTENT === */
+        .main-section { padding: 40px 0; }
+        .section-title { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+        .section-subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 24px; }
+
+        /* Car Options Grid */
+        .fleet-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 48px;
+        }
+
+        .fleet-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .fleet-card:hover {
+            border-color: var(--blue-accent);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .fleet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .fleet-title { font-size: 16px; font-weight: 700; }
+        .fleet-tag {
+            background-color: #e6f0fa;
+            color: var(--blue-accent);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .fleet-img {
+            width: 100%;
+            height: 120px;
+            object-fit: contain;
+            margin: 12px 0;
+        }
+
+        .fleet-details {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .fleet-details ul { list-style: none; }
+        .fleet-details ul li { margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+        .fleet-details ul li i { color: #008009; }
+
+        /* Steps Section */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .step-card {
+            background: var(--bg-light);
+            border-radius: 8px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .step-number {
+            width: 36px;
+            height: 36px;
+            background-color: var(--blue-accent);
+            color: white;
+            font-weight: 700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 14px auto;
+        }
+
+        .step-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+        .step-card p { font-size: 13px; color: var(--text-muted); }
+
+        /* Top Airports Grid */
+        .airports-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .airport-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            background: white;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .airport-card:hover {
+            background-color: #f0f7ff;
+        }
+
+        .airport-card h4 { font-size: 15px; font-weight: 700; color: var(--text-dark); }
+        .airport-card p { font-size: 12px; color: var(--text-muted); }
+
+        /* === 7. FOOTER === */
+        footer {
+            background-color: var(--bg-light);
+            border-top: 1px solid var(--border-color);
+            padding: 40px 0 24px 0;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .footer-col h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 8px; }
+        .footer-col ul li a { color: var(--text-muted); text-decoration: none; }
+        .footer-col ul li a:hover { color: var(--blue-accent); }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .search-form-taxi { grid-template-columns: 1fr 1fr; }
+            .fleet-grid, .steps-grid { grid-template-columns: 1fr; }
+            .airports-grid { grid-template-columns: repeat(2, 1fr); }
+            .features-flex { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            .search-form-taxi { grid-template-columns: 1fr; }
+            .airports-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navbar -->
+    <header class="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">LYMstay</a>
+            <div class="nav-actions">
+                <button class="btn-link">IDR</button>
+                <button class="btn-white">Daftar</button>
+                <button class="btn-white">Login</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sub Navigation Categories -->
+    <nav class="category-bar">
+        <div class="container">
+            <div class="category-list">
+                <a href="akomodasi.html" class="cat-item"><i class="fa-solid fa-bed"></i> Akomodasi</a>
+                <a href="penerbangan.html" class="cat-item"><i class="fa-solid fa-plane"></i> Penerbangan</a>
+                <a href="rentalmobil.html" class="cat-item"><i class="fa-solid fa-car"></i> Rental Mobil</a>
+                <a href="atraksiwisata.html" class="cat-item"><i class="fa-solid fa-ticket"></i> Wisata</a>
+                <a href="taksibandara.html" class="cat-item active"><i class="fa-solid fa-taxi"></i> Taksi Bandara</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">Pesan taksi bandara Anda dengan mudah</h1>
+            <p class="hero-subtitle">Penjemputan tepat waktu, pengemudi profesional, dan tanpa biaya tersembunyi</p>
+
+            <!-- Trip Type Selector -->
+            <div class="trip-type-selector">
+                <label>
+                    <input type="radio" name="tripType" value="oneway" checked id="oneWayRadio"> Sekali jalan
+                </label>
+                <label>
+                    <input type="radio" name="tripType" value="return" id="returnRadio"> Pulang-pergi
+                </label>
+            </div>
+
+            <div class="search-box-wrapper">
+                <form id="taxiSearchForm">
+                    <div class="search-form-taxi">
+                        
+                        <!-- Pickup Location -->
+                        <div class="input-group">
+                            <i class="fa-solid fa-plane-departure input-icon"></i>
+                            <div class="field-container">
+                                <span class="field-label">Lokasi Penjemputan</span>
+                                <input type="text" id="pickupLoc" class="field-input" placeholder="Bandara atau Alamat (misal: CGK)" required>
+                            </div>
+                        </div>
+
+                        <!-- Dropoff Location -->
+                        <div class="input-group">
+                            <i class="fa-solid fa-location-dot input-icon"></i>
+                            <div class="field-container">
+                                <span class="field-label">Lokasi Tujuan</span>
+                                <input type="text" id="dropoffLoc" class="field-input" placeholder="Hotel atau Alamat Tujuan" required>
+                            </div>
+                        </div>
+
+                        <!-- Pickup Date & Time -->
+                        <div class="input-group">
+                            <i class="fa-regular fa-calendar input-icon"></i>
+                            <div class="field-container">
+                                <span class="field-label">Tanggal & Jam</span>
+                                <div style="display:flex; gap:4px;">
+                                    <input type="date" id="pickupDate" class="field-input" required>
+                                    <input type="time" id="pickupTime" class="field-input" value="12:00">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Passengers Count -->
+                        <div class="input-group">
+                            <i class="fa-solid fa-user-group input-icon"></i>
+                            <div class="field-container">
+                                <span class="field-label">Penumpang</span>
+                                <select id="passengers" class="field-select">
+                                    <option value="1">1 orang</option>
+                                    <option value="2" selected>2 orang</option>
+                                    <option value="3">3 orang</option>
+                                    <option value="4">4 orang</option>
+                                    <option value="5+">5+ orang</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn-search">Cari Taksi</button>
+                    </div>
+
+                    <!-- Return Trip Fields (Hidden by Default) -->
+                    <div class="return-group" id="returnGroup">
+                        <div class="search-form-taxi" style="margin-top: 4px;">
+                            <div class="input-group" style="grid-column: span 3;">
+                                <i class="fa-regular fa-calendar input-icon"></i>
+                                <div class="field-container">
+                                    <span class="field-label">Tanggal & Jam Kepulangan</span>
+                                    <div style="display:flex; gap:8px;">
+                                        <input type="date" id="returnDate" class="field-input">
+                                        <input type="time" id="returnTime" class="field-input" value="12:00">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Propositions -->
+    <section class="features-bar">
+        <div class="container features-flex">
+            <div class="feature-item">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <div>
+                    <h4>Pelacakan Penerbangan</h4>
+                    <p>Pengemudi memantau jadwal pesawat Anda. Tanpa cemas jika ada penundaan (delay).</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <i class="fa-solid fa-user-check"></i>
+                <div>
+                    <h4>Layanan Pertemuan & Sapa (Meet & Greet)</h4>
+                    <p>Pengemudi akan menunggu di area kedatangan membawa papan nama Anda.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <i class="fa-solid fa-hand-holding-dollar"></i>
+                <div>
+                    <h4>Harga Pasti Tanpa Kejutan</h4>
+                    <p>Biaya sudah termasuk tol, parkir, dan waktu tunggu. Bebas biaya tersembunyi.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container main-section">
+        
+        <!-- Vehicle Fleet Options -->
+        <section>
+            <h2 class="section-title">Pilihan Armada Kendaraan</h2>
+            <p class="section-subtitle">Sesuaikan dengan kapasitas rombongan dan koper Anda</p>
+
+            <div class="fleet-grid">
+                <!-- Standard Sedan -->
+                <div class="fleet-card">
+                    <div class="fleet-header">
+                        <span class="fleet-title">Sedan Standar</span>
+                        <span class="fleet-tag">Paling Hemat</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=400&q=80" alt="Sedan Standar" class="fleet-img">
+                    <div class="fleet-details">
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Maks. 3 Penumpang</li>
+                            <li><i class="fa-solid fa-check"></i> Maks. 2 Bagasi/Koper</li>
+                            <li><i class="fa-solid fa-check"></i> Waktu tunggu gratis 45 menit</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Executive Sedan -->
+                <div class="fleet-card">
+                    <div class="fleet-header">
+                        <span class="fleet-title">Sedan Eksekutif</span>
+                        <span class="fleet-tag">Kenyamanan Ekstra</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=400&q=80" alt="Sedan Eksekutif" class="fleet-img">
+                    <div class="fleet-details">
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Maks. 3 Penumpang</li>
+                            <li><i class="fa-solid fa-check"></i> Maks. 3 Bagasi/Koper</li>
+                            <li><i class="fa-solid fa-check"></i> Mobil mewah & Pengemudi Premium</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- People Carrier / Minivan -->
+                <div class="fleet-card">
+                    <div class="fleet-header">
+                        <span class="fleet-title">Minivan / People Carrier</span>
+                        <span class="fleet-tag">Rombongan & Keluarga</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=400&q=80" alt="Minivan" class="fleet-img">
+                    <div class="fleet-details">
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Maks. 6 Penumpang</li>
+                            <li><i class="fa-solid fa-check"></i> Maks. 6 Bagasi/Koper</li>
+                            <li><i class="fa-solid fa-check"></i> Ruang kabin luas & nyaman</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How it Works -->
+        <section>
+            <h2 class="section-title">Cara Kerja Layanan</h2>
+            <p class="section-subtitle">3 langkah mudah dari pemesanan hingga penjemputan</p>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h4>Pesan Perjalanan Anda</h4>
+                    <p>Masukkan rincian penjemputan dan pilih tipe kendaraan yang Anda inginkan.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h4>Konfirmasi Pengemudi</h4>
+                    <p>Anda akan menerima email rincian pengemudi beserta nomor kontak sebelum keberangkatan.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h4>Nikmati Perjalanan</h4>
+                    <p>Pengemudi akan menyambut Anda di lokasi dan mengantar langsung ke tujuan.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Popular Airport Destinations -->
+        <section>
+            <h2 class="section-title">Bandara Terpopuler</h2>
+            <p class="section-subtitle">Layanan taksi bandara tersedia di ratusan bandara utama dunia</p>
+
+            <div class="airports-grid">
+                <div class="airport-card">
+                    <h4>Bandara Soekarno-Hatta (CGK)</h4>
+                    <p>Jakarta, Indonesia</p>
+                </div>
+                <div class="airport-card">
+                    <h4>Bandara I Gusti Ngurah Rai (DPS)</h4>
+                    <p>Bali, Indonesia</p>
+                </div>
+                <div class="airport-card">
+                    <h4>Bandara Changi (SIN)</h4>
+                    <p>Singapura</p>
+                </div>
+                <div class="airport-card">
+                    <h4>Bandara Haneda (HND)</h4>
+                    <p>Tokyo, Jepang</p>
+                </div>
+                <div class="airport-card">
+                    <h4>Bandara Juanda (SUB)</h4>
+                    <p>Surabaya, Indonesia</p>
+                </div>
+                <div class="airport-card">
+                    <h4>Bandara Kualanamu (KNO)</h4>
+                    <p>Medan, Indonesia</p>
+                </div>
+                <div class="airport-card">
+                    <h4>Bandara Suvarnabhumi (BKK)</h4>
+                    <p>Bangkok, Thailand</p>
+                </div>
+                <div class="airport-card">
+                    <h4>Bandara Kuala Lumpur (KUL)</h4>
+                    <p>Kuala Lumpur, Malaysia</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Bantuan & Dukungan</h4>
+                    <ul>
+                        <li><a href="#">Pusat Bantuan Taksi</a></li>
+                        <li><a href="#">Batal & Ubah Jadwal</a></li>
+                        <li><a href="#">Panduan Penjemputan Bandara</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Armada Taksi</h4>
+                    <ul>
+                        <li><a href="#">Sedan Standar</a></li>
+                        <li><a href="#">Sedan Eksekutif</a></li>
+                        <li><a href="#">Minivan Rombongan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Mitra Pengemudi</h4>
+                    <ul>
+                        <li><a href="#">Daftar Penyedia Layanan Taksi</a></li>
+                        <li><a href="#">Portal Pengemudi</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Perusahaan</h4>
+                    <ul>
+                        <li><a href="#">Tentang LYMstay Taxis</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                        <li><a href="#">Syarat & Ketentuan</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 LYMstay Taxis. Semua hak dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script Logic -->
+    <script>
+        // Set default pickup date
+        const today = new Date();
+        document.getElementById('pickupDate').value = today.toISOString().split('T')[0];
+
+        // Toggle Return Trip Visibility
+        const oneWayRadio = document.getElementById('oneWayRadio');
+        const returnRadio = document.getElementById('returnRadio');
+        const returnGroup = document.getElementById('returnGroup');
+
+        returnRadio.addEventListener('change', function() {
+            if (this.checked) {
+                returnGroup.style.display = 'block';
+            }
+        });
+
+        oneWayRadio.addEventListener('change', function() {
+            if (this.checked) {
+                returnGroup.style.display = 'none';
+            }
+        });
+
+        // Form Submit Handler
+        document.getElementById('taxiSearchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const pickup = document.getElementById('pickupLoc').value;
+            const dropoff = document.getElementById('dropoffLoc').value;
+            const pDate = document.getElementById('pickupDate').value;
+            const pTime = document.getElementById('pickupTime').value;
+
+            alert(`Mencari Taksi Bandara:\nDari: ${pickup}\nKe: ${dropoff}\nTanggal & Jam: ${pDate} jam ${pTime}`);
+        });
+
+        // Ensure links to penerbangan open in new tab
+        document.querySelectorAll('a[href="penerbangan.html"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.open(this.href, '_blank', 'noopener,noreferrer');
+            });
+        });
+    </script>
+</body>
+</html>

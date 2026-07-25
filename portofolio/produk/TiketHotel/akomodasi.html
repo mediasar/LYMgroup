@@ -1,0 +1,1757 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LYMstay | Temukan Akomodasi Impian Anda</title>
+    
+    <!-- Google Font & FontAwesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=BlinkMacSystemFont,Segoe+UI,Roboto,Helvetica,Arial,sans-serif&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* === 1. CSS RESET & VARIABLES === */
+        :root {
+            --blue-primary: #0077B6;
+            --blue-hover: #1E293B;
+            --blue-accent: #D4AF37;
+            --yellow-search: #ffb700;
+            --text-dark: #0F172A;
+            --text-muted: #475569;
+            --border-color: #CBD5E1;
+            --bg-light: #FAFAFA;
+            --max-width: 1100px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: var(--text-dark);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* === 2. HEADER & NAVBAR === */
+        .navbar {
+            background-color: var(--blue-primary);
+            color: white;
+            padding: 14px 0;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-link, .btn-outline, .btn-white {
+            padding: 8px 14px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-link {
+            background: transparent;
+            color: white;
+            border: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 1px solid white;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--blue-accent);
+            border: 1px solid white;
+        }
+
+        .btn-white:hover {
+            background: #f0f7ff;
+        }
+
+        /* === CURRENCY DROPDOWN STYLES === */
+        .currency-wrapper {
+            position: relative;
+        }
+
+        .currency-dropdown {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            width: 300px;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+            border-radius: 8px;
+            z-index: 1000;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .currency-dropdown.active {
+            display: block;
+        }
+
+        .currency-search-box {
+            padding: 10px;
+            background: #f9f9f9;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .currency-search-input {
+            width: 100%;
+            padding: 8px 10px;
+            font-size: 13px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .currency-search-input:focus {
+            border-color: var(--blue-accent);
+        }
+
+        .currency-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 260px;
+            overflow-y: auto;
+        }
+
+        .currency-item {
+            padding: 10px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f2f2f2;
+            transition: background-color 0.15s ease;
+        }
+
+        .currency-item:last-child {
+            border-bottom: none;
+        }
+
+        .currency-item:hover {
+            background-color: #f5f5f5;
+            color: var(--blue-accent);
+        }
+
+        .currency-item span {
+            font-weight: normal;
+            color: var(--text-muted);
+            font-size: 12px;
+            text-align: right;
+            max-width: 150px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* === 3. CATEGORY NAV === */
+        .category-bar {
+            background-color: var(--blue-primary);
+            padding-bottom: 16px;
+        }
+
+        .category-list {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .cat-item {
+            color: white;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            border: 1px solid transparent;
+        }
+
+        .cat-item.active {
+            border-color: white;
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .cat-item:hover:not(.active) {
+            background-color: rgba(255, 255, 255, 0.08);
+        }
+
+        /* === 4. HERO & SEARCH BAR === */
+        .hero-section {
+            background-color: var(--blue-primary);
+            color: white;
+            padding: 24px 0 60px 0;
+        }
+
+        .hero-title {
+            font-size: 44px;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 8px;
+        }
+
+        .hero-subtitle {
+            font-size: 22px;
+            opacity: 0.9;
+            margin-bottom: 24px;
+        }
+
+        .search-box-wrapper {
+            background-color: var(--yellow-search);
+            padding: 4px;
+            border-radius: 8px;
+        }
+
+        .search-form {
+            display: grid;
+            grid-template-columns: 2.5fr 2fr 2.5fr 1fr;
+            gap: 4px;
+        }
+
+        .input-group {
+            background: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            border: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .input-group:focus-within {
+            border-color: var(--yellow-search);
+        }
+
+        .input-group i.input-icon {
+            color: #474747;
+            font-size: 20px;
+            min-width: 22px;
+            text-align: center;
+        }
+
+        .field-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .field-label {
+            font-size: 11px;
+            color: var(--blue-accent);
+            font-weight: 600;
+            margin-bottom: -2px;
+        }
+
+        .field-input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+            background: transparent;
+        }
+
+        .destination-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .trending-dropdown {
+            display: none;
+            position: absolute;
+            top: calc(100% + 6px);
+            left: 0;
+            width: 100%;
+            min-width: 360px;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+            border-radius: 8px;
+            z-index: 1000;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.08);
+            max-height: 380px;
+            overflow-y: auto;
+        }
+
+        .trending-dropdown.active { display: block; }
+
+        .dropdown-title {
+            padding: 12px 16px 8px 16px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: #fafafa;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dropdown-list { list-style: none; padding: 0; margin: 0; }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 16px;
+            cursor: pointer;
+            border-bottom: 1px solid #f2f2f2;
+            transition: background-color 0.15s ease;
+        }
+
+        .dropdown-item:last-child { border-bottom: none; }
+        .dropdown-item:hover { background-color: #f5f5f5; }
+
+        .dropdown-item i {
+            font-size: 18px;
+            color: var(--blue-accent);
+            width: 20px;
+            text-align: center;
+        }
+
+        .dropdown-item.gps-item { background-color: #f0f7ff; }
+        .dropdown-item.gps-item i { color: #d9381e; }
+        .dropdown-item.gps-item:hover { background-color: #e2f0ff; }
+
+        .item-info { display: flex; flex-direction: column; overflow: hidden; width: 100%; }
+
+        .item-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-city {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .item-distance {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--blue-primary);
+            background: #e0f2fe;
+            padding: 2px 6px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .item-country {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 1px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .dropdown-msg {
+            padding: 16px;
+            font-size: 13px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .occupancy-select { cursor: pointer; user-select: none; }
+
+        .occupancy-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .btn-search {
+            background-color: var(--blue-accent);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-search:hover { background-color: #0057b8; }
+
+        .search-options {
+            display: flex;
+            gap: 24px;
+            margin-top: 16px;
+            font-size: 14px;
+        }
+
+        .search-options label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        /* === 5. POPOVER OKUPANSI === */
+        .popover {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            width: 320px;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            padding: 20px;
+            z-index: 999;
+        }
+
+        .popover.active { display: block; }
+
+        .popover-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .popover-label { font-size: 14px; font-weight: 600; color: var(--text-dark); }
+
+        .counter-btn-group { display: flex; align-items: center; gap: 12px; }
+
+        .btn-counter {
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--blue-accent);
+            background: white;
+            color: var(--blue-accent);
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-counter:disabled { border-color: #ccc; color: #ccc; cursor: not-allowed; }
+        .counter-value { font-size: 14px; font-weight: 600; width: 20px; text-align: center; }
+
+        /* === 6. MAIN CONTENT SECTIONS === */
+        .main-section { padding: 40px 0; }
+        .section-title { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+        .section-subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 20px; }
+
+        /* Value Props */
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .value-card {
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            padding: 16px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .value-card i { font-size: 24px; color: var(--blue-primary); }
+        .value-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+        .value-card p { font-size: 12px; color: var(--text-muted); }
+
+        /* Jelajahi Indonesia Grid */
+        .explore-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .explore-card {
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .explore-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+        }
+
+        .explore-img-wrapper {
+            position: relative;
+            width: 100%;
+            height: 140px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .explore-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .explore-card:hover img { transform: scale(1.08); }
+
+        .explore-info { padding: 10px 2px 0 2px; }
+
+        .explore-city {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 2px;
+        }
+
+        .explore-count { font-size: 13px; color: var(--text-muted); }
+
+        /* Tipe Akomodasi Grid */
+        .type-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .type-card {
+            cursor: pointer;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #ffffff;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .type-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .type-card-img-wrapper {
+            position: relative;
+            width: 100%;
+            height: 160px;
+            overflow: hidden;
+        }
+
+        .type-card img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .type-card:hover img { transform: scale(1.06); }
+        .type-card-body { padding: 12px 14px; }
+        .type-card h4 { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; }
+        .type-card .type-count { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+
+        /* Trending Destinations Grid */
+        .trending-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .trending-card {
+            position: relative;
+            height: 270px;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .trending-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+        }
+
+        .trending-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .trending-card:hover img { transform: scale(1.05); }
+
+        .trending-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 50%, transparent 100%);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .trending-overlay h3 {
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 2px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .trending-overlay p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .trending-card.col-3 { grid-column: span 3; }
+        .trending-card.col-2 { grid-column: span 2; }
+
+        /* Promo Hotel Grid */
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .hotel-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            background: white;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .hotel-card img { height: 180px; width: 100%; object-fit: cover; }
+
+        .hotel-body {
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .hotel-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+        .hotel-location { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; }
+
+        .hotel-rating-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .rating-badge {
+            background-color: var(--blue-primary);
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 6px;
+            border-radius: 4px 4px 4px 0;
+        }
+
+        .rating-text { font-size: 13px; font-weight: 600; }
+        .price-box { margin-top: auto; text-align: right; }
+        .old-price { font-size: 12px; color: #d4111e; text-decoration: line-through; }
+        .new-price { font-size: 18px; font-weight: 700; color: var(--text-dark); }
+
+        /* === 7. FOOTER LENGKAP === */
+        footer {
+            background-color: var(--bg-light);
+            border-top: 1px solid var(--border-color);
+            padding: 40px 0 24px 0;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .footer-col h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--blue-accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        /* === 8. RESPONSIVE MEDIA QUERIES === */
+        @media (max-width: 992px) {
+            .search-form { grid-template-columns: 1fr 1fr; }
+            .value-grid, .property-grid { grid-template-columns: repeat(2, 1fr); }
+            .type-grid { grid-template-columns: repeat(3, 1fr); }
+            .explore-grid { grid-template-columns: repeat(3, 1fr); }
+            .trending-card.col-3, .trending-card.col-2 { grid-column: span 6; }
+            .trending-dropdown { min-width: 100%; }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 600px) {
+            .search-form { grid-template-columns: 1fr; }
+            .value-grid, .property-grid { grid-template-columns: 1fr; }
+            .type-grid, .explore-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero-title { font-size: 30px; }
+            .hero-subtitle { font-size: 16px; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navbar -->
+    <header class="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo">LYMstay</a>
+            <div class="nav-actions">
+                <!-- Currency Selector Dropdown -->
+                <div class="currency-wrapper">
+                    <button class="btn-link" id="currencyBtn">IDR <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 2px;"></i></button>
+                    <div class="currency-dropdown" id="currencyDropdown">
+                        <div class="currency-search-box">
+                            <input type="text" id="currencySearchInput" class="currency-search-input" placeholder="Cari seluruh mata uang...">
+                        </div>
+                        <ul class="currency-list" id="currencyList">
+                            <!-- Populated dynamically via JS -->
+                        </ul>
+                    </div>
+                </div>
+                <button class="btn-white">Daftar</button>
+                <button class="btn-white">Login</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sub Navigation Categories -->
+    <nav class="category-bar">
+        <div class="container">
+            <div class="category-list">
+                <a href="akomodasi.html" class="cat-item active"><i class="fa-solid fa-bed"></i> Akomodasi</a>
+                <a href="penerbangan.html" class="cat-item"><i class="fa-solid fa-plane"></i> Penerbangan</a>
+                <a href="rentalmobil.html" class="cat-item"><i class="fa-solid fa-car"></i> Rental Mobil</a>
+                <a href="atraksiwisata.html" class="cat-item"><i class="fa-solid fa-ticket"></i> Wisata</a>
+                <a href="taksibandara.html" class="cat-item"><i class="fa-solid fa-taxi"></i> Taksi</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">Temukan akomodasi berikutnya</h1>
+            <p class="hero-subtitle">Cari promo hotel, rumah liburan, dan banyak lagi...</p>
+
+            <!-- Search Form Wrapper -->
+            <div class="search-box-wrapper">
+                <form id="searchForm" class="search-form">
+                    
+                    <!-- DESTINATION INPUT WITH LIVE AUTOCOMPLETE & GPS -->
+                    <div class="destination-wrapper">
+                        <div class="input-group" id="destInputGroup">
+                            <i class="fa-solid fa-bed input-icon"></i>
+                            <div class="field-container">
+                                <span class="field-label">Masukkan destinasi</span>
+                                <input type="text" id="destination" class="field-input" placeholder="Mau pergi ke mana?" autocomplete="off" required>
+                            </div>
+                        </div>
+
+                        <!-- Dynamic Dropdown Menu -->
+                        <div class="trending-dropdown" id="destDropdown">
+                            <div class="dropdown-title" id="dropdownTitle">Gunakan GPS / Destinasi Popular</div>
+                            <ul class="dropdown-list" id="dropdownList">
+                                <!-- Populated dynamically by JS -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Date Input -->
+                    <div class="input-group">
+                        <i class="fa-regular fa-calendar input-icon"></i>
+                        <div class="field-container">
+                            <span class="field-label">Tanggal</span>
+                            <input type="text" id="checkin" class="field-input" placeholder="Waktu check-in — Check-out" onfocus="(this.type='date')">
+                        </div>
+                    </div>
+
+                    <!-- Occupancy Input Trigger & Popover -->
+                    <div class="input-group occupancy-select" id="occupancyBtn">
+                        <i class="fa-regular fa-user input-icon"></i>
+                        <div class="field-container">
+                            <span class="field-label">Tamu & Kamar</span>
+                            <span class="occupancy-text" id="occupancyText">2 dewasa · 0 anak · 1 kamar</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down" style="margin-left: auto; font-size: 12px; color: #474747;"></i>
+
+                        <!-- Popover Menu -->
+                        <div class="popover" id="occupancyPopover">
+                            <div class="popover-row">
+                                <span class="popover-label">Dewasa</span>
+                                <div class="counter-btn-group">
+                                    <button type="button" class="btn-counter" id="btnAdultsDec">-</button>
+                                    <span class="counter-value" id="valAdults">2</span>
+                                    <button type="button" class="btn-counter" id="btnAdultsInc">+</button>
+                                </div>
+                            </div>
+                            <div class="popover-row">
+                                <span class="popover-label">Anak-anak</span>
+                                <div class="counter-btn-group">
+                                    <button type="button" class="btn-counter" id="btnChildrenDec" disabled>-</button>
+                                    <span class="counter-value" id="valChildren">0</span>
+                                    <button type="button" class="btn-counter" id="btnChildrenInc">+</button>
+                                </div>
+                            </div>
+                            <div class="popover-row">
+                                <span class="popover-label">Kamar</span>
+                                <div class="counter-btn-group">
+                                    <button type="button" class="btn-counter" id="btnRoomsDec">-</button>
+                                    <span class="counter-value" id="valRooms">1</span>
+                                    <button type="button" class="btn-counter" id="btnRoomsInc">+</button>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-white" style="width:100%; border-color:var(--blue-accent);" id="btnClosePopover">Selesai</button>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn-search">Cari</button>
+                </form>
+            </div>
+
+            <!-- Options Checkbox -->
+            <div class="search-options">
+                <label><input type="checkbox"> Saya bepergian untuk kerja</label>
+                <label><input type="checkbox"> Tambahkan penerbangan ke pencarian saya</label>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="container main-section">
+        
+        <!-- Value Props -->
+        <section>
+            <h2 class="section-title">Mengapa LYMstay?</h2>
+            <p class="section-subtitle">Kemudahan dan kenyamanan terbaik untuk perjalanan Anda</p>
+            <div class="value-grid">
+                <div class="value-card">
+                    <i class="fa-solid fa-thumbs-up"></i>
+                    <div>
+                        <h4>Pesan sekarang, bayar di akomodasi</h4>
+                        <p>Pembatalan GRATIS di sebagian besar kamar</p>
+                    </div>
+                </div>
+                <div class="value-card">
+                    <i class="fa-solid fa-comments"></i>
+                    <div>
+                        <h4>300+ juta ulasan terpercaya</h4>
+                        <p>Dapatkan informasi objektif dari sesama traveler</p>
+                    </div>
+                </div>
+                <div class="value-card">
+                    <i class="fa-solid fa-globe"></i>
+                    <div>
+                        <h4>2+ juta akomodasi di dunia</h4>
+                        <p>Hotel, guesthouse, apartemen, dan lainnya...</p>
+                    </div>
+                </div>
+                <div class="value-card">
+                    <i class="fa-solid fa-headset"></i>
+                    <div>
+                        <h4>Customer Service 24/7</h4>
+                        <p>Kami selalu ada untuk membantu Anda kapan saja</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section (Cari berdasarkan tipe akomodasi) -->
+        <section>
+            <h2 class="section-title">Cari berdasarkan tipe akomodasi</h2>
+            <p class="section-subtitle">Jelajahi pilihan akomodasi sesuai dengan gaya liburan Anda</p>
+            <div class="type-grid">
+                <div class="type-card" onclick="filterByAccommodationType('Hotel')">
+                    <div class="type-card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80" alt="Hotel">
+                    </div>
+                    <div class="type-card-body">
+                        <h4>Hotel</h4>
+                        <span class="type-count">840.000+ pilihan</span>
+                    </div>
+                </div>
+
+                <div class="type-card" onclick="filterByAccommodationType('Apartemen')">
+                    <div class="type-card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=500&q=80" alt="Apartemen">
+                    </div>
+                    <div class="type-card-body">
+                        <h4>Apartemen</h4>
+                        <span class="type-count">720.000+ pilihan</span>
+                    </div>
+                </div>
+
+                <div class="type-card" onclick="filterByAccommodationType('Resor')">
+                    <div class="type-card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=500&q=80" alt="Resor">
+                    </div>
+                    <div class="type-card-body">
+                        <h4>Resor</h4>
+                        <span class="type-count">180.000+ pilihan</span>
+                    </div>
+                </div>
+
+                <div class="type-card" onclick="filterByAccommodationType('Vila')">
+                    <div class="type-card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=500&q=80" alt="Vila">
+                    </div>
+                    <div class="type-card-body">
+                        <h4>Vila</h4>
+                        <span class="type-count">350.000+ pilihan</span>
+                    </div>
+                </div>
+
+                <div class="type-card" onclick="filterByAccommodationType('Guesthouse & Hostel')">
+                    <div class="type-card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=500&q=80" alt="Guesthouse">
+                    </div>
+                    <div class="type-card-body">
+                        <h4>Guesthouse & Hostel</h4>
+                        <span class="type-count">210.000+ pilihan</span>
+                    </div>
+                </div>
+
+                <div class="type-card" onclick="filterByAccommodationType('Glamping')">
+                    <div class="type-card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?auto=format&fit=crop&w=500&q=80" alt="Glamping">
+                    </div>
+                    <div class="type-card-body">
+                        <h4>Glamping & Camping</h4>
+                        <span class="type-count">45.000+ pilihan</span>
+                    </div>
+                </div>
+
+                <div class="type-card" onclick="filterByAccommodationType('Rumah Liburan')">
+                    <div class="type-card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=500&q=80" alt="Rumah Liburan">
+                    </div>
+                    <div class="type-card-body">
+                        <h4>Rumah Liburan</h4>
+                        <span class="type-count">490.000+ pilihan</span>
+                    </div>
+                </div>
+
+                <div class="type-card" onclick="filterByAccommodationType('Bed & Breakfast')">
+                    <div class="type-card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=500&q=80" alt="Bed & Breakfast">
+                    </div>
+                    <div class="type-card-body">
+                        <h4>Bed & Breakfast</h4>
+                        <span class="type-count">130.000+ pilihan</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trending Destinations -->
+        <section>
+            <h2 class="section-title">Destinasi trending</h2>
+            <p class="section-subtitle">Pilihan terpopuler untuk traveler dari Indonesia</p>
+            <div class="trending-grid">
+                <div class="trending-card col-3" onclick="selectDestination('Jakarta, Indonesia', -6.2088, 106.8456)">
+                    <img src="https://images.unsplash.com/photo-1555899434-94d1368aa7af?auto=format&fit=crop&w=800&q=80" alt="Jakarta">
+                    <div class="trending-overlay">
+                        <h3>Jakarta 🇮🇩</h3>
+                        <p>Pusat bisnis, kuliner, dan belanja terpopuler</p>
+                    </div>
+                </div>
+
+                <div class="trending-card col-3" onclick="selectDestination('Bali, Indonesia', -8.409518, 115.188919)">
+                    <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80" alt="Bali">
+                    <div class="trending-overlay">
+                        <h3>Bali & Ubud 🇮🇩</h3>
+                        <p>Keindahan pantai, kebudayaan, dan resor mewah</p>
+                    </div>
+                </div>
+
+                <div class="trending-card col-2" onclick="selectDestination('Yogyakarta, Indonesia', -7.7956, 110.3695)">
+                    <img src="https://images.unsplash.com/photo-1584810359583-96fc3448beaa?auto=format&fit=crop&w=600&q=80" alt="Yogyakarta">
+                    <div class="trending-overlay">
+                        <h3>Yogyakarta 🇮🇩</h3>
+                        <p>Wisata budaya & sejarah</p>
+                    </div>
+                </div>
+
+                <div class="trending-card col-2" onclick="selectDestination('Bandung, Indonesia', -6.9175, 107.6191)">
+                    <img src="https://images.unsplash.com/photo-1601058268499-e52658b8bb88?auto=format&fit=crop&w=600&q=80" alt="Bandung">
+                    <div class="trending-overlay">
+                        <h3>Bandung 🇮🇩</h3>
+                        <p>Udara sejuk & factory outlet</p>
+                    </div>
+                </div>
+
+                <div class="trending-card col-2" onclick="selectDestination('Surabaya, Indonesia', -7.2575, 112.7521)">
+                    <img src="https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=600&q=80" alt="Surabaya">
+                    <div class="trending-overlay">
+                        <h3>Surabaya 🇮🇩</h3>
+                        <p>Kota pahlawan & kuliner khas</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         <!-- Jelajahi Indonesia Section -->
+        <section>
+            <h2 class="section-title">Jelajahi Indonesia</h2>
+            <p class="section-subtitle">Destinasi populer ini punya banyak hal yang menarik untuk ditawarkan</p>
+
+            <div class="explore-grid">
+                <div class="explore-card" onclick="selectDestination('Bali, Indonesia', -8.409518, 115.188919)">
+                    <div class="explore-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=500&q=80" alt="Bali">
+                    </div>
+                    <div class="explore-info">
+                        <h3 class="explore-city">Bali</h3>
+                        <p class="explore-count">5.420 properti</p>
+                    </div>
+                </div>
+
+                <div class="explore-card" onclick="selectDestination('Bandung, Jawa Barat, Indonesia', -6.9175, 107.6191)">
+                    <div class="explore-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1601058268499-e52658b8bb88?auto=format&fit=crop&w=500&q=80" alt="Bandung">
+                    </div>
+                    <div class="explore-info">
+                        <h3 class="explore-city">Bandung</h3>
+                        <p class="explore-count">2.150 properti</p>
+                    </div>
+                </div>
+
+                <div class="explore-card" onclick="selectDestination('Yogyakarta, Indonesia', -7.7956, 110.3695)">
+                    <div class="explore-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1584810359583-96fc3448beaa?auto=format&fit=crop&w=500&q=80" alt="Yogyakarta">
+                    </div>
+                    <div class="explore-info">
+                        <h3 class="explore-city">Yogyakarta</h3>
+                        <p class="explore-count">1.890 properti</p>
+                    </div>
+                </div>
+
+                <div class="explore-card" onclick="selectDestination('Jakarta, Indonesia', -6.2088, 106.8456)">
+                    <div class="explore-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1555899434-94d1368aa7af?auto=format&fit=crop&w=500&q=80" alt="Jakarta">
+                    </div>
+                    <div class="explore-info">
+                        <h3 class="explore-city">Jakarta</h3>
+                        <p class="explore-count">3.210 properti</p>
+                    </div>
+                </div>
+
+                <div class="explore-card" onclick="selectDestination('Surabaya, Jawa Timur, Indonesia', -7.2575, 112.7521)">
+                    <div class="explore-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=500&q=80" alt="Surabaya">
+                    </div>
+                    <div class="explore-info">
+                        <h3 class="explore-city">Surabaya</h3>
+                        <p class="explore-count">1.120 properti</p>
+                    </div>
+                </div>
+
+                <div class="explore-card" onclick="selectDestination('Lombok, Nusa Tenggara Barat, Indonesia', -8.5655, 116.3513)">
+                    <div class="explore-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1584810359583-96fc3448beaa?auto=format&fit=crop&w=500&q=80"  alt="Lombok">
+                    </div>
+                    <div class="explore-info">
+                        <h3 class="explore-city">Lombok</h3>
+                        <p class="explore-count">980 properti</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Promo Deals -->
+        <section>
+            <h2 class="section-title">Promo akhir pekan di LYMstay</h2>
+            <p class="section-subtitle">Hemat untuk menginap liburan minggu ini</p>
+            <div class="property-grid" id="hotelGrid">
+                <!-- JS akan merender kartu hotel di sini -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Dukungan</h4>
+                    <ul>
+                        <li><a href="#">Pusat Bantuan</a></li>
+                        <li><a href="#">FAQ Pembatalan</a></li>
+                        <li><a href="#">Layanan Pelanggan</a></li>
+                        <li><a href="#">Panduan Keamanan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Akomodasi</h4>
+                    <ul>
+                        <li><a href="#">Hotel</a></li>
+                        <li><a href="#">Apartemen</a></li>
+                        <li><a href="#">Resor</a></li>
+                        <li><a href="#">Vila</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Perusahaan</h4>
+                    <ul>
+                        <li><a href="#">Tentang LYMstay</a></li>
+                        <li><a href="#">Karir</a></li>
+                        <li><a href="#">Pers & Media</a></li>
+                        <li><a href="#">Mitra Bisnis</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Kebijakan</h4>
+                    <ul>
+                        <li><a href="#">Privasi & Cookie</a></li>
+                        <li><a href="#">Syarat & Ketentuan</a></li>
+                        <li><a href="#">Sanggahan Hukum</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 LYMstay. Semua hak dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- 0. SCRIPT FOR ALL WORLD CURRENCIES & LIVE LIVE API FETCH ---
+        const currencyNames = {
+            AED: "Dirham UEA", AFN: "Afghani Afganistan", ALL: "Lek Albania", AMD: "Dram Armenia", ANG: "Guilder Antillen Belanda",
+            AOA: "Kwanza Angola", ARS: "Peso Argentina", AUD: "Dolar Australia", AWG: "Florin Aruba", AZN: "Manat Azerbaijan",
+            BAM: "Mark Konvertibel Bosnia", BBD: "Dolar Barbados", BDT: "Taka Bangladesh", BGN: "Lev Bulgaria", BHD: "Dinar Bahrain",
+            BIF: "Franc Burundi", BMD: "Dolar Bermuda", BND: "Dolar Brunei", BOB: "Boliviano Bolivia", BRL: "Real Brasil",
+            BSD: "Dolar Bahama", BTN: "Ngultrum Bhutan", BWP: "Pula Botswana", BYN: "Rubel Belarusia", BZD: "Dolar Belize",
+            CAD: "Dolar Kanada", CDF: "Franc Kongo", CHF: "Franc Swiss", CLP: "Peso Chili", CNY: "Yuan Tiongkok",
+            COP: "Peso Kolombia", CRC: "Colon Kosta Rika", CUP: "Peso Kuba", CVE: "Escudo Tanjung Verde", CZK: "Koruna Ceko",
+            DJF: "Franc Jibuti", DKK: "Krone Denmark", DOP: "Peso Dominika", DZD: "Dinar Aljazair", EGP: "Pound Mesir",
+            ERN: "Nakfa Eritrea", ETB: "Birr Etiopia", EUR: "Euro", FJD: "Dolar Fiji", FKP: "Pound Kepulauan Falkland",
+            GBP: "Pound Britania", GEL: "Lari Georgia", GHS: "Cedi Ghana", GIP: "Pound Gibraltar", GMD: "Dalasi Gambia",
+            GNF: "Franc Guinea", GTQ: "Quetzal Guatemala", GYD: "Dolar Guyana", HKD: "Dolar Hong Kong", HNL: "Lempira Honduras",
+            HRK: "Kuna Kroasia", HTG: "Gourde Haiti", HUF: "Forint Hungaria", IDR: "Rupiah Indonesia", ILS: "Shekel Baru Israel",
+            INR: "Rupee India", IQD: "Dinar Irak", IRR: "Rial Iran", ISK: "Krona Islandia", JMD: "Dolar Jamaika",
+            JOD: "Dinar Yordania", JPY: "Yen Jepang", KES: "Shilling Kenya", KGS: "Som Kirgistan", KHR: "Riel Kamboja",
+            KMF: "Franc Komoro", KPW: "Won Korea Utara", KRW: "Won Korea Selatan", KWD: "Dinar Kuwait", KYD: "Dolar Kepulauan Cayman",
+            KZT: "Tenge Kazakstan", LAK: "Kip Laos", LBP: "Pound Lebanon", LKR: "Rupee Sri Lanka", LRD: "Dolar Liberia",
+            LSL: "Loti Lesotho", LYD: "Dinar Libya", MAD: "Dirham Maroko", MDL: "Leu Moldova", MGA: "Ariary Madagaskar",
+            MKD: "Denar Makedonia Utara", MMK: "Kyat Myanmar", MNT: "Tugrik Mongolia", MOP: "Pataca Makau", MRU: "Ouguiya Mauritania",
+            MUR: "Rupee Mauritius", MVR: "Rufiyaa Maladewa", MWK: "Kwacha Malawi", MXN: "Peso Meksiko", MYR: "Ringgit Malaysia",
+            MZN: "Metical Mozambik", NAD: "Dolar Namibia", NGN: "Naira Nigeria", NIO: "Cordoba Nikaragua", NOK: "Krone Norwegia",
+            NPR: "Rupee Nepal", NZD: "Dolar Selandia Baru", OMR: "Rial Oman", PAB: "Balboa Panama", PEN: "Sol Peru",
+            PGK: "Kina Papua Nugini", PHP: "Peso Filipina", PKR: "Rupee Pakistan", PLN: "Zloty Polandia", PYG: "Guarani Paraguay",
+            QAR: "Riyal Qatar", RON: "Leu Rumania", RSD: "Dinar Serbia", RUB: "Rubel Rusia", RWF: "Franc Rwanda",
+            SAR: "Riyal Arab Saudi", SBD: "Dolar Kepulauan Solomon", SCR: "Rupee Seychelles", SDG: "Pound Sudan", SEK: "Krona Swedia",
+            SGD: "Dolar Singapura", SHP: "Pound Saint Helena", SLL: "Leone Sierra Leone", SOS: "Shilling Somalia", SRD: "Dolar Suriname",
+            SSP: "Pound Sudan Selatan", STN: "Dobra Sao Tome", SYP: "Pound Suriah", SZL: "Lilangeni Eswatini", THB: "Baht Thailand",
+            TJS: "Somoni Tajikistan", TMT: "Manat Turkmenistan", TND: "Dinar Tunisia", TOP: "Pa'anga Tonga", TRY: "Lira Turki",
+            TTD: "Dolar Trinidad & Tobago", TWD: "Dolar Baru Taiwan", TZS: "Shilling Tanzania", UAH: "Hryvnia Ukraina", UGX: "Shilling Uganda",
+            USD: "Dolar AS", UYU: "Peso Uruguay", UZS: "Som Uzbekistan", VES: "Bolivar Venezuela", VND: "Dong Vietnam",
+            VUV: "Vatu Vanuatu", WST: "Tala Samoa", XAF: "Franc CFA BEAC", XCD: "Dolar Karibia Timur", XOF: "Franc CFA BCEAO",
+            XPF: "Franc CFP", YER: "Rial Yaman", ZAR: "Rand Afrika Selatan", ZMW: "Kwacha Zambia", ZWL: "Dolar Zimbabwe"
+        };
+
+        let exchangeRates = { IDR: 1, USD: 0.000062, EUR: 0.000057 };
+        let currenciesList = [];
+        let currentCurrencyCode = 'IDR';
+
+        const currencyBtn = document.getElementById('currencyBtn');
+        const currencyDropdown = document.getElementById('currencyDropdown');
+        const currencyList = document.getElementById('currencyList');
+        const currencySearchInput = document.getElementById('currencySearchInput');
+
+        async function fetchLiveExchangeRates() {
+            try {
+                const response = await fetch('https://open.er-api.com/v6/latest/IDR');
+                const data = await response.json();
+                if (data && data.rates) {
+                    exchangeRates = data.rates;
+                }
+            } catch (error) {
+                console.warn("Gagal mengambil kurs live.", error);
+            }
+
+            currenciesList = Object.keys(currencyNames).map(code => ({
+                code: code,
+                name: currencyNames[code],
+                rate: exchangeRates[code] || 1
+            }));
+
+            renderCurrencyMenu();
+            renderHotels();
+        }
+
+        function renderCurrencyMenu(filter = '') {
+            const filtered = currenciesList.filter(curr => 
+                curr.code.toLowerCase().includes(filter.toLowerCase()) || 
+                curr.name.toLowerCase().includes(filter.toLowerCase())
+            );
+
+            let html = '';
+            if (filtered.length === 0) {
+                html = `<li style="padding: 12px; text-align: center; color: var(--text-muted); font-size: 13px;">Mata uang tidak ditemukan</li>`;
+            } else {
+                filtered.forEach(curr => {
+                    html += `
+                        <li class="currency-item" data-code="${curr.code}">
+                            ${curr.code} <span>${curr.name}</span>
+                        </li>
+                    `;
+                });
+            }
+            currencyList.innerHTML = html;
+
+            currencyList.querySelectorAll('.currency-item').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    currentCurrencyCode = item.getAttribute('data-code');
+                    currencyBtn.innerHTML = `${currentCurrencyCode} <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 2px;"></i>`;
+                    currencyDropdown.classList.remove('active');
+                    currencySearchInput.value = '';
+                    renderCurrencyMenu(); 
+                    renderHotels();
+                });
+            });
+        }
+
+        currencyBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currencyDropdown.classList.toggle('active');
+            if (currencyDropdown.classList.contains('active')) currencySearchInput.focus();
+        });
+
+        currencySearchInput.addEventListener('input', (e) => renderCurrencyMenu(e.target.value));
+        currencySearchInput.addEventListener('click', (e) => e.stopPropagation());
+
+        document.addEventListener('click', (e) => {
+            if (!currencyDropdown.contains(e.target) && !currencyBtn.contains(e.target)) {
+                currencyDropdown.classList.remove('active');
+                currencySearchInput.value = '';
+                renderCurrencyMenu();
+            }
+        });
+
+
+        // --- 1. DESTINATION AUTOCOMPLETE, GPS & DISTANCE (KM) LOGIC ---
+        const destInput = document.getElementById('destination');
+        const destDropdown = document.getElementById('destDropdown');
+        const dropdownList = document.getElementById('dropdownList');
+        const dropdownTitle = document.getElementById('dropdownTitle');
+
+        let debounceTimer;
+        let currentUserLat = null;
+        let currentUserLon = null;
+
+        const defaultDestinations = [
+            { name: "Jakarta", subtext: "DKI Jakarta, Indonesia", lat: -6.2088, lon: 106.8456 },
+            { name: "Yogyakarta", subtext: "DI Yogyakarta, Indonesia", lat: -7.7956, lon: 110.3695 },
+            { name: "Bandung", subtext: "Jawa Barat, Indonesia", lat: -6.9175, lon: 107.6191 },
+            { name: "Surabaya", subtext: "Jawa Timur, Indonesia", lat: -7.2575, lon: 112.7521 },
+            { name: "Bali / Denpasar", subtext: "Bali, Indonesia", lat: -8.6705, lon: 115.2126 },
+            { name: "Medan", subtext: "Sumatera Utara, Indonesia", lat: 3.5952, lon: 98.6722 }
+        ];
+
+        // Rumus Haversine untuk menghitung jarak kilometer antara dua koordinat GPS
+        function calculateDistanceKm(lat1, lon1, lat2, lon2) {
+            if (lat1 === null || lon1 === null || lat2 === null || lon2 === null) return null;
+            const R = 6371; // Radius bumi dalam kilometer
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = 
+                Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+                Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return Math.round(R * c); // Hasil pembulatan dalam km
+        }
+
+        function selectDestination(cityName, lat = null, lon = null) {
+            destInput.value = cityName;
+            if (lat !== null && lon !== null) {
+                destInput.dataset.lat = lat;
+                destInput.dataset.lon = lon;
+            }
+            window.scrollTo({
+                top: document.querySelector('.hero-section').offsetTop - 20,
+                behavior: 'smooth'
+            });
+            destInput.focus();
+        }
+
+        function filterByAccommodationType(typeName) {
+            alert(`Menampilkan hasil pencarian untuk tipe akomodasi: ${typeName}`);
+            window.scrollTo({
+                top: document.querySelector('.hero-section').offsetTop - 20,
+                behavior: 'smooth'
+            });
+            destInput.focus();
+        }
+
+        function renderDefaultMenu() {
+            dropdownTitle.textContent = "Saran / Lokasi Terdekat";
+            
+            let html = `
+                <li class="dropdown-item gps-item" id="btnUseGPS">
+                    <i class="fa-solid fa-location-crosshairs"></i>
+                    <div class="item-info">
+                        <div class="item-top-row">
+                            <span class="item-city">Gunakan Lokasi Saya Saat Ini</span>
+                        </div>
+                        <span class="item-country">Deteksi posisi GPS perangkat</span>
+                    </div>
+                </li>
+            `;
+
+            defaultDestinations.forEach(item => {
+                const dist = calculateDistanceKm(currentUserLat, currentUserLon, item.lat, item.lon);
+                const distBadge = dist !== null ? `<span class="item-distance">${dist} km</span>` : '';
+
+                html += `
+                    <li class="dropdown-item" data-value="${item.name}, ${item.subtext}" data-lat="${item.lat}" data-lon="${item.lon}">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div class="item-info">
+                            <div class="item-top-row">
+                                <span class="item-city">${item.name}</span>
+                                ${distBadge}
+                            </div>
+                            <span class="item-country">${item.subtext}</span>
+                        </div>
+                    </li>
+                `;
+            });
+
+            dropdownList.innerHTML = html;
+            bindDropdownEvents();
+        }
+
+        async function fetchLocationsFromAPI(query) {
+            dropdownTitle.textContent = "Hasil Pencarian Lokasi";
+            dropdownList.innerHTML = `<div class="dropdown-msg"><i class="fa-solid fa-spinner fa-spin"></i> Mencari lokasi...</div>`;
+
+            try {
+                const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&countrycodes=id&limit=6&addressdetails=1`);
+                const data = await response.json();
+
+                if (!data || data.length === 0) {
+                    dropdownList.innerHTML = `<div class="dropdown-msg">Lokasi tidak ditemukan. Coba ketik nama kota/daerah lain.</div>`;
+                    return;
+                }
+
+                let html = '';
+                data.forEach(place => {
+                    const mainName = place.address.city || place.address.town || place.address.village || place.address.county || place.name;
+                    const fullAddress = place.display_name;
+                    const pLat = parseFloat(place.lat);
+                    const pLon = parseFloat(place.lon);
+
+                    const dist = calculateDistanceKm(currentUserLat, currentUserLon, pLat, pLon);
+                    const distBadge = dist !== null ? `<span class="item-distance">${dist} km</span>` : '';
+
+                    html += `
+                        <li class="dropdown-item" data-value="${fullAddress}" data-lat="${pLat}" data-lon="${pLon}">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <div class="item-info">
+                                <div class="item-top-row">
+                                    <span class="item-city">${mainName}</span>
+                                    ${distBadge}
+                                </div>
+                                <span class="item-country">${fullAddress}</span>
+                            </div>
+                        </li>
+                    `;
+                });
+
+                dropdownList.innerHTML = html;
+                bindDropdownEvents();
+            } catch (error) {
+                dropdownList.innerHTML = `<div class="dropdown-msg">Gagal memuat lokasi. Periksa koneksi internet Anda.</div>`;
+            }
+        }
+
+        async function fetchReverseGeocode(lat, lon) {
+            currentUserLat = lat;
+            currentUserLon = lon;
+            destInput.value = "Mendeteksi posisi GPS...";
+            try {
+                const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&addressdetails=1`);
+                const data = await response.json();
+                
+                if (data && data.display_name) {
+                    const city = data.address.city || data.address.town || data.address.subdistrict || data.address.county || "Lokasi Saya";
+                    const state = data.address.state || "Indonesia";
+                    destInput.value = `${city}, ${state}`;
+                    destInput.dataset.lat = lat;
+                    destInput.dataset.lon = lon;
+                } else {
+                    destInput.value = `${lat.toFixed(4)}, ${lon.toFixed(4)}`;
+                }
+            } catch (error) {
+                destInput.value = `Posisi Terdeteksi (${lat.toFixed(4)}, ${lon.toFixed(4)})`;
+            }
+        }
+
+        function handleGPSLocation() {
+            if (!navigator.geolocation) {
+                alert("Fitur GPS / Geolocation tidak didukung di browser ini.");
+                return;
+            }
+
+            destInput.value = "Mendapatkan GPS...";
+            destDropdown.classList.remove('active');
+
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    fetchReverseGeocode(lat, lon);
+                },
+                (error) => {
+                    let errMsg = "Gagal mengakses GPS.";
+                    if (error.code === error.PERMISSION_DENIED) {
+                        errMsg = "Izin GPS ditolak oleh pengguna.";
+                    } else if (error.code === error.POSITION_UNAVAILABLE) {
+                        errMsg = "Informasi lokasi GPS tidak tersedia.";
+                    } else if (error.code === error.TIMEOUT) {
+                        errMsg = "Waktu permintaan akses GPS habis.";
+                    }
+                    alert(errMsg);
+                    destInput.value = "";
+                },
+                { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+            );
+        }
+
+        function bindDropdownEvents() {
+            const gpsBtn = document.getElementById('btnUseGPS');
+            if (gpsBtn) {
+                gpsBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    handleGPSLocation();
+                });
+            }
+
+            dropdownList.querySelectorAll('.dropdown-item:not(.gps-item)').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    destInput.value = item.getAttribute('data-value');
+                    destInput.dataset.lat = item.getAttribute('data-lat');
+                    destInput.dataset.lon = item.getAttribute('data-lon');
+                    destDropdown.classList.remove('active');
+                });
+            });
+        }
+
+        destInput.addEventListener('focus', () => {
+            renderDefaultMenu();
+            destDropdown.classList.add('active');
+        });
+
+        destInput.addEventListener('click', (e) => {
+            e.stopPropagation();
+            renderDefaultMenu();
+            destDropdown.classList.add('active');
+        });
+
+        destInput.addEventListener('input', (e) => {
+            const query = e.target.value.trim();
+            clearTimeout(debounceTimer);
+
+            if (query.length < 2) {
+                renderDefaultMenu();
+                destDropdown.classList.add('active');
+                return;
+            }
+
+            debounceTimer = setTimeout(() => {
+                fetchLocationsFromAPI(query);
+                destDropdown.classList.add('active');
+            }, 400);
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!destInput.contains(e.target) && !destDropdown.contains(e.target)) {
+                destDropdown.classList.remove('active');
+            }
+        });
+
+
+        // --- 2. SCRIPT UNTUK OKUPANSI POPOVER ---
+        const occupancy = { adults: 2, children: 0, rooms: 1 };
+        const occupancyBtn = document.getElementById('occupancyBtn');
+        const occupancyPopover = document.getElementById('occupancyPopover');
+        const btnClosePopover = document.getElementById('btnClosePopover');
+
+        occupancyBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            occupancyPopover.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!occupancyPopover.contains(e.target) && !occupancyBtn.contains(e.target)) {
+                occupancyPopover.classList.remove('active');
+            }
+        });
+
+        btnClosePopover.addEventListener('click', () => {
+            occupancyPopover.classList.remove('active');
+        });
+
+        function setupCounter(type, decBtnId, incBtnId, valId, minVal) {
+            const decBtn = document.getElementById(decBtnId);
+            const incBtn = document.getElementById(incBtnId);
+
+            decBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (occupancy[type] > minVal) {
+                    occupancy[type]--;
+                    updateUI();
+                }
+            });
+
+            incBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                occupancy[type]++;
+                updateUI();
+            });
+        }
+
+        setupCounter('adults', 'btnAdultsDec', 'btnAdultsInc', 'valAdults', 1);
+        setupCounter('children', 'btnChildrenDec', 'btnChildrenInc', 'valChildren', 0);
+        setupCounter('rooms', 'btnRoomsDec', 'btnRoomsInc', 'valRooms', 1);
+
+        function updateUI() {
+            document.getElementById('valAdults').textContent = occupancy.adults;
+            document.getElementById('valChildren').textContent = occupancy.children;
+            document.getElementById('valRooms').textContent = occupancy.rooms;
+
+            document.getElementById('btnAdultsDec').disabled = occupancy.adults <= 1;
+            document.getElementById('btnChildrenDec').disabled = occupancy.children <= 0;
+            document.getElementById('btnRoomsDec').disabled = occupancy.rooms <= 1;
+
+            document.getElementById('occupancyText').textContent = 
+                `${occupancy.adults} dewasa · ${occupancy.children} anak · ${occupancy.rooms} kamar`;
+        }
+
+
+        // --- 3. DUMMY DATA HOTEL & DYNAMIC CONVERSION ---
+        const hotels = [
+            {
+                name: "Ascott Jakarta",
+                location: "Jakarta, Indonesia",
+                score: "8.7",
+                ratingText: "Hebat",
+                baseOldPrice: 9438000,
+                baseNewPrice: 8022300,
+                image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                name: "Pan Pacific Jakarta",
+                location: "Jakarta, Indonesia",
+                score: "9.3",
+                ratingText: "Luar Biasa",
+                baseOldPrice: 6482362,
+                baseNewPrice: 5418347,
+                image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                name: "FM7 Resort Hotel",
+                location: "Tangerang, Indonesia",
+                score: "8.7",
+                ratingText: "Hebat",
+                baseOldPrice: 2840000,
+                baseNewPrice: 2300400,
+                image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                name: "Hotel Santika Bandung",
+                location: "Bandung, Indonesia",
+                score: "8.2",
+                ratingText: "Sangat Baik",
+                baseOldPrice: 1950000,
+                baseNewPrice: 1619800,
+                image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=500&q=80"
+            }
+        ];
+
+        function formatPrice(amountIDR, currencyCode) {
+            const rate = exchangeRates[currencyCode] || 1;
+            const converted = amountIDR * rate;
+            try {
+                return new Intl.NumberFormat('id-ID', {
+                    style: 'currency',
+                    currency: currencyCode,
+                    maximumFractionDigits: 0
+                }).format(converted);
+            } catch (e) {
+                return `${currencyCode} ${Math.round(converted).toLocaleString('id-ID')}`;
+            }
+        }
+
+        function renderHotels() {
+            const grid = document.getElementById('hotelGrid');
+            grid.innerHTML = hotels.map(hotel => {
+                const formattedOld = formatPrice(hotel.baseOldPrice, currentCurrencyCode);
+                const formattedNew = formatPrice(hotel.baseNewPrice, currentCurrencyCode);
+
+                return `
+                    <div class="hotel-card">
+                        <img src="${hotel.image}" alt="${hotel.name}">
+                        <div class="hotel-body">
+                            <div class="hotel-title">${hotel.name}</div>
+                            <div class="hotel-location">${hotel.location}</div>
+                            <div class="hotel-rating-row">
+                                <span class="rating-badge">${hotel.score}</span>
+                                <span class="rating-text">${hotel.ratingText}</span>
+                            </div>
+                            <div class="price-box">
+                                <div class="old-price">${formattedOld}</div>
+                                <div class="new-price">${formattedNew}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        document.getElementById('searchForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const dest = destInput.value;
+            const lat = destInput.dataset.lat || 'Tidak diketahui';
+            const lon = destInput.dataset.lon || 'Tidak diketahui';
+            alert(`Mencari akomodasi di: ${dest}\nKoordinat: (${lat}, ${lon})\nJumlah Tamu: ${occupancy.adults} Dewasa, ${occupancy.children} Anak (${occupancy.rooms} Kamar)`);
+        });
+
+        // Initialize UI State & Fetch Live Rates
+        updateUI();
+        fetchLiveExchangeRates();
+
+        // Otomatis deteksi GPS pasif di awal untuk menampilkan titik jarak (km) secara instan jika diizinkan browser
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (pos) => {
+                    currentUserLat = pos.coords.latitude;
+                    currentUserLon = pos.coords.longitude;
+                },
+                () => {}, 
+                { timeout: 5000 }
+            );
+        }
+    </script>
+</body>
+</html>
