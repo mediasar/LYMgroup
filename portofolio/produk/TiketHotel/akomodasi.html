@@ -116,13 +116,13 @@
             background: #f0f7ff;
         }
 
-        /* User Profile Display after Login & Logout */
+        /* User Profile Display after Login */
         .user-profile-badge {
             display: none;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             background: rgba(255, 255, 255, 0.15);
-            padding: 4px 12px 4px 6px;
+            padding: 4px 10px;
             border-radius: 20px;
             color: white;
             font-size: 13px;
@@ -134,23 +134,6 @@
             height: 28px;
             border-radius: 50%;
             object-fit: cover;
-        }
-
-        .btn-logout {
-            background: transparent;
-            border: none;
-            color: #ffcccc;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            padding: 2px 6px;
-            border-radius: 4px;
-            transition: color 0.2s, background 0.2s;
-        }
-
-        .btn-logout:hover {
-            color: #ffffff;
-            background: rgba(255, 0, 0, 0.2);
         }
 
         /* === CURRENCY DROPDOWN STYLES === */
@@ -1034,11 +1017,11 @@
                 <button class="btn-white" id="btnOpenRegister">Daftar</button>
                 <button class="btn-white" id="btnOpenLogin">Login</button>
                 
-                <!-- Profil & Tombol Log Out (Hidden sebelum login) -->
+                <!-- Profil Asli Google & Tombol Log Out (Hidden sebelum login) -->
                 <div class="user-profile-badge" id="userProfileBadge">
                     <img id="userAvatarImg" src="" alt="Avatar">
                     <span id="userNameSpan"></span>
-                    <button class="btn-logout" id="btnLogout" title="Keluar Akun">Keluar</button>
+                    <button class="btn-outline" id="btnLogout" style="padding: 4px 8px; font-size: 12px; margin-left: 6px;">Log Out</button>
                 </div>
             </div>
         </div>
@@ -1048,11 +1031,11 @@
     <nav class="category-bar">
         <div class="container">
             <div class="category-list">
-                <a href="akomodasi.html" class="cat-item active"><i class="fa-solid fa-bed"></i> Akomodasi</a>
-                <a href="penerbangan.html" class="cat-item"><i class="fa-solid fa-plane"></i> Penerbangan</a>
-                <a href="rentalmobil.html" class="cat-item"><i class="fa-solid fa-car"></i> Rental Mobil</a>
-                <a href="atraksiwisata.html" class="cat-item"><i class="fa-solid fa-ticket"></i> Wisata</a>
-                <a href="taksibandara.html" class="cat-item"><i class="fa-solid fa-taxi"></i> Taksi</a>
+                <a href="#" class="cat-item active"><i class="fa-solid fa-bed"></i> Akomodasi</a>
+                <a href="#" class="cat-item"><i class="fa-solid fa-plane"></i> Penerbangan</a>
+                <a href="#" class="cat-item"><i class="fa-solid fa-car"></i> Rental Mobil</a>
+                <a href="#" class="cat-item"><i class="fa-solid fa-ticket"></i> Wisata</a>
+                <a href="#" class="cat-item"><i class="fa-solid fa-taxi"></i> Taksi</a>
             </div>
         </div>
     </nav>
@@ -1931,9 +1914,7 @@
         }
 
 
-        // --- 3. SCRIPT UNTUK MODAL DAFTAR, LOGIN & GOOGLE IDENTITY SERVICES SDK ---
-        const GOOGLE_CLIENT_ID = "781071651721-pud6n24pqehivtcqtagmpbig0edd5e3j.apps.googleusercontent.com";
-
+        // --- 3. SCRIPT UNTUK MODAL DAFTAR, LOGIN, GOOGLE IDENTITY & LOG OUT ---
         const btnOpenRegister = document.getElementById('btnOpenRegister');
         const btnOpenLogin = document.getElementById('btnOpenLogin');
         
@@ -1992,12 +1973,34 @@
             e.preventDefault();
             alert('Pendaftaran berhasil! Selamat datang di LYMstay.');
             registerModal.classList.remove('active');
+            
+            // Simulasikan state login setelah daftar berhasil
+            btnOpenRegister.style.display = 'none';
+            btnOpenLogin.style.display = 'none';
+            userAvatarImg.src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80';
+            userNameSpan.textContent = 'User Baru';
+            userProfileBadge.style.display = 'flex';
         });
 
         document.getElementById('loginForm').addEventListener('submit', (e) => {
             e.preventDefault();
             alert('Login berhasil! Anda sekarang masuk ke akun LYMstay.');
             loginModal.classList.remove('active');
+
+            // Simulasikan state login setelah login form berhasil
+            btnOpenRegister.style.display = 'none';
+            btnOpenLogin.style.display = 'none';
+            userAvatarImg.src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80';
+            userNameSpan.textContent = 'Member LYMstay';
+            userProfileBadge.style.display = 'flex';
+        });
+
+        // Event listener untuk tombol Log Out
+        btnLogout.addEventListener('click', () => {
+            userProfileBadge.style.display = 'none';
+            btnOpenRegister.style.display = 'inline-block';
+            btnOpenLogin.style.display = 'inline-block';
+            alert('Anda telah berhasil log out.');
         });
 
         // Fungsi Decode JSON Web Token (JWT) dari respons Google
@@ -2014,24 +2017,6 @@
             }
         }
 
-        // Cek sesi login saat halaman dimuat
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedUser = localStorage.getItem('lym_google_user');
-            if (savedUser) {
-                const userData = JSON.parse(savedUser);
-                activateUserSession(userData);
-            }
-        });
-
-        function activateUserSession(userData) {
-            btnOpenRegister.style.display = 'none';
-            btnOpenLogin.style.display = 'none';
-
-            userAvatarImg.src = userData.picture;
-            userNameSpan.textContent = userData.name;
-            userProfileBadge.style.display = 'flex';
-        }
-
         // Handle hasil sukses login Google
         function handleCredentialResponse(response) {
             const responsePayload = parseJwt(response.credential);
@@ -2043,14 +2028,17 @@
                     picture: responsePayload.picture
                 };
 
-                localStorage.setItem('lym_google_user', JSON.stringify(googleUserData));
-
                 registerModal.classList.remove('active');
                 loginModal.classList.remove('active');
 
-                activateUserSession(googleUserData);
+                btnOpenRegister.style.display = 'none';
+                btnOpenLogin.style.display = 'none';
 
-                alert(`Berhasil masuk dengan akun Google!\nSelamat datang, ${googleUserData.name}`);
+                userAvatarImg.src = googleUserData.picture;
+                userNameSpan.textContent = googleUserData.name;
+                userProfileBadge.style.display = 'flex';
+
+                alert(`Berhasil masuk dengan akun Google!\nSelamat datang, ${googleUserData.name} (${googleUserData.email})`);
             }
         }
 
@@ -2058,7 +2046,7 @@
         window.onload = function () {
             if (typeof google !== 'undefined' && google.accounts) {
                 google.accounts.id.initialize({
-                    client_id: GOOGLE_CLIENT_ID,
+                    client_id: "781071651721-pud6n24pqehivtcqtagmpbig0edd5e3j.apps.googleusercontent.com",
                     callback: handleCredentialResponse
                 });
             }
@@ -2067,36 +2055,38 @@
         // Trigger Google Login popup saat tombol diklik
         function triggerGoogleLogin() {
             if (typeof google !== 'undefined' && google.accounts) {
+                google.accounts.id.prompt((notification) => {
+                    if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+                        google.accounts.id.renderButton(
+                            document.createElement('div'),
+                            { theme: "outline", size: "large" }
+                        );
+                    }
+                });
+                
                 try {
                     google.accounts.oauth2.initTokenClient({
-                        client_id: GOOGLE_CLIENT_ID,
+                        client_id: "781071651721-pud6n24pqehivtcqtagmpbig0edd5e3j.apps.googleusercontent.com",
                         scope: 'email profile openid',
                         callback: (tokenResponse) => {
                             if (tokenResponse && tokenResponse.access_token) {
                                 fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${tokenResponse.access_token}`)
                                     .then(res => res.json())
                                     .then(userInfo => {
-                                        const googleUserData = {
-                                            name: userInfo.name,
-                                            email: userInfo.email,
-                                            picture: userInfo.picture
-                                        };
-
-                                        localStorage.setItem('lym_google_user', JSON.stringify(googleUserData));
-
                                         registerModal.classList.remove('active');
                                         loginModal.classList.remove('active');
-
-                                        activateUserSession(googleUserData);
-
-                                        alert(`Berhasil masuk dengan akun Google!\nSelamat datang, ${userInfo.name}`);
+                                        btnOpenRegister.style.display = 'none';
+                                        btnOpenLogin.style.display = 'none';
+                                        userAvatarImg.src = userInfo.picture;
+                                        userNameSpan.textContent = userInfo.name;
+                                        userProfileBadge.style.display = 'flex';
+                                        alert(`Berhasil masuk dengan akun Google!\nSelamat datang, ${userInfo.name} (${userInfo.email})`);
                                     });
                             }
                         }
                     }).requestAccessToken();
                 } catch(err) {
                     console.log("Menggunakan Google ID prompt standar");
-                    google.accounts.id.prompt();
                 }
             } else {
                 alert("SDK Google belum dimuat sempurna. Periksa koneksi internet Anda.");
@@ -2105,21 +2095,6 @@
 
         document.getElementById('googleRegisterBtn').addEventListener('click', triggerGoogleLogin);
         document.getElementById('googleLoginBtn').addEventListener('click', triggerGoogleLogin);
-
-        // --- Log Out Handler ---
-        btnLogout.addEventListener('click', () => {
-            localStorage.removeItem('lym_google_user');
-            
-            if (window.google && window.google.accounts) {
-                google.accounts.id.disableAutoSelect();
-            }
-
-            userProfileBadge.style.display = 'none';
-            btnOpenRegister.style.display = 'inline-block';
-            btnOpenLogin.style.display = 'inline-block';
-
-            alert('Anda berhasil keluar.');
-        });
 
 
         // --- 4. DUMMY DATA HOTEL & DYNAMIC CONVERSION ---
