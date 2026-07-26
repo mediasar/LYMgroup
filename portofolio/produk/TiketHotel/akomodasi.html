@@ -113,6 +113,26 @@
             background: #f0f7ff;
         }
 
+        /* User Profile Display after Login */
+        .user-profile-badge {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 4px 10px;
+            border-radius: 20px;
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .user-profile-badge img {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
         /* === CURRENCY DROPDOWN STYLES === */
         .currency-wrapper {
             position: relative;
@@ -794,6 +814,53 @@
             margin-bottom: 20px;
         }
 
+        /* Google Sign-In Button Style */
+        .google-signin-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: #ffffff;
+            color: #3c4043;
+            border: 1px solid #dadce0;
+            border-radius: 6px;
+            padding: 11px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s, box-shadow 0.2s;
+            margin-bottom: 16px;
+        }
+
+        .google-signin-btn:hover {
+            background-color: #f8f9fa;
+            box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3);
+        }
+
+        .google-signin-btn img {
+            width: 18px;
+            height: 18px;
+        }
+
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 16px 0;
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .auth-divider::before, .auth-divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .auth-divider::before { margin-right: 10px; }
+        .auth-divider::after { margin-left: 10px; }
+
         .auth-form-group {
             margin-bottom: 14px;
         }
@@ -931,7 +998,7 @@
     <header class="navbar">
         <div class="container nav-content">
             <a href="#" class="logo">LYMstay</a>
-            <div class="nav-actions">
+            <div class="nav-actions" id="navActionsContainer">
                 <!-- Currency Selector Dropdown -->
                 <div class="currency-wrapper">
                     <button class="btn-link" id="currencyBtn">IDR <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 2px;"></i></button>
@@ -946,6 +1013,12 @@
                 </div>
                 <button class="btn-white" id="btnOpenRegister">Daftar</button>
                 <button class="btn-white" id="btnOpenLogin">Login</button>
+                
+                <!-- Profil Asli Google (Hidden sebelum login) -->
+                <div class="user-profile-badge" id="userProfileBadge">
+                    <img id="userAvatarImg" src="" alt="Avatar">
+                    <span id="userNameSpan"></span>
+                </div>
             </div>
         </div>
     </header>
@@ -1311,6 +1384,15 @@
             <button class="auth-close-btn" id="closeRegisterModal"><i class="fa-solid fa-xmark"></i></button>
             <h3 class="auth-title">Buat Akun LYMstay</h3>
             <p class="auth-subtitle">Nikmati kemudahan pesan akomodasi dan promo menarik.</p>
+            
+            <!-- Tombol Google Sign-In -->
+            <button type="button" class="google-signin-btn" id="googleRegisterBtn">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo">
+                Daftar dengan Google
+            </button>
+            
+            <div class="auth-divider">atau dengan email</div>
+
             <form id="registerForm">
                 <div class="auth-form-group">
                     <label class="auth-label">Nama Lengkap</label>
@@ -1338,6 +1420,15 @@
             <button class="auth-close-btn" id="closeLoginModal"><i class="fa-solid fa-xmark"></i></button>
             <h3 class="auth-title">Selamat Datang Kembali</h3>
             <p class="auth-subtitle">Masuk untuk melanjutkan perjalanan Anda bersama LYMstay.</p>
+            
+            <!-- Tombol Google Sign-In -->
+            <button type="button" class="google-signin-btn" id="googleLoginBtn">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo">
+                Login dengan Google
+            </button>
+
+            <div class="auth-divider">atau dengan email</div>
+
             <form id="loginForm">
                 <div class="auth-form-group">
                     <label class="auth-label">Email</label>
@@ -1819,7 +1910,7 @@
         }
 
 
-        // --- 3. SCRIPT UNTUK MODAL DAFTAR & LOGIN ---
+        // --- 3. SCRIPT UNTUK MODAL DAFTAR, LOGIN & GOOGLE SIGN-IN ---
         const btnOpenRegister = document.getElementById('btnOpenRegister');
         const btnOpenLogin = document.getElementById('btnOpenLogin');
         
@@ -1831,6 +1922,10 @@
         
         const switchToLogin = document.getElementById('switchToLogin');
         const switchToRegister = document.getElementById('switchToRegister');
+
+        const userProfileBadge = document.getElementById('userProfileBadge');
+        const userAvatarImg = document.getElementById('userAvatarImg');
+        const userNameSpan = document.getElementById('userNameSpan');
 
         btnOpenRegister.addEventListener('click', () => {
             registerModal.classList.add('active');
@@ -1880,6 +1975,34 @@
             alert('Login berhasil! Anda sekarang masuk ke akun LYMstay.');
             loginModal.classList.remove('active');
         });
+
+        // Fungsi Simulasi Google Sign-In (OAuth 2.0 / Google Identity Services)
+        function handleGoogleSignIn() {
+            // Simulasi data nyata yang diterima dari Google API setelah popup otentikasi berhasil
+            const googleUserData = {
+                name: "Rizky Pratama",
+                email: "rizky.pratama@gmail.com",
+                picture: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"
+            };
+
+            // Tutup modal aktif
+            registerModal.classList.remove('active');
+            loginModal.classList.remove('active');
+
+            // Sembunyikan tombol Daftar & Login standar di Navbar
+            btnOpenRegister.style.display = 'none';
+            btnOpenLogin.style.display = 'none';
+
+            // Tampilkan foto profil asli dan nama lengkap pendaftar secara otomatis
+            userAvatarImg.src = googleUserData.picture;
+            userNameSpan.textContent = googleUserData.name;
+            userProfileBadge.style.display = 'flex';
+
+            alert(`Berhasil masuk dengan akun Google!\nSelamat datang, ${googleUserData.name} (${googleUserData.email})`);
+        }
+
+        document.getElementById('googleRegisterBtn').addEventListener('click', handleGoogleSignIn);
+        document.getElementById('googleLoginBtn').addEventListener('click', handleGoogleSignIn);
 
 
         // --- 4. DUMMY DATA HOTEL & DYNAMIC CONVERSION ---
