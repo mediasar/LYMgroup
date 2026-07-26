@@ -10,6 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Identity Services (GIS) SDK Script -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
     <style>
         /* === 1. CSS RESET & VARIABLES === */
@@ -1910,7 +1913,7 @@
         }
 
 
-        // --- 3. SCRIPT UNTUK MODAL DAFTAR, LOGIN & GOOGLE SIGN-IN ---
+        // --- 3. SCRIPT UNTUK MODAL DAFTAR, LOGIN & GOOGLE IDENTITY SERVICES SDK ---
         const btnOpenRegister = document.getElementById('btnOpenRegister');
         const btnOpenLogin = document.getElementById('btnOpenLogin');
         
@@ -1976,29 +1979,100 @@
             loginModal.classList.remove('active');
         });
 
-        // Fungsi Simulasi Google Sign-In (OAuth 2.0 / Google Identity Services)
-        function handleGoogleSignIn() {
-            const googleUserData = {
-                name: "Rizky Pratama",
-                email: "rizky.pratama@gmail.com",
-                picture: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"
-            };
-
-            registerModal.classList.remove('active');
-            loginModal.classList.remove('active');
-
-            btnOpenRegister.style.display = 'none';
-            btnOpenLogin.style.display = 'none';
-
-            userAvatarImg.src = googleUserData.picture;
-            userNameSpan.textContent = googleUserData.name;
-            userProfileBadge.style.display = 'flex';
-
-            alert(`Berhasil masuk dengan akun Google!\nSelamat datang, ${googleUserData.name} (${googleUserData.email})`);
+        // Fungsi Decode JSON Web Token (JWT) dari respons Google
+        function parseJwt(token) {
+            try {
+                const base64Url = token.split('.')[1];
+                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
+                return JSON.parse(jsonPayload);
+            } catch (e) {
+                return null;
+            }
         }
 
-        document.getElementById('googleRegisterBtn').addEventListener('click', handleGoogleSignIn);
-        document.getElementById('googleLoginBtn').addEventListener('click', handleGoogleSignIn);
+        // Handle hasil sukses login Google
+        function handleCredentialResponse(response) {
+            const responsePayload = parseJwt(response.credential);
+            
+            if (responsePayload) {
+                const googleUserData = {
+                    name: responsePayload.name,
+                    email: responsePayload.email,
+                    picture: responsePayload.picture
+                };
+
+                registerModal.classList.remove('active');
+                loginModal.classList.remove('active');
+
+                btnOpenRegister.style.display = 'none';
+                btnOpenLogin.style.display = 'none';
+
+                userAvatarImg.src = googleUserData.picture;
+                userNameSpan.textContent = googleUserData.name;
+                userProfileBadge.style.display = 'flex';
+
+                alert(`Berhasil masuk dengan akun Google!\nSelamat datang, ${googleUserData.name} (${googleUserData.email})`);
+            }
+        }
+
+        // Inisialisasi Google Identity Services SDK
+        window.onload = function () {
+            if (typeof google !== 'undefined' && google.accounts) {
+                google.accounts.id.initialize({
+                    client_id: "781071651721-ev31vk26jves22aqf2f1jqepbhe0oq3t.apps.googleusercontent.com",
+                    callback: handleCredentialResponse
+                });
+            }
+        };
+
+        // Trigger Google Login popup saat tombol diklik
+        function triggerGoogleLogin() {
+            if (typeof google !== 'undefined' && google.accounts) {
+                google.accounts.id.prompt((notification) => {
+                    if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+                        // Fallback jika One Tap tertutup otomatis, panggil dengan token client / tombol interaktif
+                        google.accounts.id.renderButton(
+                            document.createElement('div'),
+                            { theme: "outline", size: "large" }
+                        );
+                    }
+                });
+                
+                // Atau gunakan alternative popup eksplisit jika didukung, atau panggil prompt secara langsung
+                try {
+                    google.accounts.oauth2.initTokenClient({
+                        client_id: "781071651721-ev31vk26jves22aqf2f1jqepbhe0oq3t.apps.googleusercontent.com",
+                        scope: 'email profile openid',
+                        callback: (tokenResponse) => {
+                            if (tokenResponse && tokenResponse.access_token) {
+                                fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${tokenResponse.access_token}`)
+                                    .then(res => res.json())
+                                    .then(userInfo => {
+                                        registerModal.classList.remove('active');
+                                        loginModal.classList.remove('active');
+                                        btnOpenRegister.style.display = 'none';
+                                        btnOpenLogin.style.display = 'none';
+                                        userAvatarImg.src = userInfo.picture;
+                                        userNameSpan.textContent = userInfo.name;
+                                        userProfileBadge.style.display = 'flex';
+                                        alert(`Berhasil masuk dengan akun Google!\nSelamat datang, ${userInfo.name} (${userInfo.email})`);
+                                    });
+                            }
+                        }
+                    }).requestAccessToken();
+                } catch(err) {
+                    console.log("Menggunakan Google ID prompt standar");
+                }
+            } else {
+                alert("SDK Google belum dimuat sempurna. Periksa koneksi internet Anda.");
+            }
+        }
+
+        document.getElementById('googleRegisterBtn').addEventListener('click', triggerGoogleLogin);
+        document.getElementById('googleLoginBtn').addEventListener('click', triggerGoogleLogin);
 
 
         // --- 4. DUMMY DATA HOTEL & DYNAMIC CONVERSION ---
