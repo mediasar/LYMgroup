@@ -8,7 +8,7 @@
     <!-- Google Font & FontAwesome Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=BlinkMacSystemFont,Segoe+UI,Roboto,Helvetica,Arial,sans-serif&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -29,7 +29,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
@@ -734,7 +734,128 @@
         .old-price { font-size: 12px; color: #d4111e; text-decoration: line-through; }
         .new-price { font-size: 18px; font-weight: 700; color: var(--text-dark); }
 
-        /* === 7. FOOTER LENGKAP === */
+        /* === 7. MODAL DAFTAR & LOGIN STYLES === */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .auth-modal.active {
+            display: flex;
+        }
+
+        .auth-modal-content {
+            background: white;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 12px;
+            padding: 24px;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .auth-close-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: transparent;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .auth-close-btn:hover {
+            color: var(--text-dark);
+        }
+
+        .auth-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--text-dark);
+        }
+
+        .auth-subtitle {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .auth-form-group {
+            margin-bottom: 14px;
+        }
+
+        .auth-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--text-dark);
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .auth-input:focus {
+            border-color: var(--blue-primary);
+        }
+
+        .auth-submit-btn {
+            width: 100%;
+            background-color: var(--blue-primary);
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.2s;
+        }
+
+        .auth-submit-btn:hover {
+            background-color: var(--blue-hover);
+        }
+
+        .auth-switch-text {
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 16px;
+        }
+
+        .auth-switch-text a {
+            color: var(--blue-primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .auth-switch-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* === 8. FOOTER LENGKAP === */
         footer {
             background-color: var(--bg-light);
             border-top: 1px solid var(--border-color);
@@ -783,7 +904,7 @@
             font-size: 12px;
         }
 
-        /* === 8. RESPONSIVE MEDIA QUERIES === */
+        /* === 9. RESPONSIVE MEDIA QUERIES === */
         @media (max-width: 992px) {
             .search-form { grid-template-columns: 1fr 1fr; }
             .value-grid, .property-grid { grid-template-columns: repeat(2, 1fr); }
@@ -823,8 +944,8 @@
                         </ul>
                     </div>
                 </div>
-                <button class="btn-white">Daftar</button>
-                <button class="btn-white">Login</button>
+                <button class="btn-white" id="btnOpenRegister">Daftar</button>
+                <button class="btn-white" id="btnOpenLogin">Login</button>
             </div>
         </div>
     </header>
@@ -1163,7 +1284,7 @@
 
                 <div class="explore-card" onclick="selectDestination('Lombok, Nusa Tenggara Barat, Indonesia', -8.5655, 116.3513)">
                     <div class="explore-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1584810359583-96fc3448beaa?auto=format&fit=crop&w=500&q=80"  alt="Lombok">
+                        <img src="https://images.unsplash.com/photo-1570789210967-2cac24afeb00?auto=format&fit=crop&w=500&q=80" alt="Lombok">
                     </div>
                     <div class="explore-info">
                         <h3 class="explore-city">Lombok</h3>
@@ -1183,6 +1304,56 @@
         </section>
 
     </main>
+
+    <!-- Modal Daftar -->
+    <div class="auth-modal" id="registerModal">
+        <div class="auth-modal-content">
+            <button class="auth-close-btn" id="closeRegisterModal"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="auth-title">Buat Akun LYMstay</h3>
+            <p class="auth-subtitle">Nikmati kemudahan pesan akomodasi dan promo menarik.</p>
+            <form id="registerForm">
+                <div class="auth-form-group">
+                    <label class="auth-label">Nama Lengkap</label>
+                    <input type="text" class="auth-input" placeholder="Masukkan nama lengkap" required>
+                </div>
+                <div class="auth-form-group">
+                    <label class="auth-label">Email</label>
+                    <input type="email" class="auth-input" placeholder="nama@email.com" required>
+                </div>
+                <div class="auth-form-group">
+                    <label class="auth-label">Kata Sandi</label>
+                    <input type="password" class="auth-input" placeholder="Minimal 6 karakter" required>
+                </div>
+                <button type="submit" class="auth-submit-btn">Daftar Sekarang</button>
+            </form>
+            <div class="auth-switch-text">
+                Sudah punya akun? <a href="#" id="switchToLogin">Login di sini</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Login -->
+    <div class="auth-modal" id="loginModal">
+        <div class="auth-modal-content">
+            <button class="auth-close-btn" id="closeLoginModal"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="auth-title">Selamat Datang Kembali</h3>
+            <p class="auth-subtitle">Masuk untuk melanjutkan perjalanan Anda bersama LYMstay.</p>
+            <form id="loginForm">
+                <div class="auth-form-group">
+                    <label class="auth-label">Email</label>
+                    <input type="email" class="auth-input" placeholder="nama@email.com" required>
+                </div>
+                <div class="auth-form-group">
+                    <label class="auth-label">Kata Sandi</label>
+                    <input type="password" class="auth-input" placeholder="Masukkan kata sandi" required>
+                </div>
+                <button type="submit" class="auth-submit-btn">Masuk</button>
+            </form>
+            <div class="auth-switch-text">
+                Belum punya akun? <a href="#" id="switchToRegister">Daftar sekarang</a>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -1232,7 +1403,7 @@
 
     <!-- JavaScript Logic -->
     <script>
-        // --- 0. SCRIPT FOR ALL WORLD CURRENCIES & LIVE LIVE API FETCH ---
+        // --- 0. SCRIPT FOR ALL WORLD CURRENCIES & LIVE API FETCH ---
         const currencyNames = {
             AED: "Dirham UEA", AFN: "Afghani Afganistan", ALL: "Lek Albania", AMD: "Dram Armenia", ANG: "Guilder Antillen Belanda",
             AOA: "Kwanza Angola", ARS: "Peso Argentina", AUD: "Dolar Australia", AWG: "Florin Aruba", AZN: "Manat Azerbaijan",
@@ -1367,10 +1538,9 @@
             { name: "Medan", subtext: "Sumatera Utara, Indonesia", lat: 3.5952, lon: 98.6722 }
         ];
 
-        // Rumus Haversine untuk menghitung jarak kilometer antara dua koordinat GPS
         function calculateDistanceKm(lat1, lon1, lat2, lon2) {
             if (lat1 === null || lon1 === null || lat2 === null || lon2 === null) return null;
-            const R = 6371; // Radius bumi dalam kilometer
+            const R = 6371; 
             const dLat = (lat2 - lat1) * Math.PI / 180;
             const dLon = (lon2 - lon1) * Math.PI / 180;
             const a = 
@@ -1378,7 +1548,7 @@
                 Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
                 Math.sin(dLon/2) * Math.sin(dLon/2);
             const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-            return Math.round(R * c); // Hasil pembulatan dalam km
+            return Math.round(R * c);
         }
 
         function selectDestination(cityName, lat = null, lon = null) {
@@ -1649,7 +1819,70 @@
         }
 
 
-        // --- 3. DUMMY DATA HOTEL & DYNAMIC CONVERSION ---
+        // --- 3. SCRIPT UNTUK MODAL DAFTAR & LOGIN ---
+        const btnOpenRegister = document.getElementById('btnOpenRegister');
+        const btnOpenLogin = document.getElementById('btnOpenLogin');
+        
+        const registerModal = document.getElementById('registerModal');
+        const loginModal = document.getElementById('loginModal');
+        
+        const closeRegisterModal = document.getElementById('closeRegisterModal');
+        const closeLoginModal = document.getElementById('closeLoginModal');
+        
+        const switchToLogin = document.getElementById('switchToLogin');
+        const switchToRegister = document.getElementById('switchToRegister');
+
+        btnOpenRegister.addEventListener('click', () => {
+            registerModal.classList.add('active');
+        });
+
+        btnOpenLogin.addEventListener('click', () => {
+            loginModal.classList.add('active');
+        });
+
+        closeRegisterModal.addEventListener('click', () => {
+            registerModal.classList.remove('active');
+        });
+
+        closeLoginModal.addEventListener('click', () => {
+            loginModal.classList.remove('active');
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === registerModal) {
+                registerModal.classList.remove('active');
+            }
+            if (e.target === loginModal) {
+                loginModal.classList.remove('active');
+            }
+        });
+
+        switchToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerModal.classList.remove('active');
+            loginModal.classList.add('active');
+        });
+
+        switchToRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.classList.remove('active');
+            registerModal.classList.add('active');
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Pendaftaran berhasil! Selamat datang di LYMstay.');
+            registerModal.classList.remove('active');
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Login berhasil! Anda sekarang masuk ke akun LYMstay.');
+            loginModal.classList.remove('active');
+        });
+
+
+        // --- 4. DUMMY DATA HOTEL & DYNAMIC CONVERSION ---
         const hotels = [
             {
                 name: "Ascott Jakarta",
@@ -1737,11 +1970,9 @@
             alert(`Mencari akomodasi di: ${dest}\nKoordinat: (${lat}, ${lon})\nJumlah Tamu: ${occupancy.adults} Dewasa, ${occupancy.children} Anak (${occupancy.rooms} Kamar)`);
         });
 
-        // Initialize UI State & Fetch Live Rates
         updateUI();
         fetchLiveExchangeRates();
 
-        // Otomatis deteksi GPS pasif di awal untuk menampilkan titik jarak (km) secara instan jika diizinkan browser
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (pos) => {
