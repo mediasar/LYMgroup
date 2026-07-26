@@ -2022,7 +2022,7 @@
         window.onload = function () {
             if (typeof google !== 'undefined' && google.accounts) {
                 google.accounts.id.initialize({
-                    client_id: "781071651721-ev31vk26jves22aqf2f1jqepbhe0oq3t.apps.googleusercontent.com",
+                    client_id: 781071651721-pud6n24pqehivtcqtagmpbig0edd5e3j.apps.googleusercontent.com,
                     callback: handleCredentialResponse
                 });
             }
@@ -2044,7 +2044,7 @@
                 // Atau gunakan alternative popup eksplisit jika didukung, atau panggil prompt secara langsung
                 try {
                     google.accounts.oauth2.initTokenClient({
-                        client_id: "781071651721-ev31vk26jves22aqf2f1jqepbhe0oq3t.apps.googleusercontent.com",
+                        client_id: 781071651721-pud6n24pqehivtcqtagmpbig0edd5e3j.apps.googleusercontent.com,
                         scope: 'email profile openid',
                         callback: (tokenResponse) => {
                             if (tokenResponse && tokenResponse.access_token) {
