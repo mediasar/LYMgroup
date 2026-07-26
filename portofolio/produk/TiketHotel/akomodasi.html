@@ -1017,11 +1017,10 @@
                 <button class="btn-white" id="btnOpenRegister">Daftar</button>
                 <button class="btn-white" id="btnOpenLogin">Login</button>
                 
-                <!-- Profil Asli Google & Tombol Log Out (Hidden sebelum login) -->
+                <!-- Profil Asli Google (Hidden sebelum login) -->
                 <div class="user-profile-badge" id="userProfileBadge">
                     <img id="userAvatarImg" src="" alt="Avatar">
                     <span id="userNameSpan"></span>
-                    <button class="btn-outline" id="btnLogout" style="padding: 4px 8px; font-size: 12px; margin-left: 6px;">Log Out</button>
                 </div>
             </div>
         </div>
@@ -1914,7 +1913,7 @@
         }
 
 
-        // --- 3. SCRIPT UNTUK MODAL DAFTAR, LOGIN, GOOGLE IDENTITY & LOG OUT ---
+        // --- 3. SCRIPT UNTUK MODAL DAFTAR, LOGIN & GOOGLE IDENTITY SERVICES SDK ---
         const btnOpenRegister = document.getElementById('btnOpenRegister');
         const btnOpenLogin = document.getElementById('btnOpenLogin');
         
@@ -1930,7 +1929,6 @@
         const userProfileBadge = document.getElementById('userProfileBadge');
         const userAvatarImg = document.getElementById('userAvatarImg');
         const userNameSpan = document.getElementById('userNameSpan');
-        const btnLogout = document.getElementById('btnLogout');
 
         btnOpenRegister.addEventListener('click', () => {
             registerModal.classList.add('active');
@@ -1973,34 +1971,12 @@
             e.preventDefault();
             alert('Pendaftaran berhasil! Selamat datang di LYMstay.');
             registerModal.classList.remove('active');
-            
-            // Simulasikan state login setelah daftar berhasil
-            btnOpenRegister.style.display = 'none';
-            btnOpenLogin.style.display = 'none';
-            userAvatarImg.src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80';
-            userNameSpan.textContent = 'User Baru';
-            userProfileBadge.style.display = 'flex';
         });
 
         document.getElementById('loginForm').addEventListener('submit', (e) => {
             e.preventDefault();
             alert('Login berhasil! Anda sekarang masuk ke akun LYMstay.');
             loginModal.classList.remove('active');
-
-            // Simulasikan state login setelah login form berhasil
-            btnOpenRegister.style.display = 'none';
-            btnOpenLogin.style.display = 'none';
-            userAvatarImg.src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80';
-            userNameSpan.textContent = 'Member LYMstay';
-            userProfileBadge.style.display = 'flex';
-        });
-
-        // Event listener untuk tombol Log Out
-        btnLogout.addEventListener('click', () => {
-            userProfileBadge.style.display = 'none';
-            btnOpenRegister.style.display = 'inline-block';
-            btnOpenLogin.style.display = 'inline-block';
-            alert('Anda telah berhasil log out.');
         });
 
         // Fungsi Decode JSON Web Token (JWT) dari respons Google
@@ -2057,6 +2033,7 @@
             if (typeof google !== 'undefined' && google.accounts) {
                 google.accounts.id.prompt((notification) => {
                     if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+                        // Fallback jika One Tap tertutup otomatis, panggil dengan token client / tombol interaktif
                         google.accounts.id.renderButton(
                             document.createElement('div'),
                             { theme: "outline", size: "large" }
@@ -2064,6 +2041,7 @@
                     }
                 });
                 
+                // Atau gunakan alternative popup eksplisit jika didukung, atau panggil prompt secara langsung
                 try {
                     google.accounts.oauth2.initTokenClient({
                         client_id: "781071651721-pud6n24pqehivtcqtagmpbig0edd5e3j.apps.googleusercontent.com",
