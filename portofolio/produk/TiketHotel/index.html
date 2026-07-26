@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LYMstay | Temukan Akomodasi Impian Anda</title>
+    <title>LYMstay | Platform Perjalanan & Akomodasi Terpadu</title>
     
     <!-- Google Font & FontAwesome Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -73,6 +73,7 @@
             font-weight: 700;
             text-decoration: none;
             letter-spacing: -0.5px;
+            cursor: pointer;
         }
 
         .nav-actions {
@@ -244,6 +245,7 @@
             gap: 8px;
             white-space: nowrap;
             border: 1px solid transparent;
+            cursor: pointer;
         }
 
         .cat-item.active {
@@ -255,7 +257,7 @@
             background-color: rgba(255, 255, 255, 0.08);
         }
 
-        /* === 4. HERO & SEARCH BAR === */
+        /* === 4. HERO & DYNAMIC VIEW SECTIONS === */
         .hero-section {
             background-color: var(--blue-primary);
             color: white;
@@ -284,6 +286,12 @@
         .search-form {
             display: grid;
             grid-template-columns: 2.5fr 2fr 2.5fr 1fr;
+            gap: 4px;
+        }
+
+        .search-form-generic {
+            display: grid;
+            grid-template-columns: 2fr 2fr 1fr 1fr;
             gap: 4px;
         }
 
@@ -520,7 +528,10 @@
         .btn-counter:disabled { border-color: #ccc; color: #ccc; cursor: not-allowed; }
         .counter-value { font-size: 14px; font-weight: 600; width: 20px; text-align: center; }
 
-        /* === 6. MAIN CONTENT SECTIONS === */
+        /* === 6. APP VIEWS (SPA SECTIONS) === */
+        .app-view { display: none; }
+        .app-view.active-view { display: block; }
+
         .main-section { padding: 40px 0; }
         .section-title { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
         .section-subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 20px; }
@@ -585,16 +596,8 @@
         }
 
         .explore-card:hover img { transform: scale(1.08); }
-
         .explore-info { padding: 10px 2px 0 2px; }
-
-        .explore-city {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 2px;
-        }
-
+        .explore-city { font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; }
         .explore-count { font-size: 13px; color: var(--text-muted); }
 
         /* Tipe Akomodasi Grid */
@@ -700,7 +703,7 @@
         .trending-card.col-3 { grid-column: span 3; }
         .trending-card.col-2 { grid-column: span 2; }
 
-        /* Promo Hotel Grid */
+        /* Property & Hotel Grid */
         .property-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -725,37 +728,27 @@
         }
 
         .hotel-card img { height: 180px; width: 100%; object-fit: cover; }
-
-        .hotel-body {
-            padding: 12px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
+        .hotel-body { padding: 12px; display: flex; flex-direction: column; flex-grow: 1; }
         .hotel-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
         .hotel-location { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; }
-
-        .hotel-rating-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-
-        .rating-badge {
-            background-color: var(--blue-primary);
-            color: white;
-            font-size: 12px;
-            font-weight: 700;
-            padding: 4px 6px;
-            border-radius: 4px 4px 4px 0;
-        }
-
+        .hotel-rating-row { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+        .rating-badge { background-color: var(--blue-primary); color: white; font-size: 12px; font-weight: 700; padding: 4px 6px; border-radius: 4px 4px 4px 0; }
         .rating-text { font-size: 13px; font-weight: 600; }
         .price-box { margin-top: auto; text-align: right; }
         .old-price { font-size: 12px; color: #d4111e; text-decoration: line-through; }
         .new-price { font-size: 18px; font-weight: 700; color: var(--text-dark); }
+
+        /* Generic placeholder info for other views */
+        .generic-info-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .generic-info-card h3 { font-size: 20px; margin-bottom: 8px; color: var(--blue-primary); }
+        .generic-info-card p { color: var(--text-muted); }
 
         /* === 7. MODAL DAFTAR & LOGIN STYLES === */
         .auth-modal {
@@ -800,9 +793,7 @@
             color: var(--text-muted);
         }
 
-        .auth-close-btn:hover {
-            color: var(--text-dark);
-        }
+        .auth-close-btn:hover { color: var(--text-dark); }
 
         .auth-title {
             font-size: 20px;
@@ -817,7 +808,6 @@
             margin-bottom: 20px;
         }
 
-        /* Google Sign-In Button Style */
         .google-signin-btn {
             width: 100%;
             display: flex;
@@ -864,9 +854,7 @@
         .auth-divider::before { margin-right: 10px; }
         .auth-divider::after { margin-left: 10px; }
 
-        .auth-form-group {
-            margin-bottom: 14px;
-        }
+        .auth-form-group { margin-bottom: 14px; }
 
         .auth-label {
             display: block;
@@ -886,9 +874,7 @@
             transition: border-color 0.2s;
         }
 
-        .auth-input:focus {
-            border-color: var(--blue-primary);
-        }
+        .auth-input:focus { border-color: var(--blue-primary); }
 
         .auth-submit-btn {
             width: 100%;
@@ -904,9 +890,7 @@
             transition: background-color 0.2s;
         }
 
-        .auth-submit-btn:hover {
-            background-color: var(--blue-hover);
-        }
+        .auth-submit-btn:hover { background-color: var(--blue-hover); }
 
         .auth-switch-text {
             text-align: center;
@@ -921,9 +905,7 @@
             font-weight: 600;
         }
 
-        .auth-switch-text a:hover {
-            text-decoration: underline;
-        }
+        .auth-switch-text a:hover { text-decoration: underline; }
 
         /* === 8. FOOTER LENGKAP === */
         footer {
@@ -948,35 +930,15 @@
             margin-bottom: 12px;
         }
 
-        .footer-col ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 8px;
-        }
-
-        .footer-col ul li a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .footer-col ul li a:hover {
-            color: var(--blue-accent);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid var(--border-color);
-            padding-top: 20px;
-            text-align: center;
-            font-size: 12px;
-        }
+        .footer-col ul { list-style: none; padding: 0; }
+        .footer-col ul li { margin-bottom: 8px; }
+        .footer-col ul li a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .footer-col ul li a:hover { color: var(--blue-accent); }
+        .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 20px; text-align: center; font-size: 12px; }
 
         /* === 9. RESPONSIVE MEDIA QUERIES === */
         @media (max-width: 992px) {
-            .search-form { grid-template-columns: 1fr 1fr; }
+            .search-form, .search-form-generic { grid-template-columns: 1fr 1fr; }
             .value-grid, .property-grid { grid-template-columns: repeat(2, 1fr); }
             .type-grid { grid-template-columns: repeat(3, 1fr); }
             .explore-grid { grid-template-columns: repeat(3, 1fr); }
@@ -986,7 +948,7 @@
         }
 
         @media (max-width: 600px) {
-            .search-form { grid-template-columns: 1fr; }
+            .search-form, .search-form-generic { grid-template-columns: 1fr; }
             .value-grid, .property-grid { grid-template-columns: 1fr; }
             .type-grid, .explore-grid { grid-template-columns: repeat(2, 1fr); }
             .hero-title { font-size: 30px; }
@@ -1000,7 +962,7 @@
     <!-- Header Navbar -->
     <header class="navbar">
         <div class="container nav-content">
-            <a href="#" class="logo">LYMstay</a>
+            <a href="#" class="logo" id="logoHomeLink">LYMstay</a>
             <div class="nav-actions" id="navActionsContainer">
                 <!-- Currency Selector Dropdown -->
                 <div class="currency-wrapper">
@@ -1030,356 +992,298 @@
     <nav class="category-bar">
         <div class="container">
             <div class="category-list">
-                <a href="akomodasi.html" class="cat-item active"><i class="fa-solid fa-bed"></i> Akomodasi</a>
-                <a href="penerbangan.html" class="cat-item"><i class="fa-solid fa-plane"></i> Penerbangan</a>
-                <a href="rentalmobil.html" class="cat-item"><i class="fa-solid fa-car"></i> Rental Mobil</a>
-                <a href="atraksiwisata.html" class="cat-item"><i class="fa-solid fa-ticket"></i> Wisata</a>
-                <a href="taksibandara.html" class="cat-item"><i class="fa-solid fa-taxi"></i> Taksi</a>
+                <a class="cat-item active" data-target="akomodasiView"><i class="fa-solid fa-bed"></i> Akomodasi</a>
+                <a class="cat-item" data-target="penerbanganView"><i class="fa-solid fa-plane"></i> Penerbangan</a>
+                <a class="cat-item" data-target="rentalmobilView"><i class="fa-solid fa-car"></i> Rental Mobil</a>
+                <a class="cat-item" data-target="atraksiView"><i class="fa-solid fa-ticket"></i> Wisata</a>
+                <a class="cat-item" data-target="taksiView"><i class="fa-solid fa-taxi"></i> Taksi</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container">
-            <h1 class="hero-title">Temukan akomodasi berikutnya</h1>
-            <p class="hero-subtitle">Cari promo hotel, rumah liburan, dan banyak lagi...</p>
+    <!-- ================= VIEW 1: AKOMODASI (HOME) ================= -->
+    <div id="akomodasiView" class="app-view active-view">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <h1 class="hero-title">Temukan akomodasi berikutnya</h1>
+                <p class="hero-subtitle">Cari promo hotel, rumah liburan, dan banyak lagi...</p>
 
-            <!-- Search Form Wrapper -->
-            <div class="search-box-wrapper">
-                <form id="searchForm" class="search-form">
-                    
-                    <!-- DESTINATION INPUT WITH LIVE AUTOCOMPLETE & GPS -->
-                    <div class="destination-wrapper">
-                        <div class="input-group" id="destInputGroup">
-                            <i class="fa-solid fa-bed input-icon"></i>
+                <!-- Search Form Wrapper -->
+                <div class="search-box-wrapper">
+                    <form id="searchForm" class="search-form">
+                        
+                        <!-- DESTINATION INPUT WITH LIVE AUTOCOMPLETE & GPS -->
+                        <div class="destination-wrapper">
+                            <div class="input-group" id="destInputGroup">
+                                <i class="fa-solid fa-bed input-icon"></i>
+                                <div class="field-container">
+                                    <span class="field-label">Masukkan destinasi</span>
+                                    <input type="text" id="destination" class="field-input" placeholder="Mau pergi ke mana?" autocomplete="off" required>
+                                </div>
+                            </div>
+
+                            <!-- Dynamic Dropdown Menu -->
+                            <div class="trending-dropdown" id="destDropdown">
+                                <div class="dropdown-title" id="dropdownTitle">Gunakan GPS / Destinasi Popular</div>
+                                <ul class="dropdown-list" id="dropdownList">
+                                    <!-- Populated dynamically by JS -->
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Date Input -->
+                        <div class="input-group">
+                            <i class="fa-regular fa-calendar input-icon"></i>
                             <div class="field-container">
-                                <span class="field-label">Masukkan destinasi</span>
-                                <input type="text" id="destination" class="field-input" placeholder="Mau pergi ke mana?" autocomplete="off" required>
+                                <span class="field-label">Tanggal</span>
+                                <input type="text" id="checkin" class="field-input" placeholder="Waktu check-in — Check-out" onfocus="(this.type='date')">
                             </div>
                         </div>
 
-                        <!-- Dynamic Dropdown Menu -->
-                        <div class="trending-dropdown" id="destDropdown">
-                            <div class="dropdown-title" id="dropdownTitle">Gunakan GPS / Destinasi Popular</div>
-                            <ul class="dropdown-list" id="dropdownList">
-                                <!-- Populated dynamically by JS -->
-                            </ul>
-                        </div>
-                    </div>
+                        <!-- Occupancy Input Trigger & Popover -->
+                        <div class="input-group occupancy-select" id="occupancyBtn">
+                            <i class="fa-regular fa-user input-icon"></i>
+                            <div class="field-container">
+                                <span class="field-label">Tamu & Kamar</span>
+                                <span class="occupancy-text" id="occupancyText">2 dewasa · 0 anak · 1 kamar</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-down" style="margin-left: auto; font-size: 12px; color: #474747;"></i>
 
-                    <!-- Date Input -->
-                    <div class="input-group">
-                        <i class="fa-regular fa-calendar input-icon"></i>
-                        <div class="field-container">
-                            <span class="field-label">Tanggal</span>
-                            <input type="text" id="checkin" class="field-input" placeholder="Waktu check-in — Check-out" onfocus="(this.type='date')">
-                        </div>
-                    </div>
-
-                    <!-- Occupancy Input Trigger & Popover -->
-                    <div class="input-group occupancy-select" id="occupancyBtn">
-                        <i class="fa-regular fa-user input-icon"></i>
-                        <div class="field-container">
-                            <span class="field-label">Tamu & Kamar</span>
-                            <span class="occupancy-text" id="occupancyText">2 dewasa · 0 anak · 1 kamar</span>
-                        </div>
-                        <i class="fa-solid fa-chevron-down" style="margin-left: auto; font-size: 12px; color: #474747;"></i>
-
-                        <!-- Popover Menu -->
-                        <div class="popover" id="occupancyPopover">
-                            <div class="popover-row">
-                                <span class="popover-label">Dewasa</span>
-                                <div class="counter-btn-group">
-                                    <button type="button" class="btn-counter" id="btnAdultsDec">-</button>
-                                    <span class="counter-value" id="valAdults">2</span>
-                                    <button type="button" class="btn-counter" id="btnAdultsInc">+</button>
+                            <!-- Popover Menu -->
+                            <div class="popover" id="occupancyPopover">
+                                <div class="popover-row">
+                                    <span class="popover-label">Dewasa</span>
+                                    <div class="counter-btn-group">
+                                        <button type="button" class="btn-counter" id="btnAdultsDec">-</button>
+                                        <span class="counter-value" id="valAdults">2</span>
+                                        <button type="button" class="btn-counter" id="btnAdultsInc">+</button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="popover-row">
-                                <span class="popover-label">Anak-anak</span>
-                                <div class="counter-btn-group">
-                                    <button type="button" class="btn-counter" id="btnChildrenDec" disabled>-</button>
-                                    <span class="counter-value" id="valChildren">0</span>
-                                    <button type="button" class="btn-counter" id="btnChildrenInc">+</button>
+                                <div class="popover-row">
+                                    <span class="popover-label">Anak-anak</span>
+                                    <div class="counter-btn-group">
+                                        <button type="button" class="btn-counter" id="btnChildrenDec" disabled>-</button>
+                                        <span class="counter-value" id="valChildren">0</span>
+                                        <button type="button" class="btn-counter" id="btnChildrenInc">+</button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="popover-row">
-                                <span class="popover-label">Kamar</span>
-                                <div class="counter-btn-group">
-                                    <button type="button" class="btn-counter" id="btnRoomsDec">-</button>
-                                    <span class="counter-value" id="valRooms">1</span>
-                                    <button type="button" class="btn-counter" id="btnRoomsInc">+</button>
+                                <div class="popover-row">
+                                    <span class="popover-label">Kamar</span>
+                                    <div class="counter-btn-group">
+                                        <button type="button" class="btn-counter" id="btnRoomsDec">-</button>
+                                        <span class="counter-value" id="valRooms">1</span>
+                                        <button type="button" class="btn-counter" id="btnRoomsInc">+</button>
+                                    </div>
                                 </div>
+                                <button type="button" class="btn-white" style="width:100%; border-color:var(--blue-accent);" id="btnClosePopover">Selesai</button>
                             </div>
-                            <button type="button" class="btn-white" style="width:100%; border-color:var(--blue-accent);" id="btnClosePopover">Selesai</button>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn-search">Cari</button>
+                    </form>
+                </div>
+
+                <!-- Options Checkbox -->
+                <div class="search-options">
+                    <label><input type="checkbox"> Saya bepergian untuk kerja</label>
+                    <label><input type="checkbox"> Tambahkan penerbangan ke pencarian saya</label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content Area -->
+        <main class="container main-section">
+            
+            <!-- Value Props -->
+            <section>
+                <h2 class="section-title">Mengapa LYMstay?</h2>
+                <p class="section-subtitle">Kemudahan dan kenyamanan terbaik untuk perjalanan Anda</p>
+                <div class="value-grid">
+                    <div class="value-card">
+                        <i class="fa-solid fa-thumbs-up"></i>
+                        <div>
+                            <h4>Pesan sekarang, bayar di akomodasi</h4>
+                            <p>Pembatalan GRATIS di sebagian besar kamar</p>
                         </div>
                     </div>
-
-                    <!-- Submit Button -->
-                    <button type="submit" class="btn-search">Cari</button>
-                </form>
-            </div>
-
-            <!-- Options Checkbox -->
-            <div class="search-options">
-                <label><input type="checkbox"> Saya bepergian untuk kerja</label>
-                <label><input type="checkbox"> Tambahkan penerbangan ke pencarian saya</label>
-            </div>
-        </div>
-    </section>
-
-    <!-- Main Content Area -->
-    <main class="container main-section">
-        
-        <!-- Value Props -->
-        <section>
-            <h2 class="section-title">Mengapa LYMstay?</h2>
-            <p class="section-subtitle">Kemudahan dan kenyamanan terbaik untuk perjalanan Anda</p>
-            <div class="value-grid">
-                <div class="value-card">
-                    <i class="fa-solid fa-thumbs-up"></i>
-                    <div>
-                        <h4>Pesan sekarang, bayar di akomodasi</h4>
-                        <p>Pembatalan GRATIS di sebagian besar kamar</p>
+                    <div class="value-card">
+                        <i class="fa-solid fa-comments"></i>
+                        <div>
+                            <h4>300+ juta ulasan terpercaya</h4>
+                            <p>Dapatkan informasi objektif dari sesama traveler</p>
+                        </div>
+                    </div>
+                    <div class="value-card">
+                        <i class="fa-solid fa-globe"></i>
+                        <div>
+                            <h4>2+ juta akomodasi di dunia</h4>
+                            <p>Hotel, guesthouse, apartemen, dan lainnya...</p>
+                        </div>
+                    </div>
+                    <div class="value-card">
+                        <i class="fa-solid fa-headset"></i>
+                        <div>
+                            <h4>Customer Service 24/7</h4>
+                            <p>Kami selalu ada untuk membantu Anda kapan saja</p>
+                        </div>
                     </div>
                 </div>
-                <div class="value-card">
-                    <i class="fa-solid fa-comments"></i>
-                    <div>
-                        <h4>300+ juta ulasan terpercaya</h4>
-                        <p>Dapatkan informasi objektif dari sesama traveler</p>
-                    </div>
-                </div>
-                <div class="value-card">
-                    <i class="fa-solid fa-globe"></i>
-                    <div>
-                        <h4>2+ juta akomodasi di dunia</h4>
-                        <p>Hotel, guesthouse, apartemen, dan lainnya...</p>
-                    </div>
-                </div>
-                <div class="value-card">
-                    <i class="fa-solid fa-headset"></i>
-                    <div>
-                        <h4>Customer Service 24/7</h4>
-                        <p>Kami selalu ada untuk membantu Anda kapan saja</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Categories Section (Cari berdasarkan tipe akomodasi) -->
-        <section>
-            <h2 class="section-title">Cari berdasarkan tipe akomodasi</h2>
-            <p class="section-subtitle">Jelajahi pilihan akomodasi sesuai dengan gaya liburan Anda</p>
-            <div class="type-grid">
-                <div class="type-card" onclick="filterByAccommodationType('Hotel')">
-                    <div class="type-card-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80" alt="Hotel">
+            <!-- Categories Section -->
+            <section>
+                <h2 class="section-title">Cari berdasarkan tipe akomodasi</h2>
+                <p class="section-subtitle">Jelajahi pilihan akomodasi sesuai dengan gaya liburan Anda</p>
+                <div class="type-grid">
+                    <div class="type-card" onclick="filterByAccommodationType('Hotel')">
+                        <div class="type-card-img-wrapper"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80" alt="Hotel"></div>
+                        <div class="type-card-body"><h4>Hotel</h4><span class="type-count">840.000+ pilihan</span></div>
                     </div>
-                    <div class="type-card-body">
-                        <h4>Hotel</h4>
-                        <span class="type-count">840.000+ pilihan</span>
+                    <div class="type-card" onclick="filterByAccommodationType('Apartemen')">
+                        <div class="type-card-img-wrapper"><img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=500&q=80" alt="Apartemen"></div>
+                        <div class="type-card-body"><h4>Apartemen</h4><span class="type-count">720.000+ pilihan</span></div>
                     </div>
-                </div>
-
-                <div class="type-card" onclick="filterByAccommodationType('Apartemen')">
-                    <div class="type-card-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=500&q=80" alt="Apartemen">
+                    <div class="type-card" onclick="filterByAccommodationType('Resor')">
+                        <div class="type-card-img-wrapper"><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=500&q=80" alt="Resor"></div>
+                        <div class="type-card-body"><h4>Resor</h4><span class="type-count">180.000+ pilihan</span></div>
                     </div>
-                    <div class="type-card-body">
-                        <h4>Apartemen</h4>
-                        <span class="type-count">720.000+ pilihan</span>
+                    <div class="type-card" onclick="filterByAccommodationType('Vila')">
+                        <div class="type-card-img-wrapper"><img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=500&q=80" alt="Vila"></div>
+                        <div class="type-card-body"><h4>Vila</h4><span class="type-count">350.000+ pilihan</span></div>
                     </div>
                 </div>
+            </section>
 
-                <div class="type-card" onclick="filterByAccommodationType('Resor')">
-                    <div class="type-card-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=500&q=80" alt="Resor">
+            <!-- Trending Destinations -->
+            <section>
+                <h2 class="section-title">Destinasi trending</h2>
+                <p class="section-subtitle">Pilihan terpopuler untuk traveler dari Indonesia</p>
+                <div class="trending-grid">
+                    <div class="trending-card col-3" onclick="selectDestination('Jakarta, Indonesia', -6.2088, 106.8456)">
+                        <img src="https://images.unsplash.com/photo-1555899434-94d1368aa7af?auto=format&fit=crop&w=800&q=80" alt="Jakarta">
+                        <div class="trending-overlay"><h3>Jakarta 🇮🇩</h3><p>Pusat bisnis, kuliner, dan belanja terpopuler</p></div>
                     </div>
-                    <div class="type-card-body">
-                        <h4>Resor</h4>
-                        <span class="type-count">180.000+ pilihan</span>
+                    <div class="trending-card col-3" onclick="selectDestination('Bali, Indonesia', -8.409518, 115.188919)">
+                        <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80" alt="Bali">
+                        <div class="trending-overlay"><h3>Bali & Ubud 🇮🇩</h3><p>Keindahan pantai, kebudayaan, dan resor mewah</p></div>
                     </div>
                 </div>
+            </section>
 
-                <div class="type-card" onclick="filterByAccommodationType('Vila')">
-                    <div class="type-card-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=500&q=80" alt="Vila">
-                    </div>
-                    <div class="type-card-body">
-                        <h4>Vila</h4>
-                        <span class="type-count">350.000+ pilihan</span>
-                    </div>
-                </div>
+            <!-- Promo Deals -->
+            <section>
+                <h2 class="section-title">Promo akhir pekan di LYMstay</h2>
+                <p class="section-subtitle">Hemat untuk menginap liburan minggu ini</p>
+                <div class="property-grid" id="hotelGrid"></div>
+            </section>
+        </main>
+    </div>
 
-                <div class="type-card" onclick="filterByAccommodationType('Guesthouse & Hostel')">
-                    <div class="type-card-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=500&q=80" alt="Guesthouse">
-                    </div>
-                    <div class="type-card-body">
-                        <h4>Guesthouse & Hostel</h4>
-                        <span class="type-count">210.000+ pilihan</span>
-                    </div>
-                </div>
-
-                <div class="type-card" onclick="filterByAccommodationType('Glamping')">
-                    <div class="type-card-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?auto=format&fit=crop&w=500&q=80" alt="Glamping">
-                    </div>
-                    <div class="type-card-body">
-                        <h4>Glamping & Camping</h4>
-                        <span class="type-count">45.000+ pilihan</span>
-                    </div>
-                </div>
-
-                <div class="type-card" onclick="filterByAccommodationType('Rumah Liburan')">
-                    <div class="type-card-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=500&q=80" alt="Rumah Liburan">
-                    </div>
-                    <div class="type-card-body">
-                        <h4>Rumah Liburan</h4>
-                        <span class="type-count">490.000+ pilihan</span>
-                    </div>
-                </div>
-
-                <div class="type-card" onclick="filterByAccommodationType('Bed & Breakfast')">
-                    <div class="type-card-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=500&q=80" alt="Bed & Breakfast">
-                    </div>
-                    <div class="type-card-body">
-                        <h4>Bed & Breakfast</h4>
-                        <span class="type-count">130.000+ pilihan</span>
-                    </div>
+    <!-- ================= VIEW 2: PENERBANGAN ================= -->
+    <div id="penerbanganView" class="app-view">
+        <section class="hero-section">
+            <div class="container">
+                <h1 class="hero-title">Pesan Tiket Pesawat Murah</h1>
+                <p class="hero-subtitle">Terbang ke destinasi impian Anda dengan harga terbaik</p>
+                <div class="search-box-wrapper">
+                    <form onsubmit="event.preventDefault(); alert('Pencarian penerbangan diproses.');">
+                        <div class="search-form-generic">
+                            <div class="input-group"><i class="fa-solid fa-plane-departure input-icon"></i><div class="field-container"><span class="field-label">Dari</span><input type="text" class="field-input" placeholder="Kota Asal" required></div></div>
+                            <div class="input-group"><i class="fa-solid fa-plane-arrival input-icon"></i><div class="field-container"><span class="field-label">Ke</span><input type="text" class="field-input" placeholder="Kota Tujuan" required></div></div>
+                            <div class="input-group"><i class="fa-regular fa-calendar input-icon"></i><div class="field-container"><span class="field-label">Tanggal Berangkat</span><input type="date" class="field-input"></div></div>
+                            <button type="submit" class="btn-search">Cari</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </section>
+        <main class="container main-section">
+            <div class="generic-info-card">
+                <h3>Rute Penerbangan Domestik & Internasional</h3>
+                <p>Nikmati diskon khusus pemesanan tiket penerbangan langsung dari aplikasi LYMstay.</p>
+            </div>
+        </main>
+    </div>
 
-        <!-- Trending Destinations -->
-        <section>
-            <h2 class="section-title">Destinasi trending</h2>
-            <p class="section-subtitle">Pilihan terpopuler untuk traveler dari Indonesia</p>
-            <div class="trending-grid">
-                <div class="trending-card col-3" onclick="selectDestination('Jakarta, Indonesia', -6.2088, 106.8456)">
-                    <img src="https://images.unsplash.com/photo-1555899434-94d1368aa7af?auto=format&fit=crop&w=800&q=80" alt="Jakarta">
-                    <div class="trending-overlay">
-                        <h3>Jakarta 🇮🇩</h3>
-                        <p>Pusat bisnis, kuliner, dan belanja terpopuler</p>
-                    </div>
-                </div>
-
-                <div class="trending-card col-3" onclick="selectDestination('Bali, Indonesia', -8.409518, 115.188919)">
-                    <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80" alt="Bali">
-                    <div class="trending-overlay">
-                        <h3>Bali & Ubud 🇮🇩</h3>
-                        <p>Keindahan pantai, kebudayaan, dan resor mewah</p>
-                    </div>
-                </div>
-
-                <div class="trending-card col-2" onclick="selectDestination('Yogyakarta, Indonesia', -7.7956, 110.3695)">
-                    <img src="https://images.unsplash.com/photo-1584810359583-96fc3448beaa?auto=format&fit=crop&w=600&q=80" alt="Yogyakarta">
-                    <div class="trending-overlay">
-                        <h3>Yogyakarta 🇮🇩</h3>
-                        <p>Wisata budaya & sejarah</p>
-                    </div>
-                </div>
-
-                <div class="trending-card col-2" onclick="selectDestination('Bandung, Indonesia', -6.9175, 107.6191)">
-                    <img src="https://images.unsplash.com/photo-1601058268499-e52658b8bb88?auto=format&fit=crop&w=600&q=80" alt="Bandung">
-                    <div class="trending-overlay">
-                        <h3>Bandung 🇮🇩</h3>
-                        <p>Udara sejuk & factory outlet</p>
-                    </div>
-                </div>
-
-                <div class="trending-card col-2" onclick="selectDestination('Surabaya, Indonesia', -7.2575, 112.7521)">
-                    <img src="https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=600&q=80" alt="Surabaya">
-                    <div class="trending-overlay">
-                        <h3>Surabaya 🇮🇩</h3>
-                        <p>Kota pahlawan & kuliner khas</p>
-                    </div>
+    <!-- ================= VIEW 3: RENTAL MOBIL ================= -->
+    <div id="rentalmobilView" class="app-view">
+        <section class="hero-section">
+            <div class="container">
+                <h1 class="hero-title">Rental Mobil & Transportasi</h1>
+                <p class="hero-subtitle">Jelajahi kota dengan kenyamanan kendaraan pilihan</p>
+                <div class="search-box-wrapper">
+                    <form onsubmit="event.preventDefault(); alert('Pencarian rental mobil diproses.');">
+                        <div class="search-form-generic">
+                            <div class="input-group"><i class="fa-solid fa-location-dot input-icon"></i><div class="field-container"><span class="field-label">Lokasi Penjemputan</span><input type="text" class="field-input" placeholder="Kota / Bandara" required></div></div>
+                            <div class="input-group"><i class="fa-regular fa-calendar input-icon"></i><div class="field-container"><span class="field-label">Tanggal Mulai</span><input type="date" class="field-input"></div></div>
+                            <div class="input-group"><i class="fa-regular fa-calendar input-icon"></i><div class="field-container"><span class="field-label">Tanggal Selesai</span><input type="date" class="field-input"></div></div>
+                            <button type="submit" class="btn-search">Cari</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </section>
+        <main class="container main-section">
+            <div class="generic-info-card">
+                <h3>Sewa Mobil dengan / tanpa Pengemudi</h3>
+                <p>Pilihan armada terawat siap menemani perjalanan bisnis atau liburan keluarga.</p>
+            </div>
+        </main>
+    </div>
 
-         <!-- Jelajahi Indonesia Section -->
-        <section>
-            <h2 class="section-title">Jelajahi Indonesia</h2>
-            <p class="section-subtitle">Destinasi populer ini punya banyak hal yang menarik untuk ditawarkan</p>
-
-            <div class="explore-grid">
-                <div class="explore-card" onclick="selectDestination('Bali, Indonesia', -8.409518, 115.188919)">
-                    <div class="explore-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=500&q=80" alt="Bali">
-                    </div>
-                    <div class="explore-info">
-                        <h3 class="explore-city">Bali</h3>
-                        <p class="explore-count">5.420 properti</p>
-                    </div>
-                </div>
-
-                <div class="explore-card" onclick="selectDestination('Bandung, Jawa Barat, Indonesia', -6.9175, 107.6191)">
-                    <div class="explore-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1601058268499-e52658b8bb88?auto=format&fit=crop&w=500&q=80" alt="Bandung">
-                    </div>
-                    <div class="explore-info">
-                        <h3 class="explore-city">Bandung</h3>
-                        <p class="explore-count">2.150 properti</p>
-                    </div>
-                </div>
-
-                <div class="explore-card" onclick="selectDestination('Yogyakarta, Indonesia', -7.7956, 110.3695)">
-                    <div class="explore-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1584810359583-96fc3448beaa?auto=format&fit=crop&w=500&q=80" alt="Yogyakarta">
-                    </div>
-                    <div class="explore-info">
-                        <h3 class="explore-city">Yogyakarta</h3>
-                        <p class="explore-count">1.890 properti</p>
-                    </div>
-                </div>
-
-                <div class="explore-card" onclick="selectDestination('Jakarta, Indonesia', -6.2088, 106.8456)">
-                    <div class="explore-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1555899434-94d1368aa7af?auto=format&fit=crop&w=500&q=80" alt="Jakarta">
-                    </div>
-                    <div class="explore-info">
-                        <h3 class="explore-city">Jakarta</h3>
-                        <p class="explore-count">3.210 properti</p>
-                    </div>
-                </div>
-
-                <div class="explore-card" onclick="selectDestination('Surabaya, Jawa Timur, Indonesia', -7.2575, 112.7521)">
-                    <div class="explore-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=500&q=80" alt="Surabaya">
-                    </div>
-                    <div class="explore-info">
-                        <h3 class="explore-city">Surabaya</h3>
-                        <p class="explore-count">1.120 properti</p>
-                    </div>
-                </div>
-
-                <div class="explore-card" onclick="selectDestination('Lombok, Nusa Tenggara Barat, Indonesia', -8.5655, 116.3513)">
-                    <div class="explore-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1570789210967-2cac24afeb00?auto=format&fit=crop&w=500&q=80" alt="Lombok">
-                    </div>
-                    <div class="explore-info">
-                        <h3 class="explore-city">Lombok</h3>
-                        <p class="explore-count">980 properti</p>
-                    </div>
+    <!-- ================= VIEW 4: ATRAKSI & WISATA ================= -->
+    <div id="atraksiView" class="app-view">
+        <section class="hero-section">
+            <div class="container">
+                <h1 class="hero-title">Atraksi, tur, dan pengalaman unik</h1>
+                <p class="hero-subtitle">Temukan & pesan tiket untuk aktivitas seru di seluruh dunia</p>
+                <div class="search-box-wrapper">
+                    <form onsubmit="event.preventDefault(); alert('Pencarian atraksi diproses.');">
+                        <div class="search-form-generic">
+                            <div class="input-group"><i class="fa-solid fa-location-crosshairs input-icon"></i><div class="field-container"><span class="field-label">Lokasi Anda</span><input type="text" class="field-input" placeholder="cth: Jakarta" required></div></div>
+                            <div class="input-group"><i class="fa-solid fa-magnifying-glass input-icon"></i><div class="field-container"><span class="field-label">Destinasi / Aktivitas</span><input type="text" class="field-input" placeholder="cth: Bali, Tokyo" required></div></div>
+                            <div class="input-group"><i class="fa-regular fa-calendar input-icon"></i><div class="field-container"><span class="field-label">Tanggal Kunjungan</span><input type="date" class="field-input"></div></div>
+                            <button type="submit" class="btn-search">Cari</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </section>
+        <main class="container main-section">
+            <div class="generic-info-card">
+                <h3>Ribuan Destinasi & Tiket Masuk</h3>
+                <p>Dapatkan konfirmasi instan dan lewati antrean panjang di lokasi wisata favorit.</p>
+            </div>
+        </main>
+    </div>
 
-        <!-- Promo Deals -->
-        <section>
-            <h2 class="section-title">Promo akhir pekan di LYMstay</h2>
-            <p class="section-subtitle">Hemat untuk menginap liburan minggu ini</p>
-            <div class="property-grid" id="hotelGrid">
-                <!-- JS akan merender kartu hotel di sini -->
+    <!-- ================= VIEW 5: TAKSI BANDARA ================= -->
+    <div id="taksiView" class="app-view">
+        <section class="hero-section">
+            <div class="container">
+                <h1 class="hero-title">Taksi Bandara Cepat & Aman</h1>
+                <p class="hero-subtitle">Pesan penjemputan bandara bebas repot</p>
+                <div class="search-box-wrapper">
+                    <form onsubmit="event.preventDefault(); alert('Pencarian taksi bandara diproses.');">
+                        <div class="search-form-generic">
+                            <div class="input-group"><i class="fa-solid fa-plane-arrival input-icon"></i><div class="field-container"><span class="field-label">Nama Bandara</span><input type="text" class="field-input" placeholder="cth: Soekarno Hatta" required></div></div>
+                            <div class="input-group"><i class="fa-solid fa-location-dot input-icon"></i><div class="field-container"><span class="field-label">Tujuan Akhir</span><input type="text" class="field-input" placeholder="Hotel / Alamat Tujuan" required></div></div>
+                            <div class="input-group"><i class="fa-regular fa-calendar input-icon"></i><div class="field-container"><span class="field-label">Waktu Penjemputan</span><input type="date" class="field-input"></div></div>
+                            <button type="submit" class="btn-search">Cari</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </section>
-
-    </main>
+        <main class="container main-section">
+            <div class="generic-info-card">
+                <h3>Antar Jemput Bandara Tepat Waktu</h3>
+                <p>Driver profesional siap menyambut Anda langsung di terminal kedatangan.</p>
+            </div>
+        </main>
+    </div>
 
     <!-- Modal Daftar -->
     <div class="auth-modal" id="registerModal">
@@ -1388,7 +1292,6 @@
             <h3 class="auth-title">Buat Akun LYMstay</h3>
             <p class="auth-subtitle">Nikmati kemudahan pesan akomodasi dan promo menarik.</p>
             
-            <!-- Tombol Google Sign-In -->
             <button type="button" class="google-signin-btn" id="googleRegisterBtn">
                 <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo">
                 Daftar dengan Google
@@ -1424,7 +1327,6 @@
             <h3 class="auth-title">Selamat Datang Kembali</h3>
             <p class="auth-subtitle">Masuk untuk melanjutkan perjalanan Anda bersama LYMstay.</p>
             
-            <!-- Tombol Google Sign-In -->
             <button type="button" class="google-signin-btn" id="googleLoginBtn">
                 <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo">
                 Login dengan Google
@@ -1497,6 +1399,33 @@
 
     <!-- JavaScript Logic -->
     <script>
+        // --- 0. SPA NAVIGATION SWITCHER ---
+        const categoryItems = document.querySelectorAll('.category-list .cat-item');
+        const appViews = document.querySelectorAll('.app-view');
+        const logoHomeLink = document.getElementById('logoHomeLink');
+
+        categoryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                categoryItems.forEach(ci => ci.classList.remove('active'));
+                item.classList.add('active');
+
+                const targetViewId = item.getAttribute('data-target');
+                appViews.forEach(view => {
+                    if (view.id === targetViewId) {
+                        view.classList.add('active-view');
+                    } else {
+                        view.classList.remove('active-view');
+                    }
+                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        logoHomeLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            categoryItems[0].click();
+        });
+
         // --- 0. SCRIPT FOR ALL WORLD CURRENCIES & LIVE API FETCH ---
         const currencyNames = {
             AED: "Dirham UEA", AFN: "Afghani Afganistan", ALL: "Lek Albania", AMD: "Dram Armenia", ANG: "Guilder Antillen Belanda",
@@ -1947,12 +1876,8 @@
         });
 
         window.addEventListener('click', (e) => {
-            if (e.target === registerModal) {
-                registerModal.classList.remove('active');
-            }
-            if (e.target === loginModal) {
-                loginModal.classList.remove('active');
-            }
+            if (e.target === registerModal) registerModal.classList.remove('active');
+            if (e.target === loginModal) loginModal.classList.remove('active');
         });
 
         switchToLogin.addEventListener('click', (e) => {
@@ -1979,7 +1904,6 @@
             loginModal.classList.remove('active');
         });
 
-        // Fungsi Decode JSON Web Token (JWT) dari respons Google
         function parseJwt(token) {
             try {
                 const base64Url = token.split('.')[1];
@@ -1993,10 +1917,8 @@
             }
         }
 
-        // Handle hasil sukses login Google
         function handleCredentialResponse(response) {
             const responsePayload = parseJwt(response.credential);
-            
             if (responsePayload) {
                 const googleUserData = {
                     name: responsePayload.name,
@@ -2006,7 +1928,6 @@
 
                 registerModal.classList.remove('active');
                 loginModal.classList.remove('active');
-
                 btnOpenRegister.style.display = 'none';
                 btnOpenLogin.style.display = 'none';
 
@@ -2018,7 +1939,6 @@
             }
         }
 
-        // Inisialisasi Google Identity Services SDK
         window.onload = function () {
             if (typeof google !== 'undefined' && google.accounts) {
                 google.accounts.id.initialize({
@@ -2028,20 +1948,8 @@
             }
         };
 
-        // Trigger Google Login popup saat tombol diklik
         function triggerGoogleLogin() {
             if (typeof google !== 'undefined' && google.accounts) {
-                google.accounts.id.prompt((notification) => {
-                    if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-                        // Fallback jika One Tap tertutup otomatis, panggil dengan token client / tombol interaktif
-                        google.accounts.id.renderButton(
-                            document.createElement('div'),
-                            { theme: "outline", size: "large" }
-                        );
-                    }
-                });
-                
-                // Atau gunakan alternative popup eksplisit jika didukung, atau panggil prompt secara langsung
                 try {
                     google.accounts.oauth2.initTokenClient({
                         client_id: "781071651721-pud6n24pqehivtcqtagmpbig0edd5e3j.apps.googleusercontent.com",
@@ -2064,10 +1972,10 @@
                         }
                     }).requestAccessToken();
                 } catch(err) {
-                    console.log("Menggunakan Google ID prompt standar");
+                    console.log("OAuth Client fallback");
                 }
             } else {
-                alert("SDK Google belum dimuat sempurna. Periksa koneksi internet Anda.");
+                alert("SDK Google belum dimuat sempurna.");
             }
         }
 
@@ -2131,6 +2039,7 @@
 
         function renderHotels() {
             const grid = document.getElementById('hotelGrid');
+            if(!grid) return;
             grid.innerHTML = hotels.map(hotel => {
                 const formattedOld = formatPrice(hotel.baseOldPrice, currentCurrencyCode);
                 const formattedNew = formatPrice(hotel.baseNewPrice, currentCurrencyCode);
@@ -2157,9 +2066,14 @@
 
         document.getElementById('searchForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            const dest = destInput.value;
-            const lat = destInput.dataset.lat || 'Tidak diketahui';
-            const lon = destInput.dataset.lon || 'Tidak diketahui';
+            const dest = destInput.value.trim();
+            if (!dest) {
+                alert('Silakan masukkan atau pilih destinasi terlebih dahulu.');
+                destInput.focus();
+                return;
+            }
+            const lat = destInput.dataset.lat || '-6.2088';
+            const lon = destInput.dataset.lon || '106.8456';
             alert(`Mencari akomodasi di: ${dest}\nKoordinat: (${lat}, ${lon})\nJumlah Tamu: ${occupancy.adults} Dewasa, ${occupancy.children} Anak (${occupancy.rooms} Kamar)`);
         });
 
