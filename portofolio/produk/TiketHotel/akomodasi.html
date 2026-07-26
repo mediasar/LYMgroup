@@ -1027,11 +1027,11 @@
     <nav class="category-bar">
         <div class="container">
             <div class="category-list">
-                <a href="akomodasi.html" class="cat-item active"><i class="fa-solid fa-bed"></i> Akomodasi</a>
-                <a href="penerbangan.html" class="cat-item"><i class="fa-solid fa-plane"></i> Penerbangan</a>
-                <a href="rentalmobil.html" class="cat-item"><i class="fa-solid fa-car"></i> Rental Mobil</a>
-                <a href="atraksiwisata.html" class="cat-item"><i class="fa-solid fa-ticket"></i> Wisata</a>
-                <a href="taksibandara.html" class="cat-item"><i class="fa-solid fa-taxi"></i> Taksi</a>
+                <a href="#" class="cat-item active"><i class="fa-solid fa-bed"></i> Akomodasi</a>
+                <a href="#" class="cat-item"><i class="fa-solid fa-plane"></i> Penerbangan</a>
+                <a href="#" class="cat-item"><i class="fa-solid fa-car"></i> Rental Mobil</a>
+                <a href="#" class="cat-item"><i class="fa-solid fa-ticket"></i> Wisata</a>
+                <a href="#" class="cat-item"><i class="fa-solid fa-taxi"></i> Taksi</a>
             </div>
         </div>
     </nav>
@@ -1978,22 +1978,18 @@
 
         // Fungsi Simulasi Google Sign-In (OAuth 2.0 / Google Identity Services)
         function handleGoogleSignIn() {
-            // Simulasi data nyata yang diterima dari Google API setelah popup otentikasi berhasil
             const googleUserData = {
                 name: "Rizky Pratama",
                 email: "rizky.pratama@gmail.com",
                 picture: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"
             };
 
-            // Tutup modal aktif
             registerModal.classList.remove('active');
             loginModal.classList.remove('active');
 
-            // Sembunyikan tombol Daftar & Login standar di Navbar
             btnOpenRegister.style.display = 'none';
             btnOpenLogin.style.display = 'none';
 
-            // Tampilkan foto profil asli dan nama lengkap pendaftar secara otomatis
             userAvatarImg.src = googleUserData.picture;
             userNameSpan.textContent = googleUserData.name;
             userProfileBadge.style.display = 'flex';
