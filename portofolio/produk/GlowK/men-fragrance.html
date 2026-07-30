@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women's Fragrance | GLOWK ID</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        diorDark: '#111111',
+                        diorGray: '#767676',
+                        diorLightBg: '#F9F9F9',
+                        diorBorder: '#E5E5E5'
+                    },
+                    fontFamily: {
+                        sans: ['Helvetica Neue', 'Arial', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: #FFFFFF; color: #111111; }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-[#111111] text-white text-[10px] tracking-[0.08em] py-2 px-4 text-center font-light flex flex-wrap items-center justify-center gap-1">
+        <span class="font-bold uppercase">Member Exclusive</span>
+        <span>| Receive a complimentary</span>
+        <a href="#" class="underline hover:text-neutral-300">Backstage Hair Clip & J'adore Intense Parfum 5ml</a>
+        <span>with min spend of Rp 2,500,000</span>
+    </div>
+
+    <!-- Main Header Navbar -->
+    <header class="sticky top-0 z-50 bg-white border-b border-[#E5E5E5]">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between relative border-b border-[#E5E5E5]/60">
+            
+            <!-- Left Secondary Nav -->
+            <nav class="hidden lg:flex items-center space-x-14 text-[11px] uppercase tracking-[0.15em] font-medium text-[#111111]">
+                <a href="#" class="hover:text-[#767676] transition-colors">Fashion & Accessories</a>
+                <a href="#" class="hover:text-[#767676] transition-colors">Fragrance & Beauty</a>
+            </nav>
+
+            <!-- Centered Logo -->
+            <a href="index.html" class="absolute left-1/2 -translate-x-1/2 text-3xl tracking-[0.35em] font-bold font-serif uppercase">
+                GLOWK
+            </a>
+
+            <!-- Right Utilities: Account & Shopping Bag -->
+            <div class="flex items-center space-x-6 ml-auto lg:ml-0 text-[#111111]">
+                <!-- Tombol Akun / Login -->
+                <button onclick="openAuthModal()" class="hover:text-[#767676] flex items-center gap-1.5 text-xs uppercase tracking-wider">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                    <span id="account-status-label" class="hidden md:inline text-[11px]">Sign in or create an account</span>
+                </button>
+                
+                <!-- Tombol Shopping Bag -->
+                <button onclick="toggleBagDrawer()" class="hover:text-[#767676] relative flex items-center">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                    <span id="bag-count" class="absolute -top-2 -right-2 text-[10px] font-bold bg-black text-white rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Bottom Row: Primary Category Menu Tabs with Dropdown Menu Option -->
+        <div class="max-w-7xl mx-auto px-6 overflow-x-visible">
+            <nav class="flex items-center space-x-14 text-[13px] uppercase tracking-[0.15em] font-medium whitespace-nowrap py-3.5">
+                
+                <!-- Dropdown Menu for Women's Fragrance -->
+                <div class="relative group py-2">
+                    <a href="women-fragrance.html" class="text-black hover:text-black transition-colors flex items-center gap-1">
+                        Women's Fragrance
+                    </a>
+                    <!-- Dropdown Box -->
+                    <div class="absolute left-0 top-full hidden group-hover:block w-72 bg-white border border-[#E5E5E5] shadow-lg py-4 z-50">
+                        <div class="flex flex-col space-y-3 px-6 text-[11px] uppercase tracking-[0.15em]">
+                            <a href="#" class="text-[#767676] hover:text-black transition-colors">Skincare</a>
+                            <a href="parfum-dior.html" class="text-[#767676] hover:text-black transition-colors">Parfum</a>
+
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dropdown Menu for Men's Fragrance -->
+                <div class="relative group py-2">
+                    <a href="men-fragrance.html" class="text-black hover:text-black transition-colors flex items-center gap-1">
+                        Men's Fragrance
+                    </a>
+                    <!-- Dropdown Box -->
+                    <div class="absolute left-0 top-full hidden group-hover:block w-72 bg-white border border-[#E5E5E5] shadow-lg py-4 z-50">
+                        <div class="flex flex-col space-y-3 px-6 text-[11px] uppercase tracking-[0.15em]">
+                            <a href="#" class="text-[#767676] hover:text-black transition-colors">Skincare</a>
+                            <a href="parfum-dior.html" class="text-[#767676] hover:text-black transition-colors">Parfum</a>
+                        </div>
+                    </div>
+                </div>
+                
+
+                                <!-- Dropdown Menu forLa Collection Privée -->
+                <div class="relative group py-2">
+                    <a href="women-fragrance.html" class="text-black hover:text-black transition-colors flex items-center gap-1">
+                        La Collection Privée
+                    </a>
+                                        <!-- Dropdown Box -->
+                    <div class="absolute left-0 top-full hidden group-hover:block w-72 bg-white border border-[#E5E5E5] shadow-lg py-4 z-50">
+                        <div class="flex flex-col space-y-3 px-6 text-[11px] uppercase tracking-[0.15em]">
+                            <a href="#" class="text-[#767676] hover:text-black transition-colors">Men Fragrance Homepage</a>
+                            <a href="#" class="text-[#767676] hover:text-black transition-colors">Sauvage</a>
+                            <a href="#" class="text-[#767676] hover:text-black transition-colors">Dior Homme</a>
+                            <a href="#" class="text-[#767676] hover:text-black transition-colors">Bath & Body</a>
+                            <a href="#" class="text-[#767676] hover:text-black transition-colors">New Arrivals</a>
+                            <a href="#" class="text-[#767676] hover:text-black transition-colors">Best Sellers</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <a href="#" class="text-[#767676] hover:text-black transition-colors">Makeup</a>
+                <a href="#" class="text-[#767676] hover:text-black transition-colors">Skincare</a>
+                <a href="#" class="text-[#767676] hover:text-black transition-colors">Gifts</a>
+                <a href="#" class="text-[#767676] hover:text-black transition-colors">About GLOWK</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Vid -->
+  <body>
+  <div class="video-wrapper">
+<video controls autoplay loop playsinline>
+    <source src="mvdior2.mp4" type="video/mp4">
+    Browser Anda tidak mendukung tag video atau format video tidak didukung.
+</video>
+  </div>
+
+
+    <!-- Breadcrumb & Category Title Header -->
+    <div class="py-12 text-center px-6">
+        <div class="max-w-3xl mx-auto space-y-3">
+            <p class="text-[10px] uppercase tracking-[0.3em] text-[#767676]">Fragrance</p>
+            <h1 class="text-3xl md:text-5xl font-serif uppercase tracking-wider font-normal">Men's Fragrance</h1>
+            <div class="inline-block pt-2">
+                <a href="#" class="border border-[#111111] px-8 py-3 text-[11px] uppercase tracking-[0.2em] font-medium hover:bg-[#111111] hover:text-white transition-all duration-300">
+                    Discover
+                </a>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    <!-- Modal Login & Create Account -->
+    <div id="auth-modal" class="fixed inset-0 z-[110] hidden flex items-center justify-center">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeAuthModal()"></div>
+        <div class="relative bg-white w-full max-w-md p-8 shadow-2xl z-10 border border-[#E5E5E5]">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-xl font-bold">&times;</button>
+            
+            <div id="auth-logged-in" class="hidden text-center space-y-4 py-4">
+                <div class="w-16 h-16 bg-neutral-100 rounded-full flex items-center justify-center mx-auto text-xl font-serif font-bold uppercase" id="user-initials">D</div>
+                <h3 class="text-sm uppercase tracking-[0.2em] font-bold" id="user-display-name">Welcome Back</h3>
+                <p class="text-xs text-[#767676]" id="user-display-email">email@example.com</p>
+                <div class="pt-4 border-t border-[#E5E5E5]">
+                    <button onclick="handleLogout()" class="w-full border border-black text-black text-xs uppercase tracking-[0.2em] py-3 hover:bg-black hover:text-white transition-colors">Sign Out</button>
+                </div>
+            </div>
+
+            <div id="auth-form-container">
+                <div class="flex border-b border-[#E5E5E5] mb-6 text-xs uppercase tracking-[0.2em] font-bold">
+                    <button id="tab-login-btn" onclick="switchTab('login')" class="flex-1 pb-3 border-b-2 border-black text-black">Sign In</button>
+                    <button id="tab-register-btn" onclick="switchTab('register')" class="flex-1 pb-3 text-[#767676] border-b-2 border-transparent">Create Account</button>
+                </div>
+
+                <div id="form-login" class="space-y-4">
+                    <h3 class="text-xs uppercase tracking-[0.15em] font-semibold mb-2">Sign in to your GLOWK account</h3>
+                    <input type="email" id="login-email" placeholder="Email Address" class="w-full border border-[#E5E5E5] p-3 text-xs focus:outline-none focus:border-black">
+                    <input type="password" id="login-password" placeholder="Password" class="w-full border border-[#E5E5E5] p-3 text-xs focus:outline-none focus:border-black">
+                    <button onclick="handleLogin()" class="w-full bg-black text-white text-xs uppercase tracking-[0.2em] py-3.5 hover:bg-neutral-800 transition-colors">Sign In</button>
+                </div>
+
+                <div id="form-register" class="space-y-4 hidden">
+                    <h3 class="text-xs uppercase tracking-[0.15em] font-semibold mb-2">Create your GLOWK account</h3>
+                    <div class="flex gap-2">
+                        <input type="text" id="reg-firstname" placeholder="First Name" class="w-1/2 border border-[#E5E5E5] p-3 text-xs focus:outline-none focus:border-black">
+                        <input type="text" id="reg-lastname" placeholder="Last Name" class="w-1/2 border border-[#E5E5E5] p-3 text-xs focus:outline-none focus:border-black">
+                    </div>
+                    <input type="email" id="reg-email" placeholder="Email Address" class="w-full border border-[#E5E5E5] p-3 text-xs focus:outline-none focus:border-black">
+                    <input type="password" id="reg-password" placeholder="Create Password" class="w-full border border-[#E5E5E5] p-3 text-xs focus:outline-none focus:border-black">
+                    <button onclick="handleRegister()" class="w-full bg-black text-white text-xs uppercase tracking-[0.2em] py-3.5 hover:bg-neutral-800 transition-colors">Create Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white text-[#111111] pt-16 pb-12 border-t border-[#E5E5E5]">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10 mb-16">
+            <div>
+                <h4 class="text-xs uppercase tracking-[0.2em] font-semibold mb-6">Client Services</h4>
+                <ul class="space-y-3 text-xs text-[#767676]">
+                    <li><a href="#" class="hover:text-black transition-colors">Contact GLOWK</a></li>
+                    <li><a href="#" class="hover:text-black transition-colors">Delivery & Returns</a></li>
+                    <li><a href="#" class="hover:text-black transition-colors">FAQ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xs uppercase tracking-[0.2em] font-semibold mb-6">The House of GlowK</h4>
+                <ul class="space-y-3 text-xs text-[#767676]">
+                    <li><a href="#" class="hover:text-black transition-colors">Find a Boutique</a></li>
+                    <li><a href="#" class="hover:text-black transition-colors">Careers</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xs uppercase tracking-[0.2em] font-semibold mb-6">Legal</h4>
+                <ul class="space-y-3 text-xs text-[#767676]">
+                    <li><a href="#" class="hover:text-black transition-colors">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-black transition-colors">Terms and Conditions</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xs uppercase tracking-[0.2em] font-semibold mb-6">Newsletter</h4>
+                <p class="text-xs text-[#767676] mb-4">Subscribe to receive notifications about new creations and exclusive offers.</p>
+                <div class="flex border-b border-[#111111] pb-2">
+                    <input type="email" placeholder="Enter your email address" class="bg-transparent text-xs text-[#111111] placeholder-[#767676] focus:outline-none w-full">
+                    <button class="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#111111] hover:text-[#767676]">Join</button>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-[#E5E5E5] flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-[0.2em] text-[#767676]">
+            <p>© 2026 GLOWK. All Rights Reserved.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-black">Accessibility</a>
+                <a href="#" class="hover:text-black">Sitemap</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Main JavaScript Logic -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            checkUserSession();
+        });
+
+        function checkUserSession() {
+            const currentUser = localStorage.getItem('glowk_logged_user') || localStorage.getItem('dior_logged_user');
+            const statusLabel = document.getElementById('account-status-label');
+            
+            if (currentUser) {
+                const userData = JSON.parse(currentUser);
+                statusLabel.textContent = userData.firstName || userData.email.split('@')[0];
+            } else {
+                statusLabel.textContent = "Sign in or create an account";
+            }
+        }
+
+        let bagItems = [];
+
+        function toggleBagDrawer() {
+            const drawer = document.getElementById('bag-drawer');
+            drawer.classList.toggle('hidden');
+        }
+
+        function openSizeModal(productName, sizes) {
+            const modal = document.getElementById('size-modal');
+            const nameEl = document.getElementById('modal-product-name');
+            const optionsContainer = document.getElementById('modal-size-options');
+
+            nameEl.textContent = productName;
+            optionsContainer.innerHTML = '';
+
+            sizes.forEach(item => {
+                const btn = document.createElement('button');
+                btn.className = "w-full border border-black py-3 text-xs uppercase tracking-widest font-medium hover:bg-black hover:text-white transition-colors flex justify-between px-4";
+                btn.innerHTML = `<span>${item.size}</span> <span>${item.price}</span>`;
+                btn.onclick = () => {
+                    closeSizeModal();
+                    addToBag(productName + ' (' + item.size + ')', item.price);
+                };
+                optionsContainer.appendChild(btn);
+            });
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeSizeModal() {
+            document.getElementById('size-modal').classList.add('hidden');
+        }
+
+        function addToBag(name, price) {
+            let existingItem = bagItems.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                bagItems.push({ name, price, quantity: 1 });
+            }
+            updateBagUI();
+            toggleBagDrawer();
+        }
+
+        function updateBagQuantity(index, change) {
+            bagItems[index].quantity += change;
+            if (bagItems[index].quantity <= 0) {
+                bagItems.splice(index, 1);
+            }
+            updateBagUI();
+        }
+
+        function updateBagUI() {
+            const countEl = document.getElementById('bag-count');
+            const drawerCountEl = document.getElementById('drawer-count');
+            const container = document.getElementById('bag-items-container');
+            const subtotalEl = document.getElementById('bag-subtotal');
+
+            let totalCount = bagItems.reduce((sum, item) => sum + item.quantity, 0);
+            countEl.textContent = totalCount;
+            drawerCountEl.textContent = totalCount;
+
+            if (bagItems.length === 0) {
+                container.innerHTML = `<p class="text-xs text-[#767676] text-center mt-12">Your shopping bag is empty.</p>`;
+                subtotalEl.textContent = 'Rp 0';
+                return;
+            }
+
+            container.innerHTML = '';
+            let total = 0;
+
+            bagItems.forEach((item, index) => {
+                let numericPrice = parseInt(item.price.replace(/[^0-9]/g, ''));
+                total += numericPrice * item.quantity;
+
+                container.innerHTML += `
+                    <div class="flex justify-between items-center border-b border-[#E5E5E5] pb-4">
+                        <div class="space-y-1">
+                            <h4 class="text-xs uppercase font-medium">${item.name}</h4>
+                            <p class="text-xs text-[#767676]">${item.price}</p>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="inline-flex items-center border border-[#111111] rounded overflow-hidden">
+                                <button onclick="updateBagQuantity(${index}, -1)" class="px-2 py-1 text-xs bg-white hover:bg-black hover:text-white transition-colors">-</button>
+                                <span class="px-3 py-1 text-xs font-medium">${item.quantity}</span>
+                                <button onclick="updateBagQuantity(${index}, 1)" class="px-2 py-1 text-xs bg-white hover:bg-black hover:text-white transition-colors">+</button>
+                            </div>
+                            <button onclick="removeItem(${index})" class="text-[10px] text-red-500 uppercase tracking-wider hover:underline">Remove</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            subtotalEl.textContent = 'Rp ' + total.toLocaleString('id-ID');
+        }
+
+        function removeItem(index) {
+            bagItems.splice(index, 1);
+            updateBagUI();
+        }
+
+        function openAuthModal() {
+            const modal = document.getElementById('auth-modal');
+            const loggedInView = document.getElementById('auth-logged-in');
+            const formContainer = document.getElementById('auth-form-container');
+            
+            const currentUser = localStorage.getItem('glowk_logged_user') || localStorage.getItem('dior_logged_user');
+
+            if (currentUser) {
+                const userData = JSON.parse(currentUser);
+                document.getElementById('user-initials').textContent = (userData.firstName ? userData.firstName[0] : userData.email[0]).toUpperCase();
+                document.getElementById('user-display-name').textContent = (userData.firstName ? userData.firstName + ' ' + (userData.lastName || '') : 'Valued Member');
+                document.getElementById('user-display-email').textContent = userData.email;
+                
+                loggedInView.classList.remove('hidden');
+                formContainer.classList.add('hidden');
+            } else {
+                loggedInView.classList.add('hidden');
+                formContainer.classList.remove('hidden');
+            }
+
+            modal.classList.1remove?.('hidden') || modal.classList.remove('hidden');
+        }
+
+        function closeAuthModal() {
+            document.getElementById('auth-modal').classList.add('hidden');
+        }
+
+        function switchTab(type) {
+            const loginBtn = document.getElementById('tab-login-btn');
+            const registerBtn = document.getElementById('tab-register-btn');
+            const loginForm = document.getElementById('form-login');
+            const registerForm = document.getElementById('form-register');
+
+            if (type === 'login') {
+                loginBtn.className = "flex-1 pb-3 border-b-2 border-black text-black";
+                registerBtn.className = "flex-1 pb-3 text-[#767676] border-b-2 border-transparent";
+                loginForm.classList.remove('hidden');
+                registerForm.classList.add('hidden');
+            } else {
+                registerBtn.className = "flex-1 pb-3 border-b-2 border-black text-black";
+                loginBtn.className = "flex-1 pb-3 text-[#767676] border-b-2 border-transparent";
+                registerForm.classList.remove('hidden');
+                loginForm.classList.add('hidden');
+            }
+        }
+
+        function handleRegister() {
+            const firstName = document.getElementById('reg-firstname').value.trim();
+            const lastName = document.getElementById('reg-lastname').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const password = document.getElementById('reg-password').value.trim();
+
+            if (!email || !password) {
+                alert('Please enter your email and password.');
+                return;
+            }
+
+            const userData = { firstName, lastName, email };
+            localStorage.setItem('glowk_logged_user', JSON.stringify(userData));
+            
+            alert('Account successfully created and signed in!');
+            closeAuthModal();
+            checkUserSession();
+        }
+
+        function handleLogin() {
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value.trim();
+
+            if (!email || !password) {
+                alert('Please enter your email and password.');
+                return;
+            }
+
+            const userData = { firstName: email.split('@')[0], email };
+            localStorage.setItem('glowk_logged_user', JSON.stringify(userData));
+
+            alert('Sign In Successful!');
+            closeAuthModal();
+            checkUserSession();
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('glowk_logged_user');
+            localStorage.removeItem('dior_logged_user');
+            alert('You have been signed out.');
+            closeAuthModal();
+            checkUserSession();
+        }
+    </script>
+</body>
+</html>
