@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wedding of Lintang & Herna</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            width: 100%;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+        /* Halaman Depan / Cover */
+#cover {
+        width: 100%;
+        height: 100vh;
+        background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('wedding.png') no-repeat center center/cover;        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+        }
+        #cover.hidden {
+            transform: translateY(-100%);
+        }
+        .wedding-title {
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            font-family: serif;
+        }
+        .guest-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(5px);
+        }
+        .btn-open {
+            background-color: #c5a059;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            font-size: 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        /* Isi Undangan di Bawah */
+        #main-content {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            padding: 50px 20px;
+            background: #fdfbf7;
+            color: #333;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Bagian Cover Depan -->
+    <div id="cover">
+        <div class="wedding-title">The Wedding of</div>
+        <h1>Lintang & Herna</h1>
+        
+        <div class="guest-box">
+            <p style="font-size: 13px; margin-bottom: 5px;">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+            <h3 id="guest-name">Tamu Undangan</h3>
+        </div>
+
+        <button class="btn-open" onclick="bukaUndangan()">✉ Buka Undangan</button>
+    </div>
+
+    <!-- Bagian Isi Undangan Utama -->
+    <div id="main-content">
+        <h2>Kepada Seluruh Keluarga & Sahabat</h2>
+        <p style="margin-top: 20px;">Selamat datang di website pernikahan kami. Acara akan dilaksanakan pada...</p>
+        <!-- Tambahkan detail acara, lokasi, galeri di sini -->
+    </div>
+
+    <script>
+        // Mengambil nama tamu dari URL (Contoh: website.com/?to=Budi)
+        const urlParams = new URLSearchParams(window.location.search);
+        const guest = urlParams.get('to');
+        if (guest) {
+            document.getElementById('guest-name').innerText = guest;
+        }
+
+        // Fungsi tombol buka undangan
+        function bukaUndangan() {
+            const cover = document.getElementById('cover');
+            cover.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
