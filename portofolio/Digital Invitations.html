@@ -9,7 +9,7 @@
     <title>Web Design | LYM GROUP</title>
 
     <meta name="description"
-        content="Premium Website Design Services by LYM GROUP">
+        content="Premium Digital Invitation collection by LYM GROUP">
 
     <link rel="icon" href="../assets/images/favicon.png">
 
@@ -26,12 +26,216 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
 
     <!-- CSS -->
-<link rel="stylesheet" href="../CSS/style.css">
-<link rel="stylesheet" href="../CSS/components.css">
-<link rel="stylesheet" href="../CSS/variables.css">
-<link rel="stylesheet" href="../CSS/animations.css">
-<link rel="stylesheet" href="../CSS/web-design.css">
-<link rel="stylesheet" href="../CSS/responsive.css">
+    <link rel="stylesheet" href="../CSS/variables.css">
+    <link rel="stylesheet" href="../CSS/components.css">
+    <link rel="stylesheet" href="../CSS/animations.css">
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/web-design.css">
+    <link rel="stylesheet" href="../CSS/responsive.css">
+
+    <!-- Styling Warna Senada & Kartu Produk -->
+    <style>
+        .theme-section-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .theme-section-header h3 {
+            font-size: 28px;
+            color: #222222;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .theme-section-header p {
+            color: #666666;
+            font-size: 15px;
+        }
+
+        .theme-filter-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            max-width: 650px;
+            margin: 0 auto 25px auto;
+        }
+        
+        /* Tombol Pilihan Tema disesuaikan dengan warna tema halaman utama */
+        .theme-btn {
+            background-color: #ffffff;
+            color: #4a453e;
+            border: 2px solid #d4af37; /* Warna aksen emas/kecokelatan yang selaras */
+            padding: 14px 20px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .theme-btn:hover {
+            background-color: #f7f3ee;
+        }
+
+        .theme-btn.active {
+            background-color: #4a453e; /* Warna cokelat gelap senada dengan teks utama */
+            color: #ffffff;
+            border-color: #4a453e;
+        }
+
+        .active-theme-bar {
+            max-width: 650px;
+            margin: 0 auto 40px auto;
+            background-color: #4a453e; /* Menyesuaikan warna tema */
+            color: #ffffff;
+            text-align: center;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        /* Styling Grid & Kartu Produk Tema */
+        .themes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        /* Kelas untuk menyembunyikan kategori yang tidak aktif */
+        .theme-card.hidden {
+            display: none !important;
+        }
+
+        .theme-card {
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 1px solid #eaeaea;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+
+        .theme-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .theme-card-img {
+            padding: 20px 15px;
+            text-align: center;
+            position: relative;
+            min-height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-card-img.bg-pink { background: linear-gradient(135deg, #d47a82 0%, #a8525b 100%); }
+        .theme-card-img.bg-dark { background: linear-gradient(135deg, #fffefe 0%, #afaaa4 100%); }
+        .theme-card-img.bg-red  { background: linear-gradient(135deg, #ffe1e2 0%, #aa4a4c 100%); }
+        .theme-card-img.bg-green  { background: linear-gradient(135deg, #e2f3de 0%, #389e21 100%); }
+
+
+        .theme-card-img img {
+            max-width: 85%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .theme-card-title {
+            position: absolute;
+            bottom: 12px;
+            right: 15px;
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+        }
+
+        .theme-card-body {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .price-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .discount-badge {
+            background-color: #ff4d4d;
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .original-price {
+            font-size: 13px;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        .current-price {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .theme-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .btn-demo, .btn-order {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-demo {
+            background-color: #ffffff;
+            color: #4a453e;
+            border: 1px solid #d4af37;
+        }
+
+        .btn-demo:hover {
+            background-color: #f7f3ee;
+        }
+
+        .btn-order {
+            background-color: #4a453e; /* Disesuaikan dengan warna cokelat senada */
+            color: #ffffff;
+            border: 1px solid #4a453e;
+        }
+
+        .btn-order:hover {
+            background-color: #38332e;
+        }
+
+        @media (max-width: 768px) {
+            .theme-filter-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 
 </head>
 
@@ -318,15 +522,6 @@ Fast Loading
 </section>
 
 
-
-
-
-
-
-
-
-
-
 <!-- ===========================PROJECT GALLERY=========================== -->
 
 <section class="project-gallery section" id="gallery">
@@ -356,111 +551,437 @@ Fast Loading
 
         </div>
 
-        <div class="gallery-grid">
+        <!-- BAGIAN PILIHAN TEMA -->
+        <div class="theme-section-header">
+            <span class="section-tag">
+
+                Pilihan Tema
+
+            </span>            <p>Silahkan Klik Tombol dibawah untuk menampilkan tema</p>
+        </div>
+
+        <div class="theme-filter-container">
+            <button class="theme-btn active" data-filter="bestseller">Tema Best Seller</button>
+            <button class="theme-btn" data-filter="motion3d">Motion 3D + Adat</button>
+            <button class="theme-btn" data-filter="modern">Tema Modern</button>
+            <button class="theme-btn" data-filter="tanpafoto">Tema Tanpa Foto</button>
+        </div>
+
+        <!-- Baris Panjang Aktif di Bawah Tombol -->
+        <div class="active-theme-bar" id="activeThemeDisplay">
+            Tema Best Seller
+        </div>
+
+
+        <!-- GRID KARTU PRODUK TEMA -->
+        <div class="themes-grid">
+
+            <!-- KATEGORI: TEMA BEST SELLER -->
+
+            <!-- 1 -->
+            <div class="theme-card" data-category="bestseller">
+                <div class="theme-card-img bg-dark">
+                    <img src="../assets/images/undangandigital/weddingyogya.png" alt="Yogya">
+                    <div class="theme-card-title">Yogya</div>
+                </div>
+                <div class="theme-card-body">
+                    <div class="price-section">
+                        <span class="discount-badge">-60%</span>
+                        <span class="original-price">Rp. 249.000</span>
+                    </div>
+                    <div class="current-price">Rp. 99.000</div>
+                    <div class="theme-actions">
+                        <a href="produk/undangan digital/undangan yogya/yogya.html" class="btn-demo"><i class="fa-solid fa-eye"></i> Lihat Demo</a>
+                        <a href="https://wa.me/6282123962717?text=Halo%20LYM%20GROUP,%20saya%20tertarik%20dengan%20Tema%20adat%20yogya." target="_blank" class="btn-order"><i class="fa-brands fa-whatsapp"></i> Pesan</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 2 -->
+            <div class="theme-card" data-category="bestseller">
+                <div class="theme-card-img bg-dark">
+                    <img src="../assets/images/projects/project-2.png" alt="Sunda">
+                    <div class="theme-card-title">Sunda</div>
+                </div>
+                <div class="theme-card-body">
+                    <div class="price-section">
+                        <span class="discount-badge">-60%</span>
+                        <span class="original-price">Rp. 249.000</span>
+                    </div>
+                    <div class="current-price">Rp. 99.000</div>
+                    <div class="theme-actions">
+                        <a href="#" class="btn-demo"><i class="fa-solid fa-eye"></i> Lihat Demo</a>
+                        <a href="https://wa.me/6282123962717?text=Halo%20LYM%20GROUP,%20saya%20tertarik%20dengan%20Tema%20Sunda." target="_blank" class="btn-order"><i class="fa-brands fa-whatsapp"></i> Pesan</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 3 -->
+            <div class="theme-card" data-category="bestseller">
+                <div class="theme-card-img bg-dark">
+                    <img src="../assets/images/projects/project-2.png" alt="Bugis">
+                    <div class="theme-card-title">Bugis</div>
+                </div>
+                <div class="theme-card-body">
+                    <div class="price-section">
+                        <span class="discount-badge">-60%</span>
+                        <span class="original-price">Rp. 249.000</span>
+                    </div>
+                    <div class="current-price">Rp. 99.000</div>
+                    <div class="theme-actions">
+                        <a href="#" class="btn-demo"><i class="fa-solid fa-eye"></i> Lihat Demo</a>
+                        <a href="https://wa.me/6282123962717?text=Halo%20LYM%20GROUP,%20saya%20tertarik%20dengan%20Tema%20Bugid." target="_blank" class="btn-order"><i class="fa-brands fa-whatsapp"></i> Pesan</a>
+                    </div>
+                </div>
+            </div>
 
             
-            <!-- WEBSITE 1 -->
-
-           <a href="produk/undangan digital/undangan yogya/yogya.html" class="project-card">
-
-    <div class="project-image">
-
-        <img src="../assets/images/undangandigital/weddingyogya.png"
-             alt="wedding yogya">
-
-    </div>
-
-
-                <div class="gallery-content">
-
-                    <span>
-
-                        YOGYA
-
-                    </span>
-
-                            <h3>
-            Daerah Istimewa Yogyakarta
-        </h3>
-
-    </div>
-
-</a>
-
-
-
-            <!-- WEBSITE 2 -->
-
-            <a href="produk/undangan digital/undangan sunda/.html" class="project-card">
-
-    <div class="project-image">
-
-                     <img src="../assets/images/projects/project-2.png"
-                        alt="wedding sunda">
-
+            <!-- 4 -->
+            <div class="theme-card" data-category="bestseller">
+                <div class="theme-card-img bg-dark">
+                    <img src="../assets/images/projects/project-2.png" alt="Betawi">
+                    <div class="theme-card-title">Betawi</div>
                 </div>
-
-                <div class="gallery-content">
-
-                    <span>
-
-                        SUNDA
-
-                    </span>
-
-                    <h3>
-
-                        Jawa Barat
-
-                    </h3>
-
-
+                <div class="theme-card-body">
+                    <div class="price-section">
+                        <span class="discount-badge">-60%</span>
+                        <span class="original-price">Rp. 249.000</span>
+                    </div>
+                    <div class="current-price">Rp. 99.000</div>
+                    <div class="theme-actions">
+                        <a href="#" class="btn-demo"><i class="fa-solid fa-eye"></i> Lihat Demo</a>
+                        <a href="https://wa.me/6282123962717?text=Halo%20LYM%20GROUP,%20saya%20tertarik%20dengan%20Tema%20Betawi." target="_blank" class="btn-order"><i class="fa-brands fa-whatsapp"></i> Pesan</a>
+                    </div>
                 </div>
-
-            </a>
-
+            </div>
 
 
-
-
-            <!-- WEBSITE 3 -->
-
-<a class="project-card">
-
-    <div class="project-image">
-
-                    <img src="../assets/images/projects/project-2.png"
-                        alt="wedding bugis">
-
+            <!-- 5 -->
+                        <div class="theme-card" data-category="bestseller">
+                <div class="theme-card-img bg-green">
+                    <img src="../assets/images/projects/project-2.png" alt="Modern 1">
+                    <div class="theme-card-title">Modern 1</div>
                 </div>
-
-                <div class="gallery-content">
-
-                    <span>
-
-                        BUGIS
-
-                    </span>
-
-                    <h3>
-
-                        sulawesi Selatan
-
-                    </h3>
-
-                    <p>
-
-                        
-                    </p>
-
+                <div class="theme-card-body">
+                    <div class="price-section">
+                        <span class="discount-badge">-60%</span>
+                        <span class="original-price">Rp. 249.000</span>
+                    </div>
+                    <div class="current-price">Rp. 99.000</div>
+                    <div class="theme-actions">
+                        <a href="#" class="btn-demo"><i class="fa-solid fa-eye"></i> Lihat Demo</a>
+                        <a href="https://wa.me/6282123962717?text=Halo%20LYM%20GROUP,%20saya%20tertarik%20dengan%20Tema%20Modern 1." target="_blank" class="btn-order"><i class="fa-brands fa-whatsapp"></i> Pesan</a>
+                    </div>
                 </div>
+            </div>
 
-            </a>
+
+                        <!-- 6 -->
+                         <div class="theme-card" data-category="bestseller">
+                <div class="theme-card-img bg-green">
+                    <img src="../assets/images/projects/project-2.png" alt="Modern 2">
+                    <div class="theme-card-title">Modern 2</div>
+                </div>
+                <div class="theme-card-body">
+                    <div class="price-section">
+                        <span class="discount-badge">-60%</span>
+                        <span class="original-price">Rp. 249.000</span>
+                    </div>
+                    <div class="current-price">Rp. 99.000</div>
+                    <div class="theme-actions">
+                        <a href="#" class="btn-demo"><i class="fa-solid fa-eye"></i> Lihat Demo</a>
+                        <a href="https://wa.me/6282123962717?text=Halo%20LYM%20GROUP,%20saya%20tertarik%20dengan%20Tema%20Modern 2." target="_blank" class="btn-order"><i class="fa-brands fa-whatsapp"></i> Pesan</a>
+                    </div>
+                </div>
+            </div>
 
 
-            <!-- WEBSITE 4 -->
-            <!-- WEBSITE 5 -->
-            <!-- WEBSITE 6 -->
+                        <!-- 7 -->
+            <div class="theme-card" data-category="bestseller">
+                <div class="theme-card-img bg-red">
+                                        <img src="../assets/images/projects/project-2.png" alt="Tema Tanpa Foto 1">
+                    <div class="theme-card-title">Tema TF1</div>
+                </div>
+                <div class="theme-card-body">
+                    <div class="price-section">
+                        <span class="discount-badge">-60%</span>
+                        <span class="original-price">Rp. 199.000</span>
+                    </div>
+                    <div class="current-price">Rp. 79.000</div>
+                    <div class="theme-actions">
+                        <a href="#" class="btn-demo"><i class="fa-solid fa-eye"></i> Lihat Demo</a>
+                        <a href="https://wa.me/6282123962717?text=Halo%20LYM%20GROUP,%20saya%20tertarik%20dengan%20Tema%20Tema Tanpa Foto 1." target="_blank" class="btn-order"><i class="fa-brands fa-whatsapp"></i> Pesan</a>
+                    </div>
+                </div>
+            </div>
+
+
+                <!-- 8 -->
+            <div class="theme-card" data-category="bestseller">
+                <div class="theme-card-img bg-red">
+                                        <img src="../assets/images/projects/project-2.png" alt="Tema Tanpa Foto 2">
+                    <div class="theme-card-title">Tema TF2</div>
+                </div>
+                <div class="theme-card-body">
+                    <div class="price-section">
+                        <span class="discount-badge">-60%</span>
+                        <span class="original-price">Rp. 199.000</span>
+                    </div>
+                    <div class="current-price">Rp. 79.000</div>
+                    <div class="theme-actions">
+                        <a href="#" class="btn-demo"><i class="fa-solid fa-eye"></i> Lihat Demo</a>
+                        <a href="https://wa.me/6282123962717?text=Halo%20LYM%20GROUP,%20saya%20tertarik%20dengan%20Tema%20Tema Tanpa Foto 2." target="_blank" class="btn-order"><i class="fa-brands fa-whatsapp"></i> Pesan</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KATEGORI: MOTION 3D + ADAT -->
+
+                 <!-- 1 -->
+            <div class="theme-card hidden" data-category="motion3d">
+                <div class="theme-card-img bg-dark">
+                    <img src="../assets/images/undangandigital/weddingyogya.png" alt="Yogya">
+                    <div class="theme-card-title">Yogya</div>
+                </div>
+                <div class="theme-card-body">
+                    <div class="price-section">
+                        <span class="discount-badge">-60%</span>
+                        <span class="original-price">Rp. 249.000</span>
+                    </div>
+                    <div class="current-price">Rp. 99.000</div>
+                    <div class="theme-actions">
+                        <a href="produk/undangan digital/undangan yogya/yogya.html" class="btn-demo"><i class="fa-solid fa-eye"></i> Lihat Demo</a>
+                        <a href="https://wa.me/6282123962717?text=Halo%20LYM%20GROUP,%20saya%20tertarik%20dengan%20Tema%20adat%20yogya." target="_blank" class="btn-order"><i class="fa-brands fa-whatsapp"></i> Pesan</a>
+                    </div>
+                </div>
+            </div>
+            
+
+                    <!-- 2 -->
+                     <div class="theme-card hidden" data-category="motion3d">
+                <div class="theme-card-img bg-dark">
+                                <img src="../assets/images/projects/project-2.png" alt="Sunda">
+                    <div class="theme-card-title">Sunda</div>
+                </div>
+                <div class="theme-card-body">
+                    <div class="price-section">
+                        <span class="discount-badge">-60%</span>
+                        <span class="original-price">Rp. 249.000</span>
+                    </div>
+                    <div class="current-price">Rp. 99.000</div>
+                    <div class="theme-actions">
+                        <a href="#" class="btn-demo"><i class="fa-solid fa-eye"></i> Lihat Demo</a>
+                        <a href="https://wa.me/6282123962717?text=Halo%20LYM%20GROUP,%20saya%20tertarik%20dengan%20Tema%20Sunda." target="_blank" class="btn-order"><i class="fa-brands fa-whatsapp"></i> Pesan</a>
+                    </div>
+                </div>
+            </div>
+
+
+              <!-- 3 -->
+               <div class="theme-card hidden" data-category="motion3d">
+                <div class="theme-card-img bg-dark">
+                    <img src="../assets/images/projects/project-2.png" alt="Bugis">
+                    <div class="theme-card-title">Bugis</div>
+                </div>
+                <div class="theme-card-body">
+                    <div class="price-section">
+                        <span class="discount-badge">-60%</span>
+                        <span class="original-price">Rp. 249.000</span>
+                    </div>
+                    <div class="current-price">Rp. 99.000</div>
+                    <div class="theme-actions">
+                        <a href="#" class="btn-demo"><i class="fa-solid fa-eye"></i> Lihat Demo</a>
+                        <a href="https://wa.me/6282123962717?text=Halo%20LYM%20GROUP,%20saya%20tertarik%20dengan%20Tema%20Bugid." target="_blank" class="btn-order"><i class="fa-brands fa-whatsapp"></i> Pesan</a>
+                    </div>
+                </div>
+            </div>
+
+
+                <!-- 4 -->
+                    <div class="theme-card hidden" data-category="motion3d">
+                <div class="theme-card-img bg-dark">
+                    <img src="../assets/images/projects/project-2.png" alt="Betawi">
+                    <div class="theme-card-title">Betawi</div>
+                </div>
+                <div class="theme-card-body">
+                    <div class="price-section">
+                        <span class="discount-badge">-60%</span>
+                        <span class="original-price">Rp. 249.000</span>
+                    </div>
+                    <div class="current-price">Rp. 99.000</div>
+                    <div class="theme-actions">
+                        <a href="#" class="btn-demo"><i class="fa-solid fa-eye"></i> Lihat Demo</a>
+                        <a href="https://wa.me/6282123962717?text=Halo%20LYM%20GROUP,%20saya%20tertarik%20dengan%20Tema%20Betawi." target="_blank" class="btn-order"><i class="fa-brands fa-whatsapp"></i> Pesan</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- KATEGORI: TEMA MODERN -->
+
+            <!-- 1 -->
+            <div class="theme-card hidden" data-category="modern">
+                <div class="theme-card-img bg-green">
+                    <img src="../assets/images/projects/project-2.png" alt="Modern 1">
+                    <div class="theme-card-title">Modern 1</div>
+                </div>
+                <div class="theme-card-body">
+                    <div class="price-section">
+                        <span class="discount-badge">-60%</span>
+                        <span class="original-price">Rp. 249.000</span>
+                    </div>
+                    <div class="current-price">Rp. 99.000</div>
+                    <div class="theme-actions">
+                        <a href="#" class="btn-demo"><i class="fa-solid fa-eye"></i> Lihat Demo</a>
+                        <a href="https://wa.me/6282123962717?text=Halo%20LYM%20GROUP,%20saya%20tertarik%20dengan%20Tema%20Modern 1." target="_blank" class="btn-order"><i class="fa-brands fa-whatsapp"></i> Pesan</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 2 -->
+                         <div class="theme-card hidden" data-category="modern">
+                <div class="theme-card-img bg-green">
+                    <img src="../assets/images/projects/project-2.png" alt="Modern 2">
+                    <div class="theme-card-title">Modern 2</div>
+                </div>
+                <div class="theme-card-body">
+                    <div class="price-section">
+                        <span class="discount-badge">-60%</span>
+                        <span class="original-price">Rp. 249.000</span>
+                    </div>
+                    <div class="current-price">Rp. 99.000</div>
+                    <div class="theme-actions">
+                        <a href="#" class="btn-demo"><i class="fa-solid fa-eye"></i> Lihat Demo</a>
+                        <a href="https://wa.me/6282123962717?text=Halo%20LYM%20GROUP,%20saya%20tertarik%20dengan%20Tema%20Modern 2." target="_blank" class="btn-order"><i class="fa-brands fa-whatsapp"></i> Pesan</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 3 -->
+                         <div class="theme-card hidden" data-category="modern">
+                <div class="theme-card-img bg-green">
+                    <img src="../assets/images/projects/project-2.png" alt="Modern 3">
+                    <div class="theme-card-title">Modern 3</div>
+                </div>
+                <div class="theme-card-body">
+                    <div class="price-section">
+                        <span class="discount-badge">-60%</span>
+                        <span class="original-price">Rp. 249.000</span>
+                    </div>
+                    <div class="current-price">Rp. 99.000</div>
+                    <div class="theme-actions">
+                        <a href="#" class="btn-demo"><i class="fa-solid fa-eye"></i> Lihat Demo</a>
+                        <a href="https://wa.me/6282123962717?text=Halo%20LYM%20GROUP,%20saya%20tertarik%20dengan%20Tema%20Modern 3." target="_blank" class="btn-order"><i class="fa-brands fa-whatsapp"></i> Pesan</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 4 -->
+                         <div class="theme-card hidden" data-category="modern">
+                <div class="theme-card-img bg-green">
+                    <img src="../assets/images/projects/project-2.png" alt="Modern 4">
+                    <div class="theme-card-title">Modern 4</div>
+                </div>
+                <div class="theme-card-body">
+                    <div class="price-section">
+                        <span class="discount-badge">-60%</span>
+                        <span class="original-price">Rp. 249.000</span>
+                    </div>
+                    <div class="current-price">Rp. 99.000</div>
+                    <div class="theme-actions">
+                        <a href="#" class="btn-demo"><i class="fa-solid fa-eye"></i> Lihat Demo</a>
+                        <a href="https://wa.me/6282123962717?text=Halo%20LYM%20GROUP,%20saya%20tertarik%20dengan%20Tema%20Modern 4." target="_blank" class="btn-order"><i class="fa-brands fa-whatsapp"></i> Pesan</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- KATEGORI: TEMA TANPA FOTO -->
+
+            <!-- 1 -->
+            <div class="theme-card hidden" data-category="tanpafoto">
+                <div class="theme-card-img bg-red">
+                                        <img src="../assets/images/projects/project-2.png" alt="Tema Tanpa Foto 1">
+                    <div class="theme-card-title">Tema TF1</div>
+                </div>
+                <div class="theme-card-body">
+                    <div class="price-section">
+                        <span class="discount-badge">-60%</span>
+                        <span class="original-price">Rp. 199.000</span>
+                    </div>
+                    <div class="current-price">Rp. 79.000</div>
+                    <div class="theme-actions">
+                        <a href="#" class="btn-demo"><i class="fa-solid fa-eye"></i> Lihat Demo</a>
+                        <a href="https://wa.me/6282123962717?text=Halo%20LYM%20GROUP,%20saya%20tertarik%20dengan%20Tema%20Tema Tanpa Foto 1." target="_blank" class="btn-order"><i class="fa-brands fa-whatsapp"></i> Pesan</a>
+                    </div>
+                </div>
+            </div>
+                
+
+    <!-- 2 -->
+            <div class="theme-card hidden" data-category="tanpafoto">
+                <div class="theme-card-img bg-red">
+                                        <img src="../assets/images/projects/project-2.png" alt="Tema Tanpa Foto 2">
+                    <div class="theme-card-title">Tema TF2</div>
+                </div>
+                <div class="theme-card-body">
+                    <div class="price-section">
+                        <span class="discount-badge">-60%</span>
+                        <span class="original-price">Rp. 199.000</span>
+                    </div>
+                    <div class="current-price">Rp. 79.000</div>
+                    <div class="theme-actions">
+                        <a href="#" class="btn-demo"><i class="fa-solid fa-eye"></i> Lihat Demo</a>
+                        <a href="https://wa.me/6282123962717?text=Halo%20LYM%20GROUP,%20saya%20tertarik%20dengan%20Tema%20Tema Tanpa Foto 2." target="_blank" class="btn-order"><i class="fa-brands fa-whatsapp"></i> Pesan</a>
+                    </div>
+                </div>
+            </div>
+
+
+    <!-- 3 -->
+            <div class="theme-card hidden" data-category="tanpafoto">
+                <div class="theme-card-img bg-red">
+                                        <img src="../assets/images/projects/project-2.png" alt="Tema Tanpa Foto 3">
+                    <div class="theme-card-title">Tema TF3</div>
+                </div>
+                <div class="theme-card-body">
+                    <div class="price-section">
+                        <span class="discount-badge">-60%</span>
+                        <span class="original-price">Rp. 199.000</span>
+                    </div>
+                    <div class="current-price">Rp. 79.000</div>
+                    <div class="theme-actions">
+                        <a href="#" class="btn-demo"><i class="fa-solid fa-eye"></i> Lihat Demo</a>
+                        <a href="https://wa.me/6282123962717?text=Halo%20LYM%20GROUP,%20saya%20tertarik%20dengan%20Tema%20Tema Tanpa Foto 3." target="_blank" class="btn-order"><i class="fa-brands fa-whatsapp"></i> Pesan</a>
+                    </div>
+                </div>
+            </div>
+
+
+    <!-- 4 -->
+            <div class="theme-card hidden" data-category="tanpafoto">
+                <div class="theme-card-img bg-red">
+                                        <img src="../assets/images/projects/project-2.png" alt="Tema Tanpa Foto 4">
+                    <div class="theme-card-title">Tema TF4</div>
+                </div>
+                <div class="theme-card-body">
+                    <div class="price-section">
+                        <span class="discount-badge">-60%</span>
+                        <span class="original-price">Rp. 199.000</span>
+                    </div>
+                    <div class="current-price">Rp. 79.000</div>
+                    <div class="theme-actions">
+                        <a href="#" class="btn-demo"><i class="fa-solid fa-eye"></i> Lihat Demo</a>
+                        <a href="https://wa.me/6282123962717?text=Halo%20LYM%20GROUP,%20saya%20tertarik%20dengan%20Tema%20Tema Tanpa Foto 4." target="_blank" class="btn-order"><i class="fa-brands fa-whatsapp"></i> Pesan</a>
+                    </div>
+                </div>
+            </div>
 
 </section>
 
@@ -729,6 +1250,50 @@ Fast Loading
 
 <script src="../JS/script.js"></script>
 <script src="../JS/web-design.js"></script>
+
+<!-- Script interaktif untuk filter kategori kartu tema dan update baris judul -->
+<script>
+    const themeButtons = document.querySelectorAll('.theme-btn');
+    const activeThemeDisplay = document.getElementById('activeThemeDisplay');
+    const themeCards = document.querySelectorAll('.theme-card');
+
+    // Otomatis tampilkan kategori bestseller saat halaman pertama kali dimuat
+    window.addEventListener('DOMContentLoaded', () => {
+        themeCards.forEach(card => {
+            if (card.getAttribute('data-category') === 'bestseller') {
+                card.classList.remove('hidden');
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+    });
+
+    themeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Hapus kelas aktif dari semua tombol
+            themeButtons.forEach(btn => btn.classList.remove('active'));
+            // Tambahkan kelas aktif ke tombol yang diklik
+            button.classList.add('active');
+            
+            // Ambil teks nama tema dan filter kategori
+            const themeName = button.textContent;
+            const filterCategory = button.getAttribute('data-filter');
+            
+            // Ubah teks pada baris panjang di bawah
+            activeThemeDisplay.textContent = themeName;
+
+            // Tampilkan / Sembunyikan kartu produk berdasarkan kategori
+            themeCards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                if (cardCategory === filterCategory) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+    });
+</script>
 
 </body>
 
