@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LYM game</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #0b1d3a; color: #fff; overflow: hidden; }
+    
+    .screen { display: none; width: 100vw; height: 100vh; }
+    .screen.active { display: flex; }
+
+    /* Lobby UI */
+    #lobby { justify-content: center; align-items: center; background: radial-gradient(circle, #153866, #0b1d3a); }
+    .card { background: #152b4d; padding: 2rem; border-radius: 16px; width: 340px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .card input, .card button { width: 100%; padding: 12px; margin-top: 10px; border-radius: 8px; border: none; font-size: 1rem; }
+    .card input { background: #0b1d3a; color: #fff; }
+    .card button { background: #0084ff; color: #fff; font-weight: bold; cursor: pointer; }
+
+    /* Game UI */
+    #game { flex-direction: column; padding: 10px; gap: 10px; }
+    header { height: 50px; background: #152b4d; border-radius: 10px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; }
+    .word-box { background: #0b1d3a; padding: 6px 16px; border-radius: 8px; color: #ffcc00; font-size: 1.2rem; font-weight: bold; letter-spacing: 2px; }
+    
+    main { flex: 1; display: grid; grid-template-columns: 220px 1fr 280px; gap: 10px; height: calc(100vh - 80px); }
+    .panel { background: #152b4d; border-radius: 10px; display: flex; flex-direction: column; overflow: hidden; }
+    
+    .player-item { display: flex; justify-content: space-between; padding: 10px; background: #0b1d3a; margin: 5px; border-radius: 6px; }
+    .player-item.is-drawer { border-left: 4px solid #ffcc00; }
+    
+    .canvas-container { position: relative; flex: 1; display: flex; justify-content: center; align-items: center; background: #10223e; border-radius: 10px; }
+    canvas { background: #fff; border-radius: 8px; cursor: crosshair; }
+    
+    .overlay { position: absolute; inset: 0; background: rgba(11,29,58,0.9); display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: 0.3s; }
+    .overlay.active { opacity: 1; pointer-events: auto; }
+
+    .tools { display: flex; gap: 10px; padding: 10px; background: #152b4d; justify-content: center; align-items: center; }
+    .chat-messages { flex: 1; padding: 10px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; }
+    .msg { padding: 6px; border-radius: 6px; font-size: 0.85rem; background: #0b1d3a; }
+    .msg.system { background: #1e3a5f; color: #70b0ff; }
+    .msg.correct { background: #1b5e20; color: #81c784; font-weight: bold; }
+    
+    .chat-form { display: flex; padding: 8px; gap: 6px; background: #0b1d3a; }
+    .chat-form input { flex: 1; padding: 8px; border-radius: 6px; border: none; }
+  </style>
+</head>
+<body>
+
+  <!-- LOBBY -->
+  <div id="lobby" class="screen active">
+    <div class="card">
+      <h2>LYM game <span style="color:#0084ff">Realtime</span></h2>
+      <input type="text" id="username" placeholder="Masukkan Nama Kamu..." maxlength="12" />
+      <input type="text" id="roomCode" placeholder="Kode Room (Contoh: MABAR)" value="MABAR" />
+      <button onclick="joinLobby()">MASUK & MAIN</button>
+    </div>
+  </div>
+
+  <!-- GAME -->
+  <div id="game" class="screen">
+    <header>
+      <h3>Room: <span id="room-display">MABAR</span></h3>
+      <div class="word-box" id="word-display">MENUNGGU...</div>
+      <div>Timer: <b id="timer-display">60</b>s</div>
+    </header>
+
+    <main>
+      <!-- Leaderboard -->
+      <div class="panel">
+        <h4 style="padding: 10px;">Pemain</h4>
+        <div id="players-list"></div>
+      </div>
+
+      <!-- Canvas Area -->
+      <div class="panel canvas-container">
+        <div class="overlay" id="overlay">
+          <h2 id="overlay-title">Menunggu Pemain Lain...</h2>
+          <p id="overlay-sub">Ajak temanmu bergabung dengan Kode Room yang sama!</p>
+        </div>
+        <canvas id="canvas" width="700" height="500"></canvas>
+        <div class="tools" id="tools" style="display:none;">
+          <input type="color" id="colorPicker" value="#000000" />
+          <input type="range" id="brushSize" min="2" max="30" value="6" />
+          <button onclick="clearCanvasSignal()" style="padding: 4px 10px;">Bersihkan</button>
+        </div>
+      </div>
+
+      <!-- Chat Area -->
+      <div class="panel">
+        <h4 style="padding: 10px;">Chat / Tebakan</h4>
+        <div class="chat-messages" id="chat"></div>
+        <form class="chat-form" onsubmit="event.preventDefault(); sendChat();">
+          <input type="text" id="chatInput" placeholder="Ketik jawaban kamu..." autocomplete="off"/>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const socket = io();
+    let isDrawer = false;
+    let myId = '';
+
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    function joinLobby() {
+      const username = document.getElementById('username').value.trim();
+      const roomCode = document.getElementById('roomCode').value.trim().toUpperCase();
+      if (!username) return alert('Silakan isi nama!');
+
+      document.getElementById('lobby').classList.remove('active');
+      document.getElementById('game').classList.add('active');
+      document.getElementById('room-display').innerText = roomCode;
+
+      socket.emit('joinRoom', { username, roomCode });
+    }
+
+    socket.on('connect', () => { myId = socket.id; });
+
+    socket.on('roomState', ({ players, drawerId, timer }) => {
+      isDrawer = (myId === drawerId);
+      document.getElementById('tools').style.display = isDrawer ? 'flex' : 'none';
+
+      const list = document.getElementById('players-list');
+      list.innerHTML = '';
+      players.forEach(p => {
+        const div = document.createElement('div');
+        div.className = `player-item ${p.id === drawerId ? 'is-drawer' : ''}`;
+        div.innerHTML = `<span>${p.avatar} ${p.name}</span> <b>${p.score} pt</b>`;
+        list.appendChild(div);
+      });
+    });
+
+    socket.on('yourTurn', ({ word }) => {
+      document.getElementById('word-display').innerText = word;
+      hideOverlay();
+    });
+
+    socket.on('guesserTurn', ({ drawerName, maskedWord }) => {
+      document.getElementById('word-display').innerText = maskedWord;
+      hideOverlay();
+    });
+
+    socket.on('timerTick', (t) => {
+      document.getElementById('timer-display').innerText = t;
+    });
+
+    socket.on('showOverlay', ({ title, subtitle }) => {
+      document.getElementById('overlay-title').innerText = title;
+      document.getElementById('overlay-sub').innerText = subtitle;
+      document.getElementById('overlay').classList.add('active');
+    });
+
+    function hideOverlay() {
+      document.getElementById('overlay').classList.remove('active');
+    }
+
+    // Realtime Drawing Engine
+    let drawing = false;
+
+    canvas.addEventListener('mousedown', (e) => {
+      if (!isDrawer) return;
+      drawing = true;
+      emitDraw(e, 'start');
+    });
+
+    canvas.addEventListener('mousemove', (e) => {
+      if (!drawing || !isDrawer) return;
+      emitDraw(e, 'draw');
+    });
+
+    canvas.addEventListener('mouseup', () => { drawing = false; ctx.beginPath(); });
+
+    function emitDraw(e, type) {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const color = document.getElementById('colorPicker').value;
+      const size = document.getElementById('brushSize').value;
+
+      drawLocal(x, y, color, size, type);
+      socket.emit('draw', { x, y, color, size, type });
+    }
+
+    socket.on('draw', ({ x, y, color, size, type }) => {
+      drawLocal(x, y, color, size, type);
+    });
+
+    function drawLocal(x, y, color, size, type) {
+      ctx.lineWidth = size;
+      ctx.strokeStyle = color;
+      if (type === 'start') {
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+        ctx.stroke();
+      }
+    }
+
+    function clearCanvasSignal() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      socket.emit('clearCanvas');
+    }
+
+    socket.on('clearCanvas', () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
+
+    // Chat handling
+    function sendChat() {
+      const input = document.getElementById('chatInput');
+      if (input.value.trim()) {
+        socket.emit('chatMessage', input.value.trim());
+        input.value = '';
+      }
+    }
+
+    socket.on('chatMessage', ({ sender, text, type }) => {
+      const chat = document.getElementById('chat');
+      const msg = document.createElement('div');
+      msg.className = `msg ${type}`;
+      msg.innerText = `${sender}: ${text}`;
+      chat.appendChild(msg);
+      chat.scrollTop = chat.scrollHeight;
+    });
+  </script>
+</body>
+</html>
